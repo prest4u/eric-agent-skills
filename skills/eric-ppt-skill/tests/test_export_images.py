@@ -97,6 +97,9 @@ class ExportImagesTests(unittest.TestCase):
             self.assertFalse((output / "old.txt").exists())
             self.assertEqual((output / "new.txt").read_text(encoding="utf-8"), "new")
             self.assertFalse(staged.exists())
+            backups = [path for path in project.iterdir() if path.name.endswith(".backup")]
+            self.assertEqual(len(backups), 1)
+            self.assertEqual((backups[0] / "old.txt").read_text(encoding="utf-8"), "old")
 
     def test_no_force_commit_preserves_directory_that_appeared(self):
         with tempfile.TemporaryDirectory() as name:
@@ -162,6 +165,174 @@ class ExportImagesTests(unittest.TestCase):
                 "keep",
             )
             self.assertEqual((staged / "new.txt").read_text(encoding="utf-8"), "new")
+
+    def test_force_preserves_same_directory_concurrent_addition_after_validation(self):
+        with tempfile.TemporaryDirectory() as name:
+            project = Path(name)
+            manifest = project / "deck.pptd"
+            manifest.touch()
+            output = project / ".qa-images"
+            output.mkdir()
+            (output / MODULE.IMAGE_OUTPUT_MARKER).write_text(
+                MODULE.json.dumps(MODULE.expected_image_output_marker(manifest)),
+                encoding="utf-8",
+            )
+            (output / "old.txt").write_text("old", encoding="utf-8")
+            staged = project / ".qa-images.staged"
+            staged.mkdir()
+            (staged / "new.txt").write_text("new", encoding="utf-8")
+            (staged / MODULE.IMAGE_OUTPUT_MARKER).write_text(
+                MODULE.json.dumps(MODULE.expected_image_output_marker(manifest)),
+                encoding="utf-8",
+            )
+
+            real_guard = MODULE.guarded_image_output_identity
+            calls = 0
+
+            @MODULE.contextmanager
+            def add_after_validation(_output, _manifest, *, force):
+                nonlocal calls
+                with real_guard(_output, _manifest, force=force) as guard:
+                    calls += 1
+                    if calls == 2:
+                        (_output / "concurrent-user.txt").write_text(
+                            "keep",
+                            encoding="utf-8",
+                        )
+                    yield guard
+
+            with patch.object(
+                MODULE,
+                "guarded_image_output_identity",
+                side_effect=add_after_validation,
+            ):
+                with self.assertRaisesRegex(
+                    MODULE.OutputSafetyError,
+                    "contents changed",
+                ):
+                    MODULE.commit_image_output(
+                        staged,
+                        output,
+                        manifest,
+                        force=True,
+                    )
+            self.assertEqual(
+                (output / "concurrent-user.txt").read_text(encoding="utf-8"),
+                "keep",
+            )
+            self.assertEqual((output / "old.txt").read_text(encoding="utf-8"), "old")
+            self.assertEqual((staged / "new.txt").read_text(encoding="utf-8"), "new")
+
+    def test_force_preserves_backup_changed_after_rename(self):
+        with tempfile.TemporaryDirectory() as name:
+            project = Path(name)
+            manifest = project / "deck.pptd"
+            manifest.touch()
+            output = project / ".qa-images"
+            output.mkdir()
+            (output / MODULE.IMAGE_OUTPUT_MARKER).write_text(
+                MODULE.json.dumps(MODULE.expected_image_output_marker(manifest)),
+                encoding="utf-8",
+            )
+            (output / "old.txt").write_text("old", encoding="utf-8")
+            staged = project / ".qa-images.staged"
+            staged.mkdir()
+            (staged / "new.txt").write_text("new", encoding="utf-8")
+            (staged / MODULE.IMAGE_OUTPUT_MARKER).write_text(
+                MODULE.json.dumps(MODULE.expected_image_output_marker(manifest)),
+                encoding="utf-8",
+            )
+
+            real_snapshot = MODULE.image_output_tree_snapshot
+            injected = False
+
+            def add_after_backup_snapshot(path):
+                nonlocal injected
+                snapshot = real_snapshot(path)
+                if path.name.endswith(".backup") and not injected:
+                    (path / "concurrent-user.txt").write_text("keep", encoding="utf-8")
+                    injected = True
+                return snapshot
+
+            with patch.object(
+                MODULE,
+                "image_output_tree_snapshot",
+                side_effect=add_after_backup_snapshot,
+            ):
+                with self.assertRaisesRegex(
+                    MODULE.OutputSafetyError,
+                    "backup contents changed",
+                ):
+                    MODULE.commit_image_output(
+                        staged,
+                        output,
+                        manifest,
+                        force=True,
+                    )
+            backups = [path for path in project.iterdir() if path.name.endswith(".backup")]
+            self.assertEqual(len(backups), 1)
+            self.assertEqual(
+                (backups[0] / "concurrent-user.txt").read_text(encoding="utf-8"),
+                "keep",
+            )
+            self.assertEqual((backups[0] / "old.txt").read_text(encoding="utf-8"), "old")
+            self.assertEqual((output / "new.txt").read_text(encoding="utf-8"), "new")
+
+    def test_force_preserves_write_after_final_snapshot_returns(self):
+        with tempfile.TemporaryDirectory() as name:
+            project = Path(name)
+            manifest = project / "deck.pptd"
+            manifest.touch()
+            output = project / ".qa-images"
+            output.mkdir()
+            (output / MODULE.IMAGE_OUTPUT_MARKER).write_text(
+                MODULE.json.dumps(MODULE.expected_image_output_marker(manifest)),
+                encoding="utf-8",
+            )
+            (output / "old.txt").write_text("old", encoding="utf-8")
+            staged = project / ".qa-images.staged"
+            staged.mkdir()
+            (staged / "new.txt").write_text("new", encoding="utf-8")
+            (staged / MODULE.IMAGE_OUTPUT_MARKER).write_text(
+                MODULE.json.dumps(MODULE.expected_image_output_marker(manifest)),
+                encoding="utf-8",
+            )
+
+            real_snapshot = MODULE.image_output_tree_snapshot
+            backup_snapshot_calls = 0
+
+            def add_after_final_snapshot(path):
+                nonlocal backup_snapshot_calls
+                snapshot = real_snapshot(path)
+                if path.name.endswith(".backup"):
+                    backup_snapshot_calls += 1
+                    if backup_snapshot_calls == 2:
+                        (path / "concurrent-user.txt").write_text(
+                            "keep",
+                            encoding="utf-8",
+                        )
+                return snapshot
+
+            with patch.object(
+                MODULE,
+                "image_output_tree_snapshot",
+                side_effect=add_after_final_snapshot,
+            ):
+                MODULE.commit_image_output(
+                    staged,
+                    output,
+                    manifest,
+                    force=True,
+                )
+            backups = [path for path in project.iterdir() if path.name.endswith(".backup")]
+            self.assertEqual(backup_snapshot_calls, 2)
+            self.assertEqual(len(backups), 1)
+            self.assertEqual(
+                (backups[0] / "concurrent-user.txt").read_text(encoding="utf-8"),
+                "keep",
+            )
+            self.assertEqual((backups[0] / "old.txt").read_text(encoding="utf-8"), "old")
+            self.assertEqual((output / "new.txt").read_text(encoding="utf-8"), "new")
 
     def test_page_sort_key_orders_numeric_stems(self):
         paths = [Path("10.jpeg"), Path("2.jpeg"), Path("cover.jpeg"), Path("1.jpeg")]

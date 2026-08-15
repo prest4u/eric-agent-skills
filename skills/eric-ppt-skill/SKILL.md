@@ -143,8 +143,8 @@ When generating a PPT, adopt different production approaches for different user 
      6. 文字是否可能溢出文本框（文本过长、行距过密、字号过大）
      7. 内容是否被上层元素遮挡
    - For any suspicious page, read its full-resolution image (`.qa-images/pages/<n>.jpeg`) to confirm the problem before editing.
-   - Fix issues in the corresponding `.page` file, then re-export and review again; with the optional editor path, run `scripts/export_images.py --force`. Repeat until every page passes.
-   - `.qa-images/` is an intermediate QA artifact and may be deleted after delivery.
+   - Fix issues in the corresponding `.page` file, then re-export and review again; with the optional editor path, run `scripts/export_images.py --force`. Repeat until every page passes. Each forced replacement preserves the previous owned output beside `.qa-images/` as a hidden `*.backup` recovery directory; inspect it and remove it manually only after confirming no concurrent work needs recovery.
+   - `.qa-images/` and reviewed recovery backups are intermediate QA artifacts and may be deleted manually after delivery.
 3. When no authorized renderer is installed or the model cannot read images, fall back to a structural review of the generated pages (bounds, overflow-prone long text, contrast, hierarchy, layout density), validate the PPTX package, and state precisely that image-based visual QA was skipped. Never fetch a proprietary editor merely to make the check pass.
 
 ### step5. PPT output and delivery
@@ -187,7 +187,7 @@ When generating a PPT, adopt different production approaches for different user 
    ```
 
    A project directory may be passed instead of the manifest only when it contains exactly one `.pptd` file.
-   Existing project-local PPTX files are not overwritten unless `--force` is passed. PPTX targets are project-local by default; a new external PPTX target requires `--allow-outside-project`, and an existing external file is never replaced even with `--force`. Image-QA output remains project-local, and `--force` only replaces a directory previously marked as Eric PPT Skill image output; it refuses unowned project folders.
+   Existing project-local PPTX files are not overwritten unless `--force` is passed. PPTX targets are project-local by default; a new external PPTX target requires `--allow-outside-project`, and an existing external file is never replaced even with `--force`. Image-QA output remains project-local, and `--force` only replaces a directory previously marked as Eric PPT Skill image output; it refuses unowned project folders and preserves the replaced directory as a recovery backup instead of deleting it automatically.
 7. Portable and optional-editor model:
    - **PPTX export (default)**: `scripts/portable_ooxml.py`, called safely through `scripts/export_pptx.py`. It requires Python and PyYAML only and emits editable OOXML objects.
    - **Image QA / visual review**: `scripts/export_images.py` may drive a separately licensed PPTD editor through agent-browser when `ERIC_PPT_EDITOR` is set. Without one, render the exported PPTX with an already installed, authorized office suite and review those pages; do not silently download an editor.

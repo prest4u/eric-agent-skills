@@ -9,11 +9,13 @@ into a single overview image that a multimodal model can review.
 from __future__ import annotations
 
 import argparse
+from contextlib import contextmanager
 import json
 import math
 import os
 import re
 import shutil
+import stat
 import subprocess
 import sys
 import time
@@ -82,7 +84,7 @@ def ensure_pillow() -> Tuple[Any, Any, Any]:
         raise ExportError(
             "Pillow is required for stitching page previews. This script does not "
             "install packages automatically. Install the reviewed version explicitly, "
-            "then retry: python3 -m pip install --user Pillow==11.1.0"
+            "then retry: python3 -m pip install --user Pillow==12.3.0"
         )
 
 
@@ -300,34 +302,186 @@ def image_output_is_owned(output: Path, manifest: Path) -> bool:
     return value == expected_image_output_marker(manifest)
 
 
+def image_output_tree_snapshot(output: Path) -> Tuple[Tuple[Any, ...], ...]:
+    """Capture names and non-following metadata for the complete output tree.
+
+    The root ctime is intentionally excluded because renaming the root directory
+    changes it. Root mtime and every descendant ctime remain part of the token,
+    so concurrent additions, removals, replacements, and content changes fail
+    closed before the old tree is deleted.
+    """
+    try:
+        root = output.stat(follow_symlinks=False)
+        rows: List[Tuple[Any, ...]] = [
+            (
+                ".",
+                root.st_mode,
+                root.st_dev,
+                root.st_ino,
+                root.st_nlink,
+                getattr(root, "st_uid", 0),
+                getattr(root, "st_gid", 0),
+                root.st_size,
+                root.st_mtime_ns,
+            )
+        ]
+        pending = [output]
+        while pending:
+            directory = pending.pop()
+            with os.scandir(directory) as iterator:
+                entries = sorted(iterator, key=lambda entry: entry.name)
+            child_directories: List[Path] = []
+            for entry in entries:
+                path = Path(entry.path)
+                info = entry.stat(follow_symlinks=False)
+                rows.append(
+                    (
+                        path.relative_to(output).as_posix(),
+                        info.st_mode,
+                        info.st_dev,
+                        info.st_ino,
+                        info.st_nlink,
+                        getattr(info, "st_uid", 0),
+                        getattr(info, "st_gid", 0),
+                        info.st_size,
+                        info.st_mtime_ns,
+                        info.st_ctime_ns,
+                    )
+                )
+                if stat.S_ISDIR(info.st_mode):
+                    child_directories.append(path)
+            pending.extend(reversed(child_directories))
+    except OSError as exc:
+        raise OutputSafetyError(
+            f"output directory changed while its contents were inspected: {output}"
+        ) from exc
+    return tuple(rows)
+
+
+@contextmanager
+def guarded_image_output_identity(
+    output: Path,
+    manifest: Path,
+    *,
+    force: bool,
+):
+    """Validate ownership while holding the directory inode open on POSIX.
+
+    Keeping a descriptor open prevents a deleted inode from being immediately
+    reused for a replacement directory with the same path. Windows does not
+    permit this style of directory handle through ``os.open``, so it falls back
+    to a metadata fingerprint there.
+    """
+    if not output.exists():
+        yield None
+        return
+
+    descriptor: Optional[int] = None
+    try:
+        if os.name != "nt":
+            flags = os.O_RDONLY
+            flags |= getattr(os, "O_DIRECTORY", 0)
+            flags |= getattr(os, "O_NOFOLLOW", 0)
+            try:
+                descriptor = os.open(output, flags)
+            except OSError as exc:
+                raise OutputSafetyError(
+                    f"could not lock output directory for ownership validation: {output}"
+                ) from exc
+
+        before = (
+            os.fstat(descriptor)
+            if descriptor is not None
+            else output.stat(follow_symlinks=False)
+        )
+        before_identity = (before.st_dev, before.st_ino)
+        before_fingerprint = (
+            before.st_dev,
+            before.st_ino,
+            before.st_ctime_ns,
+            before.st_mtime_ns,
+            before.st_size,
+        )
+        path_before = output.stat(follow_symlinks=False)
+        if (path_before.st_dev, path_before.st_ino) != before_identity:
+            raise OutputSafetyError(
+                "output directory identity changed before ownership validation; "
+                "nothing was deleted"
+            )
+
+        has_entries = any(output.iterdir())
+        if not force:
+            raise ExportError(
+                f"output directory already exists (pass --force to replace it): {output}"
+            )
+        if has_entries and not image_output_is_owned(output, manifest):
+            raise OutputSafetyError(
+                "refusing to delete an unowned directory; choose a new output path or "
+                f"remove it manually after review: {output}"
+            )
+
+        after = output.stat(follow_symlinks=False)
+        after_identity = (after.st_dev, after.st_ino)
+        if descriptor is not None:
+            held = os.fstat(descriptor)
+            held_fingerprint = (
+                held.st_dev,
+                held.st_ino,
+                held.st_ctime_ns,
+                held.st_mtime_ns,
+                held.st_size,
+            )
+            changed = after_identity != before_identity or held_fingerprint != before_fingerprint
+        else:
+            after_fingerprint = (
+                after.st_dev,
+                after.st_ino,
+                after.st_ctime_ns,
+                after.st_mtime_ns,
+                after.st_size,
+            )
+            changed = after_fingerprint != before_fingerprint
+        if changed:
+            raise OutputSafetyError(
+                "output directory identity changed during ownership validation; "
+                "nothing was deleted"
+            )
+        tree_snapshot = image_output_tree_snapshot(output)
+        held_after_snapshot = (
+            os.fstat(descriptor)
+            if descriptor is not None
+            else output.stat(follow_symlinks=False)
+        )
+        held_snapshot_fingerprint = (
+            held_after_snapshot.st_dev,
+            held_after_snapshot.st_ino,
+            held_after_snapshot.st_ctime_ns,
+            held_after_snapshot.st_mtime_ns,
+            held_after_snapshot.st_size,
+        )
+        if held_snapshot_fingerprint != before_fingerprint:
+            raise OutputSafetyError(
+                "output directory contents changed during ownership validation; "
+                "nothing was deleted"
+            )
+        yield before_identity, tree_snapshot
+    finally:
+        if descriptor is not None:
+            os.close(descriptor)
+
+
 def ensure_image_output_replaceable(
     output: Path,
     manifest: Path,
     *,
     force: bool,
 ) -> Optional[Tuple[int, int]]:
-    if not output.exists():
-        return None
-    before = output.stat(follow_symlinks=False)
-    before_identity = (before.st_dev, before.st_ino)
-    has_entries = any(output.iterdir())
-    if not force:
-        raise ExportError(
-            f"output directory already exists (pass --force to replace it): {output}"
-        )
-    if has_entries and not image_output_is_owned(output, manifest):
-        raise OutputSafetyError(
-            "refusing to delete an unowned directory; choose a new output path or "
-            f"remove it manually after review: {output}"
-        )
-    after = output.stat(follow_symlinks=False)
-    after_identity = (after.st_dev, after.st_ino)
-    if after_identity != before_identity:
-        raise OutputSafetyError(
-            "output directory identity changed during ownership validation; "
-            "nothing was deleted"
-        )
-    return before_identity
+    with guarded_image_output_identity(
+        output,
+        manifest,
+        force=force,
+    ) as guard:
+        return None if guard is None else guard[0]
 
 
 def commit_image_output(
@@ -362,35 +516,53 @@ def commit_image_output(
             raise
         return
 
-    original_identity = ensure_image_output_replaceable(output, manifest, force=True)
-    if original_identity is None:
-        raise OutputSafetyError(
-            "output directory disappeared during export; rerun to create it safely"
-        )
-    backup = output.with_name(f".{output.name}.{uuid.uuid4().hex}.backup")
-    moved_existing = False
-    try:
-        output.replace(backup)
-        moved_existing = True
-        backup_stat = backup.stat(follow_symlinks=False)
-        if (backup_stat.st_dev, backup_stat.st_ino) != original_identity:
-            if not output.exists():
+    with guarded_image_output_identity(
+        output,
+        manifest,
+        force=True,
+    ) as guard:
+        if guard is None:
+            raise OutputSafetyError(
+                "output directory disappeared during export; rerun to create it safely"
+            )
+        original_identity, original_tree_snapshot = guard
+        backup = output.with_name(f".{output.name}.{uuid.uuid4().hex}.backup")
+        moved_existing = False
+        try:
+            output.replace(backup)
+            moved_existing = True
+            backup_stat = backup.stat(follow_symlinks=False)
+            if (backup_stat.st_dev, backup_stat.st_ino) != original_identity:
+                if not output.exists():
+                    backup.replace(output)
+                raise OutputSafetyError(
+                    "output directory identity changed during export; no directory was deleted"
+                )
+            if image_output_tree_snapshot(backup) != original_tree_snapshot:
+                if not output.exists():
+                    backup.replace(output)
+                raise OutputSafetyError(
+                    "output directory contents changed during export; no directory was deleted"
+                )
+            staged.replace(output)
+        except Exception:
+            if moved_existing and backup.exists() and not output.exists():
                 backup.replace(output)
-            raise OutputSafetyError(
-                "output directory identity changed during export; no directory was deleted"
+            raise
+        if moved_existing:
+            backup_stat = backup.stat(follow_symlinks=False)
+            if (backup_stat.st_dev, backup_stat.st_ino) != original_identity:
+                raise OutputSafetyError(
+                    f"backup identity changed; preserving it instead of deleting: {backup}"
+                )
+            if image_output_tree_snapshot(backup) != original_tree_snapshot:
+                raise OutputSafetyError(
+                    f"backup contents changed; preserving it instead of deleting: {backup}"
+                )
+            log(
+                "previous image output preserved for recovery; review and remove it "
+                f"manually when no longer needed: {backup}"
             )
-        staged.replace(output)
-    except Exception:
-        if moved_existing and backup.exists() and not output.exists():
-            backup.replace(output)
-        raise
-    if moved_existing:
-        backup_stat = backup.stat(follow_symlinks=False)
-        if (backup_stat.st_dev, backup_stat.st_ino) != original_identity:
-            raise OutputSafetyError(
-                f"backup identity changed; preserving it instead of deleting: {backup}"
-            )
-        shutil.rmtree(backup)
 
 
 def export_images(
