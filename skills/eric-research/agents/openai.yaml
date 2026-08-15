@@ -1,0 +1,6 @@
+interface:
+  display_name: "Eric Research"
+  short_description: "Verify and synthesize cross-domain evidence"
+  default_prompt: "Use $eric-research to verify these claims and synthesize the evidence."
+policy:
+  allow_implicit_invocation: false

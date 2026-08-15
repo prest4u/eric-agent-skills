@@ -1,0 +1,6 @@
+interface:
+  display_name: "Adaptive Quality Loop"
+  short_description: "Build first, then run the smallest useful quality check"
+  default_prompt: "Use $adaptive-quality-loop in BUILD mode to produce the visible artifact first and run one targeted acceptance check."
+policy:
+  allow_implicit_invocation: true

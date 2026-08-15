@@ -1,0 +1,6 @@
+interface:
+  display_name: "Eric Reach"
+  short_description: "Web retrieval plus free local video reading"
+  default_prompt: "Use $eric-reach to retrieve current web or platform information; for a public video link, extract subtitles, inspect frames only when useful, and analyze the acquired content with the free local pipeline."
+policy:
+  allow_implicit_invocation: true

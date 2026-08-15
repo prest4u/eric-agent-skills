@@ -1,0 +1,6 @@
+interface:
+  display_name: "Eric Soft Signal"
+  short_description: "Primary creator for Eric's English teaching documents"
+  default_prompt: "Use $eric-soft-signal with its bundled template as the visual source of truth. Build this English teaching document, match any supplied reference by page grammar as well as palette, and show a representative visible proof before scaling."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,4 @@
+---
+template: title
+section: front
+---

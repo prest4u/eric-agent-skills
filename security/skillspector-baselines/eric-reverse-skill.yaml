@@ -1,0 +1,106 @@
+# SkillSpector baseline — findings listed here are suppressed on future scans.
+# Edit 'reason' fields and add glob 'rules' as needed. See docs/SUPPRESSION.md.
+version: 2
+scanner_version: 2.9.4
+rules: []
+fingerprints:
+- hash: sha256:c0bc330f1ceec78f0de9503f55804fa380d48f255645d9e95e7f48f2c35c23ca
+  rule_id: RP1
+  file: patterns-ctf.md
+  reason: Reviewed authorized local and CTF reverse-engineering references; dual-use
+    examples are constrained to owned or training artifacts.
+- hash: sha256:7fa2e7fcde9ce1ff32915f3e6f1af3aaf853c2fa57afe79f087af6f3366dc22e
+  rule_id: EA3
+  file: LICENSE
+  reason: Reviewed authorized local and CTF reverse-engineering references; dual-use
+    examples are constrained to owned or training artifacts.
+- hash: sha256:e47672973bef6c77b89234af7312d6bc672d4e920944a53b40266a9a81edb492
+  rule_id: EA1
+  file: anti-analysis.md
+  reason: Reviewed authorized local and CTF reverse-engineering references; dual-use
+    examples are constrained to owned or training artifacts.
+- hash: sha256:07cd274d5ad09999c14bb911ab4046554b746540b224a91fb44d59ef552d4324
+  rule_id: EA1
+  file: platforms-hardware.md
+  reason: Reviewed authorized local and CTF reverse-engineering references; dual-use
+    examples are constrained to owned or training artifacts.
+- hash: sha256:357e0867e3493abcff82d4c1bcd500275821ee01e8135ed8ba7f4bd67b9fb4c6
+  rule_id: MP2
+  file: patterns.md
+  reason: Reviewed authorized local and CTF reverse-engineering references; dual-use
+    examples are constrained to owned or training artifacts.
+- hash: sha256:c3987942a275bd50d8d1d81122ae61d117377f082eb275a169fbda7df426d6fd
+  rule_id: P2
+  file: tools-advanced.md
+  reason: Reviewed authorized local and CTF reverse-engineering references; dual-use
+    examples are constrained to owned or training artifacts.
+- hash: sha256:c8f78cb8861dfdf133c85ef1f36dd5f40df8179244795d03de92400718a6511e
+  rule_id: RA2
+  file: patterns-ctf-3.md
+  reason: Reviewed authorized local and CTF reverse-engineering references; dual-use
+    examples are constrained to owned or training artifacts.
+- hash: sha256:37d051ffa884f8e9e5658442345350b76e50c0e0d389a7e1eff18fb86f35ebc4
+  rule_id: P6
+  file: anti-analysis.md
+  reason: Reviewed authorized local and CTF reverse-engineering references; dual-use
+    examples are constrained to owned or training artifacts.
+- hash: sha256:f726d2bf28da0e87cb7a711c442171d8b606bca4d36fd84db686ff0086a17588
+  rule_id: P6
+  file: tools-dynamic.md
+  reason: Reviewed authorized local and CTF reverse-engineering references; dual-use
+    examples are constrained to owned or training artifacts.
+- hash: sha256:48a74ebf02d741dd1da5f1e48db1b87cff151ae7017d9c52888d92d981eba373
+  rule_id: YR4
+  file: anti-analysis.md
+  reason: Reviewed authorized local and CTF reverse-engineering references; dual-use
+    examples are constrained to owned or training artifacts.
+- hash: sha256:99adc0ec6c7803d25d3ebd39c3b40266b2e8c322ed6a008b4be50bdb2444127f
+  rule_id: YR1
+  file: anti-analysis.md
+  reason: Reviewed authorized local and CTF reverse-engineering references; dual-use
+    examples are constrained to owned or training artifacts.
+- hash: sha256:c6ffa36b1ce64e7357e4bf4dc10106ce59ac94f1dd9582f92e6ce7f4fbe6b687
+  rule_id: YR4
+  file: crypto-decode-tools.md
+  reason: Reviewed authorized local and CTF reverse-engineering references; dual-use
+    examples are constrained to owned or training artifacts.
+- hash: sha256:283436f0505bcd352831cf907299422af3eeac83977b9b7bfdd24a38539019bb
+  rule_id: YR1
+  file: patterns-ctf-3.md
+  reason: Reviewed authorized local and CTF reverse-engineering references; dual-use
+    examples are constrained to owned or training artifacts.
+- hash: sha256:23fbb078be66994095a4f1f26e1fe50258dd25ccacf55671d18533fa7583475a
+  rule_id: YR1
+  file: patterns-ctf.md
+  reason: Reviewed authorized local and CTF reverse-engineering references; dual-use
+    examples are constrained to owned or training artifacts.
+- hash: sha256:78e73568463a4374b47d11bd60af3cab60fe00712955eff432651abfa3d4feaf
+  rule_id: YR4
+  file: patterns.md
+  reason: Reviewed authorized local and CTF reverse-engineering references; dual-use
+    examples are constrained to owned or training artifacts.
+- hash: sha256:573e18d61bb4f32952bf0f2b70583264e76098ae89291eae0cdb01bef3d39b67
+  rule_id: YR1
+  file: patterns.md
+  reason: Reviewed authorized local and CTF reverse-engineering references; dual-use
+    examples are constrained to owned or training artifacts.
+- hash: sha256:d3ba4ec40041948ffc031759aa14e83a41525342d63b8f8bc9e6ebf178df29a1
+  rule_id: YR4
+  file: platforms-hardware.md
+  reason: Reviewed authorized local and CTF reverse-engineering references; dual-use
+    examples are constrained to owned or training artifacts.
+- hash: sha256:d5ec93553c62184b83e0dbf21d35ea2e0a7de3c368098123fdb3825001ebd178
+  rule_id: YR1
+  file: platforms-hardware.md
+  reason: Reviewed authorized local and CTF reverse-engineering references; dual-use
+    examples are constrained to owned or training artifacts.
+- hash: sha256:716d74de62494ea5eced071eb03a9cb81c0e470bff7c06701df1ddfed66e4289
+  rule_id: YR1
+  file: tools-advanced.md
+  reason: Reviewed authorized local and CTF reverse-engineering references; dual-use
+    examples are constrained to owned or training artifacts.
+- hash: sha256:d80362e3b1b4f7c6b944f5498c618eef4a66ab4be2f74080e4bdb89f7103a983
+  rule_id: YR1
+  file: tools-dynamic.md
+  reason: Reviewed authorized local and CTF reverse-engineering references; dual-use
+    examples are constrained to owned or training artifacts.

@@ -1,0 +1,17 @@
+[
+  {
+    "id": "happy_path_teaching_validator",
+    "prompt": "Use building-validators to create a validator plan for a teaching course pack with student PDFs, teacher guides, answer keys, and final feedback files. Do not write files; output the gates, fixtures, report fields, and validation commands.",
+    "expected": "Output inspects likely artifacts first, separates student/teacher leak gates, requires one bad and one good fixture per major gate, includes JSON+Markdown reports, human visual-review sentinel, and non-mutating validation commands."
+  },
+  {
+    "id": "repair_weak_validator",
+    "prompt": "Review this weak validator design: it scans Markdown for TODO, always exits 0, writes only a Markdown report, and says PASS if no TODO appears. Use building-validators to upgrade the design.",
+    "expected": "Output identifies always-exit-0 and Markdown-only reporting as invalid, adds strict severities, nonzero exit, rules JSON, machine-readable report, bad fixtures, and explicit next_action/handoff semantics."
+  },
+  {
+    "id": "skill_plugin_validator",
+    "prompt": "Use building-validators to design a validator for an Agent skill/plugin directory containing SKILL.md, references, scripts, and tests. Include runtime-neutrality and script self-test gates.",
+    "expected": "Output selects the skills/plugins recipe, checks frontmatter, directory/name alignment, referenced resources, TODO/runtime drift, script tests, no personal path leaks, and produces runnable validation commands."
+  }
+]

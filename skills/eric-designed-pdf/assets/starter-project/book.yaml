@@ -1,0 +1,29 @@
+title: "Pathways to Better Writing"
+subtitle: "Sentences, Paragraphs, and Writing Practice"
+level: "Level 1"
+edition: "Template System Sample"
+profile_default: "book-trim"
+unit:
+  number: 1
+  title: "Sentence Basics"
+  color: "#b8642f"
+profiles:
+  book-trim:
+    page_width_pt: 594.96
+    page_height_pt: 761.133
+    label: "Book Trim"
+  lesson-a4:
+    page_width_pt: 594.96
+    page_height_pt: 841.92
+    label: "Lesson A4"
+pages:
+  - pages/01-cover.md
+  - pages/02-title.md
+  - pages/03-unit-opener.md
+  - pages/04-elements.md
+  - pages/05-activity.md
+  - pages/06-paragraph-practice.md
+  - pages/07-photo-passage.md
+  - pages/08-writing-planner.md
+  - pages/09-handbook.md
+  - pages/10-answer-key.md

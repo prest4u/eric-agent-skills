@@ -1,0 +1,4 @@
+interface:
+  display_name: "Eric-designed-pdf"
+  short_description: "Premium textbook PDF visual contract and QA gates"
+  default_prompt: "Use $eric-designed-pdf to build or repair a textbook-style English PDF with the visual canon, contact sheets, and full QA gates."

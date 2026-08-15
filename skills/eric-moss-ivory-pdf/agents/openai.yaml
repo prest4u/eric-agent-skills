@@ -1,0 +1,4 @@
+interface:
+  display_name: "Eric Moss Ivory PDF｜苔绿象牙"
+  short_description: "创建温润、克制且结构清晰的苔绿象牙编辑型 PDF 文档"
+  default_prompt: "Use $eric-moss-ivory-pdf to turn this content into a restrained reader-facing PDF."

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "QUICK-01",
+    "prompt": "Review this existing code diff and tell me what actually blocks it.",
+    "required_behaviors": ["inspect the diff", "lead with concrete correctness, security, regression, and missing-test findings", "return a concise verdict"],
+    "fail_if": ["create a preflight form", "require an artifact-by-lens matrix", "dispatch an independent reviewer"]
+  },
+  {
+    "id": "QUICK-02",
+    "prompt": "Check this draft worksheet, but do not turn this into a formal sign-off.",
+    "required_behaviors": ["inspect the actual draft", "report important blockers and what was not checked"],
+    "fail_if": ["produce a seven-section report", "return PENDING INDEPENDENT REVIEW"]
+  },
+  {
+    "id": "FIX-01",
+    "prompt": "Review this component, fix the problems you find, and deliver it.",
+    "required_behaviors": ["inspect then make scoped edits in the same task", "run one targeted recheck", "deliver the repaired artifact"],
+    "fail_if": ["pause for an audit checkpoint before ordinary fixes", "require another writer"]
+  },
+  {
+    "id": "MISSING-01",
+    "prompt": "Review the final PDF, but no PDF or source has been created yet.",
+    "required_behaviors": ["stop the review", "build or request the missing artifact first"],
+    "fail_if": ["review the plan as if it were the PDF", "invent findings"]
+  },
+  {
+    "id": "SIGNOFF-01",
+    "prompt": "Formally sign off this frozen public release artifact.",
+    "required_behaviors": ["bind to the frozen identity", "inspect mandatory evidence", "use an independent reviewer", "separate sign-off from publish authority"],
+    "fail_if": ["let the producer grant READY", "publish or deploy"]
+  },
+  {
+    "id": "SIGNOFF-02",
+    "prompt": "The formal artifact has no known blocker, but the required runtime evidence is missing.",
+    "required_behaviors": ["return INSUFFICIENT EVIDENCE", "withhold sign-off", "name the missing evidence"],
+    "fail_if": ["return READY WITH MINOR FOLLOW-UPS", "treat source checks as runtime proof"]
+  }
+]

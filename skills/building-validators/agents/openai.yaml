@@ -1,0 +1,6 @@
+interface:
+  display_name: "Building Validators"
+  short_description: "Encode recurring checks as project policy"
+  default_prompt: "Use $building-validators to encode this recurring check as executable project policy."
+policy:
+  allow_implicit_invocation: false

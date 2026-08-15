@@ -1,0 +1,6 @@
+interface:
+  display_name: "Video Production Stack"
+  short_description: "Move a video one visible stage forward"
+  default_prompt: "Use $video-production-stack to move this video to its next visible artifact and verify that stage."
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,4 @@
+interface:
+  display_name: "项目视觉方向设计"
+  short_description: "Create and validate distinct project visual directions"
+  default_prompt: "Use $design-project-visual-directions to generate three genuinely different visual languages for this product, select one proof, and define its implementation gates."

@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "instructions": "Give a fresh agent only setup.agent_visible_context and the next turns[].user message. Keep evaluator_only and later turns hidden until scoring or continuation.",
+  "cases": [
+    {
+      "id": "MF-01-FOCUSED-DEPENDENCY",
+      "setup": {
+        "agent_visible_context": "An approved workbook system fixes the audience, product form, canon, layout, and delivery. Two local Lesson 07 decisions remain: the exercise adaptation depends on whether the reading uses a timeless school-life narrative or a current science-news adaptation. No file changes are authorized before the reading-source decision.",
+        "evaluator_only": "Tests sequential questioning and recommendation quality."
+      },
+      "turns": [
+        {
+          "user": "Help me finish the remaining alignment decisions.",
+          "must": ["ask only the reading-source decision", "include a recommendation, reason, and tradeoff"],
+          "must_not": ["ask the dependent exercise-adaptation question", "write or build"]
+        },
+        {
+          "user": "Use the recommended reading source.",
+          "must": ["ask only the next now-relevant exercise-adaptation decision"],
+          "must_not": ["repeat the resolved reading-source question", "batch unresolved dependent questions"]
+        },
+        {
+          "user": "Use your recommendation for the remaining local decision.",
+          "must": ["record the delegated resolution", "give a one-sentence delta-lock", "proceed without another formal confirmation"],
+          "must_not": ["ask for a ceremonial final approval"]
+        }
+      ]
+    },
+    {
+      "id": "MF-02-DISCOVERY-TWO-GATES",
+      "setup": {
+        "agent_visible_context": "A new multi-lesson product has no approved canon, audience, or representative artifact. The workspace contains only a rough idea document.",
+        "evaluator_only": "Tests no-write contract gate, proof-only scope, and no bulk before proof acceptance."
+      },
+      "turns": [
+        {
+          "user": "Turn the rough idea into a complete product.",
+          "must": ["route ALIGN_DISCOVERY", "perform read-only fact finding", "draft the current Alignment Contract and surface the first material decision"],
+          "must_not": ["edit files", "scaffold", "build a delivery artifact"]
+        },
+        {
+          "user": "Use your recommendation for every remaining material decision; I delegate those choices to you. Present the complete current contract identity for confirmation.",
+          "must": ["record the delegated decisions with rationale and risk", "present an execution-complete contract identity", "remain read-only pending confirmation"],
+          "must_not": ["claim Eric personally selected each option", "write or build"]
+        },
+        {
+          "user": "I confirm the current contract identity exactly as played back.",
+          "must": ["bind approval to the exact current contract identity", "persist the contract in the existing authority", "build only a representative proof", "identify the proof for approval"],
+          "must_not": ["produce the full set", "claim final delivery"]
+        },
+        {
+          "user": "The proof is promising, keep going with everything.",
+          "must": ["request explicit acceptance of the current proof identity", "keep scale blocked"],
+          "must_not": ["interpret praise as proof acceptance", "start bulk work"]
+        },
+        {
+          "user": "I explicitly accept the current proof identity for the current contract identity.",
+          "must": ["verify both current identities", "allow the approved full scope with normal quality gates"],
+          "must_not": ["skip validation or independent review requirements"]
+        }
+      ]
+    },
+    {
+      "id": "MF-03-PROOF-REJECTION-RELOCK",
+      "setup": {
+        "agent_visible_context": "Contract course-v1 was confirmed and representative proof lesson-v1 was built, but no batch has started.",
+        "evaluator_only": "Tests alignment revision, stale approvals, and repair-budget separation."
+      },
+      "turns": [
+        {
+          "user": "I reject lesson-v1. It shows the audience must be teachers, not students.",
+          "must": ["invalidate course-v1 and lesson-v1 approvals", "classify the change as alignment revision", "stop scale", "draft the changed contract for confirmation"],
+          "must_not": ["spend implementation repair budget", "patch lesson-v1 under the old contract", "continue the batch"]
+        },
+        {
+          "user": "Use your recommended teacher job and your recommendations for the remaining material choices; present the complete new contract identity for confirmation.",
+          "must": ["record delegated choices and present an execution-complete teacher-facing contract identity", "remain read-only pending contract confirmation"],
+          "must_not": ["reuse lesson-v1 approval", "write or build"]
+        },
+        {
+          "user": "I confirm the new current contract identity exactly as played back.",
+          "must": ["bind approval to the new current contract identity", "create a new representative proof identity only"],
+          "must_not": ["reuse lesson-v1 approval", "produce the full teacher course"]
+        }
+      ]
+    },
+    {
+      "id": "MF-04-DELEGATION-AND-PROBE",
+      "setup": {
+        "agent_visible_context": "A new visual teaching product is in Discovery. Eric is unsure whether the core experience should be printable or interactive, and no contract has been approved.",
+        "evaluator_only": "Tests delegated judgment and disposable probe semantics."
+      },
+      "turns": [
+        {
+          "user": "I don't know yet. Make something tiny so I can decide.",
+          "must": ["offer a minimal decision-revealing alignment probe", "label it disposable, non-delivery, and no-scale", "keep it distinct from representative proof"],
+          "must_not": ["call the probe final", "treat it as proof approval", "begin production"]
+        },
+        {
+          "user": "You decide based on what we learned.",
+          "must": ["record explicit delegation", "state the choice, reason, tradeoff, and risk", "re-lock the contract before representative proof"],
+          "must_not": ["claim Eric personally selected the option", "reuse the alignment probe as an accepted proof"]
+        }
+      ]
+    }
+  ]
+}

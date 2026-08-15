@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "project": "replace-me",
+  "target": {"medium": "document-pdf", "format": "A4", "audience": "replace-me"},
+  "references": [],
+  "visual_dna": {
+    "visual_style": "",
+    "component_structure": "",
+    "composition": "",
+    "shot_and_lens": "not_applicable",
+    "lighting": "not_applicable",
+    "color_science": "",
+    "medium_texture": "",
+    "mood": "",
+    "rendering_feel": "",
+    "era_culture": "",
+    "spatial_logic": "",
+    "density_blank_space": "",
+    "dynamic_state": "",
+    "post_processing": "none",
+    "signature_traits": ""
+  },
+  "document_extension": {
+    "information_hierarchy": "",
+    "pagination": "",
+    "data_visualization": "",
+    "iconography": "",
+    "accessibility": "",
+    "medium_translation": ""
+  },
+  "originality": {"transformations": [], "excluded": []}
+}

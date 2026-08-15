@@ -1,0 +1,28 @@
+{
+  "name": "eric-agent-skills",
+  "version": "1.0.0",
+  "description": "Portable skills for educational documents, PDF design, presentations, websites, video production, and reliable agent workflows.",
+  "author": {
+    "name": "prest4u",
+    "url": "https://github.com/prest4u"
+  },
+  "homepage": "https://github.com/prest4u/eric-agent-skills",
+  "repository": "https://github.com/prest4u/eric-agent-skills",
+  "license": "MIT",
+  "keywords": ["agent-skills", "pdf", "education", "web", "video"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Eric Agent Skills",
+    "shortDescription": "Eric's portable document, web, video, and workflow skills.",
+    "longDescription": "A curated, portable collection of independently installable skills for students, businesses, PDFs, presentations, websites, video, and quality-controlled agent workflows.",
+    "developerName": "prest4u",
+    "category": "Productivity",
+    "capabilities": ["Create", "Review", "Automate"],
+    "websiteURL": "https://github.com/prest4u/eric-agent-skills",
+    "defaultPrompt": [
+      "Create a polished educational PDF with the appropriate Eric skill.",
+      "Build and verify a high-quality website using Eric's delivery workflow.",
+      "Choose the right Eric skill for this document or media task."
+    ]
+  }
+}

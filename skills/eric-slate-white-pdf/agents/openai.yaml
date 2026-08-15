@@ -1,0 +1,4 @@
+interface:
+  display_name: "Eric Slate White PDF｜雾蓝白"
+  short_description: "创建克制、留白充分且结构清晰的雾蓝白编辑型 PDF 文档"
+  default_prompt: "Use $eric-slate-white-pdf to turn this content into a restrained reader-facing PDF."

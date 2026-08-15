@@ -1,0 +1,4 @@
+interface:
+  display_name: "Eric Philosophy Book"
+  short_description: "哲学书封面内页插图字体版式与出版级视觉审校工作流系统"
+  default_prompt: "Use $eric-philosophy-book to design or review the philosophy book cover, interior typography, illustrations, and publication QA."

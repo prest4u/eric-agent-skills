@@ -1,0 +1,5 @@
+interface:
+  display_name: "Eric Quality Sites"
+  short_description: "Design and deliver premium motion-rich websites"
+  default_prompt: "Use $eric-quality-sites to design and implement a distinctive, polished website."
+

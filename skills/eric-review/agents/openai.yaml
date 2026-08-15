@@ -1,0 +1,6 @@
+interface:
+  display_name: "Eric Review"
+  short_description: "Fast review, review-and-fix, or formal sign-off"
+  default_prompt: "Use $eric-review in QUICK_REVIEW mode to inspect this existing artifact and report only the important findings."
+policy:
+  allow_implicit_invocation: false

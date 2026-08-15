@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "free_only": true,
+  "asr": {
+    "package": "mlx-whisper",
+    "version": "0.4.3",
+    "venv_python": "~/.agent-reach/tools/video-intake/.venv/bin/python",
+    "model_repo": "mlx-community/whisper-large-v3-turbo",
+    "model_revision": "a4aaeec0636e6fef84abdcbe3544cb2bf7e9f6fb",
+    "model_dir": "~/.agent-reach/tools/video-intake/models/whisper-large-v3-turbo",
+    "revision_marker": ".model-revision",
+    "required_files": {
+      "weights.safetensors": "951ed3fc1203e6a62467abb2144a96ce7eafca8fa77e3704fdb8635ff3e7f8a6",
+      "config.json": "b34fc29e4e11e0a25e812775dd67f4dd16fc2c8eb43d28ae25ff7d660ecb6379"
+    }
+  },
+  "visual": {
+    "max_height": 720,
+    "fallback_height": 480,
+    "max_media_bytes": 1073741824,
+    "initial_frame_cap": 12,
+    "additional_frame_cap": 12,
+    "total_frame_cap": 24,
+    "ocr_languages": "chi_sim+eng"
+  }
+}

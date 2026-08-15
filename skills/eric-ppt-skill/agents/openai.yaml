@@ -1,0 +1,4 @@
+interface:
+  display_name: "Eric PPT Skill"
+  short_description: "Create, edit, and export polished PPT presentations"
+  default_prompt: "Use $eric-ppt-skill to create a polished editable presentation and export it to PPTX."

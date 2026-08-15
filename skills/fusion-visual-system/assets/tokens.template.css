@@ -1,0 +1,14 @@
+:root {
+  --fusion-paper: #f7f3eb;
+  --fusion-ink: #171714;
+  --fusion-muted: #6f6b63;
+  --fusion-accent: #b55234;
+  --fusion-signal: #d8cfbf;
+  --fusion-hairline: rgba(23, 23, 20, 0.2);
+  --fusion-space-xs: 2mm;
+  --fusion-space-sm: 4mm;
+  --fusion-space-md: 7mm;
+  --fusion-space-lg: 12mm;
+  --fusion-radius-sm: 1.5mm;
+  --fusion-rule: 0.25mm;
+}

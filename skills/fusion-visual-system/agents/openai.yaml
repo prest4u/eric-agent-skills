@@ -1,0 +1,4 @@
+interface:
+  display_name: "Fusion Visual System"
+  short_description: "Extract and translate visual DNA into original document systems"
+  default_prompt: "Use $fusion-visual-system to extract visual DNA from my references and build an original, license-aware document design."

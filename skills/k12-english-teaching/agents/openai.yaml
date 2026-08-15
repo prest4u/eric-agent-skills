@@ -1,0 +1,6 @@
+interface:
+  display_name: "K12 English Teaching"
+  short_description: "Design actionable K12 English lessons and practice"
+  default_prompt: "Use $k12-english-teaching to create an actionable K12 English lesson, unit, course, diagnosis, remediation plan, or paired practice; proceed with embedded diagnosis when safe."
+policy:
+  allow_implicit_invocation: true

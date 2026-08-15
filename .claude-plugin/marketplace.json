@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "eric-skills",
+  "owner": {
+    "name": "prest4u"
+  },
+  "description": "Eric's curated portable skill collections.",
+  "version": "1.0.0",
+  "plugins": [
+    {
+      "name": "eric-pdf-skills",
+      "source": "./",
+      "strict": false,
+      "description": "Five independent Eric PDF design and production skills.",
+      "version": "1.0.0",
+      "skills": [
+        "./skills/eric-designed-pdf",
+        "./skills/eric-pdf",
+        "./skills/eric-moss-ivory-pdf",
+        "./skills/eric-slate-white-pdf",
+        "./skills/eric-pdf-vocabulary"
+      ]
+    },
+    {
+      "name": "eric-education-skills",
+      "source": "./",
+      "strict": false,
+      "description": "Teaching, parent feedback, and educational material workflows.",
+      "version": "1.0.0",
+      "skills": [
+        "./skills/eric-soft-signal",
+        "./skills/eric-parent-feedback",
+        "./skills/eric-teaching-polish",
+        "./skills/k12-english-teaching"
+      ]
+    },
+    {
+      "name": "eric-document-skills",
+      "source": "./",
+      "strict": false,
+      "description": "Presentation, research, book, and visual memory workflows.",
+      "version": "1.0.0",
+      "skills": [
+        "./skills/eric-ppt-skill",
+        "./skills/eric-philosophy-book",
+        "./skills/eric-research",
+        "./skills/eric-visual-memory-translator"
+      ]
+    },
+    {
+      "name": "eric-web-skills",
+      "source": "./",
+      "strict": false,
+      "description": "Website direction, design systems, and delivery verification.",
+      "version": "1.0.0",
+      "skills": [
+        "./skills/eric-frontend-delivery",
+        "./skills/eric-quality-sites",
+        "./skills/design-project-visual-directions",
+        "./skills/fusion-visual-system"
+      ]
+    },
+    {
+      "name": "eric-video-skills",
+      "source": "./",
+      "strict": false,
+      "description": "Video production, recording, voice, distribution, and QA.",
+      "version": "1.0.0",
+      "skills": [
+        "./skills/eric-reach",
+        "./skills/browser-video-recording",
+        "./skills/elevenlabs-tts",
+        "./skills/video-production-stack",
+        "./skills/video-qa"
+      ]
+    },
+    {
+      "name": "eric-workflow-skills",
+      "source": "./",
+      "strict": false,
+      "description": "Planning, review, validation, handoff, and iteration workflows.",
+      "version": "1.0.0",
+      "skills": [
+        "./skills/eric-handoff",
+        "./skills/eric-reverse-skill",
+        "./skills/eric-review",
+        "./skills/eric-task-contract",
+        "./skills/adaptive-quality-loop",
+        "./skills/iterate-until-verified",
+        "./skills/building-validators"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+[
+  {
+    "id": "react-dashboard-final",
+    "prompt": "Create the production settings route in this React dashboard and verify desktop and mobile behavior.",
+    "expected_route": "production_create",
+    "invocation": "implicit",
+    "expected_owner": "eric-frontend-delivery"
+  },
+  {
+    "id": "static-html-prototype",
+    "prompt": "Prototype one runnable HTML inventory interaction so I can choose the direction before scaling it.",
+    "expected_route": "prototype",
+    "invocation": "implicit",
+    "expected_owner": "eric-frontend-delivery"
+  },
+  {
+    "id": "repair-mobile-state",
+    "prompt": "Repair the mobile validation and focus-return behavior in this checkout dialog.",
+    "expected_route": "repair",
+    "invocation": "implicit",
+    "expected_owner": "eric-frontend-delivery"
+  },
+  {
+    "id": "explicit-review-and-fix",
+    "prompt": "Use $eric-frontend-delivery with $eric-review to review this dashboard, fix blocking UI issues, and recheck it.",
+    "expected_route": "review_and_fix",
+    "invocation": "explicit",
+    "expected_owner": "eric-review+eric-frontend-delivery"
+  },
+  {
+    "id": "formal-release",
+    "prompt": "Use $eric-frontend-delivery to prepare this frozen checkout build for public delivery and formal sign-off.",
+    "expected_route": "release",
+    "invocation": "explicit",
+    "expected_owner": "eric-frontend-delivery"
+  },
+  {
+    "id": "backend-only",
+    "prompt": "Optimize this database query; there are no interface changes.",
+    "expected_route": "out_of_scope",
+    "invocation": "implicit",
+    "expected_owner": "other"
+  },
+  {
+    "id": "content-only-release-notes",
+    "prompt": "Rewrite these content-only release notes without changing the product UI.",
+    "expected_route": "out_of_scope",
+    "invocation": "implicit",
+    "expected_owner": "other"
+  },
+  {
+    "id": "unrendered-data-analysis",
+    "prompt": "Analyze this CSV and return statistics; no interface is requested.",
+    "expected_route": "out_of_scope",
+    "invocation": "implicit",
+    "expected_owner": "other"
+  }
+]

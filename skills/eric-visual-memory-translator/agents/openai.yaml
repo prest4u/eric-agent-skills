@@ -1,0 +1,6 @@
+interface:
+  display_name: "Eric Visual Memory Translator"
+  short_description: "把照片转译为克制的编辑设计与艺术出版记忆页图像"
+  default_prompt: "Use $eric-visual-memory-translator to reinterpret this photo as a restrained editorial memory page."
+policy:
+  allow_implicit_invocation: false

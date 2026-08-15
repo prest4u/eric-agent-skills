@@ -1,0 +1,12 @@
+[
+  {
+    "id": "student_book_sequence_field_cleanup",
+    "prompt": "Use eric-teaching-polish to clean a student-facing grammar book front matter that mentions source_unit_no, reader_order, build_order, quality gate, Soft Signal, and generated from.",
+    "expected": "Removes production/source sequence fields and packaging words from student-visible text, keeps only final unit title, page number, and learning task, and preserves mapping details for manifest/internal notes."
+  },
+  {
+    "id": "teacher_master_not_answer_appendix",
+    "prompt": "Use eric-teaching-polish to revise a teacher guide that only lists answers and says teachers should look at the workbook for the full questions.",
+    "expected": "Flags the teacher guide as not class-ready and rewrites the expectation toward a self-contained teaching master with full task surface, answers, evidence, common errors, and repair notes in lesson order."
+  }
+]

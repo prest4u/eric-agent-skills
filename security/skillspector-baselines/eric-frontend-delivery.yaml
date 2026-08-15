@@ -1,0 +1,61 @@
+# SkillSpector baseline — findings listed here are suppressed on future scans.
+# Edit 'reason' fields and add glob 'rules' as needed. See docs/SUPPRESSION.md.
+version: 2
+scanner_version: 2.9.4
+rules: []
+fingerprints:
+- hash: sha256:d48725b6097c4fbacc3e70d7fbb9ad8bf69af53a175fe535e95911368d137787
+  rule_id: AST4
+  file: tests/test_validate_delivery_evidence.py
+  reason: Reviewed explicit-argv local tests and pinned Vercel examples; upstream
+    tree hashes and exact finding fingerprints are required.
+- hash: sha256:20954ab03f110cf68585028e1b17d6fd03be18ba8b891d61e044480b423297b2
+  rule_id: AST4
+  file: tests/test_validate_delivery_evidence.py
+  reason: Reviewed explicit-argv local tests and pinned Vercel examples; upstream
+    tree hashes and exact finding fingerprints are required.
+- hash: sha256:731b4699dc2315ce51e2f0d2817012d4c08cebc2f015e56746a4863a966ef776
+  rule_id: AST4
+  file: tests/test_validate_delivery_evidence.py
+  reason: Reviewed explicit-argv local tests and pinned Vercel examples; upstream
+    tree hashes and exact finding fingerprints are required.
+- hash: sha256:5d0a72f990b8ac18b503d723f9a6ff65298fdbc43fe80f5832091b977069aa2e
+  rule_id: AST4
+  file: tests/test_validate_delivery_evidence.py
+  reason: Reviewed explicit-argv local tests and pinned Vercel examples; upstream
+    tree hashes and exact finding fingerprints are required.
+- hash: sha256:fe6a9214626432617f787d82e8ed58f9f39f3bae92a857bae6a291a57128772c
+  rule_id: AST4
+  file: tests/test_validate_delivery_evidence.py
+  reason: Reviewed explicit-argv local tests and pinned Vercel examples; upstream
+    tree hashes and exact finding fingerprints are required.
+- hash: sha256:0bc22cfcf03e5cad7fab8484e2a5c3847016765c0e74204b6003bf6dfa5ff3b6
+  rule_id: LP3
+  file: SKILL.md
+  reason: Reviewed explicit-argv local tests and pinned Vercel examples; upstream
+    tree hashes and exact finding fingerprints are required.
+- hash: sha256:786308d49ae7fa1d4bf6cdb7eefd6234ce7c0e58a6d52d9b7558d60f44d34b02
+  rule_id: RP1
+  file: references/upstream/vercel-react-best-practices/AGENTS.md
+  reason: Reviewed explicit-argv local tests and pinned Vercel examples; upstream
+    tree hashes and exact finding fingerprints are required.
+- hash: sha256:6224ca1a2bfc34e20fc5567b21f6a5e1341a4e4076cd64f9fbede9db597d2ce3
+  rule_id: RP1
+  file: references/upstream/vercel-react-best-practices/rules/rendering-svg-precision.md
+  reason: Reviewed explicit-argv local tests and pinned Vercel examples; upstream
+    tree hashes and exact finding fingerprints are required.
+- hash: sha256:39c6eee6193219659d84b463d3198fc2d398e48aa1e390dba027c908630cb2c7
+  rule_id: MP3
+  file: references/upstream/vercel-composition-patterns/README.md
+  reason: Reviewed explicit-argv local tests and pinned Vercel examples; upstream
+    tree hashes and exact finding fingerprints are required.
+- hash: sha256:d54c287697f9cf8ccfad00af05735b9e8ab156d0baa47e2bbb6d81f560490ba5
+  rule_id: OH1
+  file: references/upstream/vercel-react-best-practices/AGENTS.md
+  reason: Reviewed explicit-argv local tests and pinned Vercel examples; upstream
+    tree hashes and exact finding fingerprints are required.
+- hash: sha256:7ae666ccc3737acda3aab86085e6aee41ee7a9a214408499f009f50e946a8357
+  rule_id: OH1
+  file: references/upstream/vercel-react-best-practices/rules/rendering-hydration-no-flicker.md
+  reason: Reviewed explicit-argv local tests and pinned Vercel examples; upstream
+    tree hashes and exact finding fingerprints are required.

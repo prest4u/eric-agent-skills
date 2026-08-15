@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "generated_by": "scripts/sync_upstreams.py",
+  "upstreams": [
+    {
+      "id": "mengto-build-awwwards-quality-sites",
+      "repository": "https://github.com/MengTo/skills.git",
+      "source_path": "agent-skills/web-design/build-awwwards-quality-sites",
+      "commit": "22bacc4c4b5094001462d639df553a49a7642770",
+      "tree_sha256": "248c5a8a17e4c6e2779c43cf5990740f3f28ea985ad46ef63ef45da4f3578bfb",
+      "license": "MIT",
+      "license_evidence_path": "LICENSE",
+      "mode": "vendored-reference",
+      "targets": [
+        "eric-quality-sites"
+      ],
+      "license_sha256": "b2a071ba22fefd803f4e9d1f5c777dd79c62d191695586a1a73fd4d0ebd051c6"
+    },
+    {
+      "id": "vercel-web-design-guidelines",
+      "repository": "https://github.com/vercel-labs/agent-skills.git",
+      "source_path": "skills/web-design-guidelines",
+      "commit": "b8caa260a420a73042e35521de4b5c8baf6446cc",
+      "tree_sha256": "b6849640846e0e39a09629c4cebfd25529b67a1174eb4d3d86f49783094669f9",
+      "license": "MIT",
+      "license_evidence_path": "README.md",
+      "mode": "vendored-reference",
+      "targets": [
+        "eric-quality-sites"
+      ],
+      "license_sha256": "c0a05286fc2a9d52ec2480bf070867665b9357beef37c9c2812e5b2ece571b6a"
+    },
+    {
+      "id": "vercel-react-best-practices",
+      "repository": "https://github.com/vercel-labs/agent-skills.git",
+      "source_path": "skills/react-best-practices",
+      "commit": "b8caa260a420a73042e35521de4b5c8baf6446cc",
+      "tree_sha256": "bb6e0b8c9463da1d8712a88d2903ae4c915f1a5037bc2bf22fd59a0adccf8f11",
+      "license": "MIT",
+      "license_evidence_path": "README.md",
+      "mode": "vendored-reference",
+      "targets": [
+        "eric-frontend-delivery"
+      ],
+      "license_sha256": "c0a05286fc2a9d52ec2480bf070867665b9357beef37c9c2812e5b2ece571b6a"
+    },
+    {
+      "id": "vercel-composition-patterns",
+      "repository": "https://github.com/vercel-labs/agent-skills.git",
+      "source_path": "skills/composition-patterns",
+      "commit": "b8caa260a420a73042e35521de4b5c8baf6446cc",
+      "tree_sha256": "7c66753e83dae9afedc0fda25694fbaed8d9ac80bec2b8022e298eb0fb19d185",
+      "license": "MIT",
+      "license_evidence_path": "README.md",
+      "mode": "vendored-reference",
+      "targets": [
+        "eric-frontend-delivery"
+      ],
+      "license_sha256": "c0a05286fc2a9d52ec2480bf070867665b9357beef37c9c2812e5b2ece571b6a"
+    },
+    {
+      "id": "addy-frontend-ui-engineering",
+      "repository": "https://github.com/addyosmani/agent-skills.git",
+      "source_path": "skills/frontend-ui-engineering",
+      "commit": "df1edb2e05487d0aa6d93c747141e0aed1187f25",
+      "tree_sha256": "d8beb4562008057acd839036eb6e157b0e1d4052c19e14f900cf736d0fddad07",
+      "license": "MIT",
+      "license_evidence_path": "LICENSE",
+      "mode": "vendored-reference",
+      "targets": [
+        "eric-quality-sites"
+      ],
+      "license_sha256": "6f202f8bd568cd730dbb2b0d1f8e243bc74c2fa1f64dbce9b2c7ea08bd5c9fd7"
+    },
+    {
+      "id": "remotion-best-practices",
+      "repository": "https://github.com/remotion-dev/codex-plugin.git",
+      "source_path": "skills/remotion-best-practices",
+      "commit": "fd7fd4ba474d9f50b2c5724b74ab2207f9986f40",
+      "tree_sha256": "ce217be3d2c4dfe195778a9b4228ba3a241ccabc2563f46cfe7408cf2dce69da",
+      "license": "MIT",
+      "license_evidence_path": "LICENSE",
+      "mode": "vendored-reference",
+      "targets": [
+        "video-production-stack",
+        "video-qa"
+      ],
+      "license_sha256": "1df205bece1fe707f818658a104844aba9a783e43f716642f5bf1286c18263c0"
+    },
+    {
+      "id": "remotion-create",
+      "repository": "https://github.com/remotion-dev/codex-plugin.git",
+      "source_path": "skills/remotion-create",
+      "commit": "fd7fd4ba474d9f50b2c5724b74ab2207f9986f40",
+      "tree_sha256": "cf2fb9c0ea6463db84dc02f80933e023cf7366248dc6fa27abef465e01731c42",
+      "license": "MIT",
+      "license_evidence_path": "LICENSE",
+      "mode": "vendored-reference",
+      "targets": [
+        "video-production-stack"
+      ],
+      "license_sha256": "1df205bece1fe707f818658a104844aba9a783e43f716642f5bf1286c18263c0"
+    },
+    {
+      "id": "remotion-captions",
+      "repository": "https://github.com/remotion-dev/codex-plugin.git",
+      "source_path": "skills/remotion-captions",
+      "commit": "fd7fd4ba474d9f50b2c5724b74ab2207f9986f40",
+      "tree_sha256": "e261d4ab82de890863261ec495f9ed47939f3777438ae9fd0c8209f03c73b795",
+      "license": "MIT",
+      "license_evidence_path": "LICENSE",
+      "mode": "vendored-reference",
+      "targets": [
+        "video-production-stack"
+      ],
+      "license_sha256": "1df205bece1fe707f818658a104844aba9a783e43f716642f5bf1286c18263c0"
+    },
+    {
+      "id": "remotion-multimedia",
+      "repository": "https://github.com/remotion-dev/codex-plugin.git",
+      "source_path": "skills/remotion-multimedia",
+      "commit": "fd7fd4ba474d9f50b2c5724b74ab2207f9986f40",
+      "tree_sha256": "968d9a131527732c0e48df7888c222350df43bb1ecc08a4a7d030279d967d05f",
+      "license": "MIT",
+      "license_evidence_path": "LICENSE",
+      "mode": "vendored-reference",
+      "targets": [
+        "video-production-stack"
+      ],
+      "license_sha256": "1df205bece1fe707f818658a104844aba9a783e43f716642f5bf1286c18263c0"
+    },
+    {
+      "id": "remotion-render",
+      "repository": "https://github.com/remotion-dev/codex-plugin.git",
+      "source_path": "skills/remotion-render",
+      "commit": "fd7fd4ba474d9f50b2c5724b74ab2207f9986f40",
+      "tree_sha256": "c83a46b23fbc1c5538e9316538d7ee0197b36c47494a78c8ce626236bb106b8d",
+      "license": "MIT",
+      "license_evidence_path": "LICENSE",
+      "mode": "vendored-reference",
+      "targets": [
+        "video-qa"
+      ],
+      "license_sha256": "1df205bece1fe707f818658a104844aba9a783e43f716642f5bf1286c18263c0"
+    },
+    {
+      "id": "vercel-skills-installer",
+      "repository": "https://github.com/vercel-labs/skills.git",
+      "source_path": "",
+      "commit": "c6f69c631292444cc541ac6d91e2226b0ff247da",
+      "tree_sha256": null,
+      "license": "MIT",
+      "mode": "tooling-only",
+      "targets": []
+    },
+    {
+      "id": "anthropic-document-skills",
+      "repository": "https://github.com/anthropics/skills.git",
+      "source_path": "skills/pdf,skills/pptx,skills/docx,skills/xlsx",
+      "commit": "f6656c1256d5a8adfa37db9110046ef20bac644c",
+      "tree_sha256": null,
+      "license": "source-available; review each skill license",
+      "mode": "link-only",
+      "targets": []
+    },
+    {
+      "id": "nvidia-skillspector",
+      "repository": "https://github.com/NVIDIA/SkillSpector.git",
+      "source_path": "",
+      "commit": "5680c2c3008e63c9979bbbe08221ee4c2dcd17ee",
+      "tree_sha256": null,
+      "license": "Apache-2.0",
+      "mode": "tooling-only",
+      "targets": []
+    },
+    {
+      "id": "visual-memory-translator-origin",
+      "repository": "https://github.com/jinwyp/visual-memory-translator-SKILL.git",
+      "source_path": "",
+      "commit": "170ae15c331ec4bdee49334b4a818ba4b8a335a7",
+      "tree_sha256": null,
+      "license": "MIT",
+      "mode": "link-only",
+      "targets": [
+        "eric-visual-memory-translator"
+      ]
+    },
+    {
+      "id": "open-ppt-skill-origin",
+      "repository": "https://github.com/jinwyp/open-ppt-skill.git",
+      "source_path": "skills/open-kimi-ppt",
+      "commit": "07eeaadcb04c32c9adb107eb5c8608e6be4e1008",
+      "tree_sha256": null,
+      "license": "MIT",
+      "license_evidence_path": "LICENSE",
+      "license_sha256": "ad8a028292fda7e019f061107092b84c85dcc0351f47e7fb2370114bbc8fe5c5",
+      "mode": "link-only",
+      "targets": [
+        "eric-ppt-skill"
+      ],
+      "exclusions": [
+        "editor/neo-ppt",
+        "editor product assets",
+        "patched product WASM",
+        "bundled fonts and templates without separate redistribution evidence"
+      ]
+    }
+  ]
+}

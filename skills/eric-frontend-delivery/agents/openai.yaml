@@ -1,0 +1,7 @@
+interface:
+  display_name: "Eric Frontend Delivery"
+  short_description: "Build the real frontend, then run one current check"
+  default_prompt: "Use $eric-frontend-delivery in BUILD mode to produce the working interface first and run one current runtime check."
+
+policy:
+  allow_implicit_invocation: true

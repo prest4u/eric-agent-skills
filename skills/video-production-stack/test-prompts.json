@@ -1,0 +1,17 @@
+[
+  {
+    "id": "rough-video-idea",
+    "prompt": "我想做一条关于自由为什么让人更焦虑的视频，你来帮我做。",
+    "expected": "Detects idea/spec stage, routes to video-director-spec or video-director, and does not start HyperFrames implementation."
+  },
+  {
+    "id": "approved-spec-render",
+    "prompt": "这个 episode 已经有 video-spec.md 和 DESIGN.md 了，帮我做成 HyperFrames 视频。",
+    "expected": "Routes to hyperframes-producer, requires lint/validate/inspect before render, and does not re-invent the brief."
+  },
+  {
+    "id": "rendered-mp4-check",
+    "prompt": "这个 MP4 看起来有点黑，你帮我检查一下。",
+    "expected": "Routes directly to video-qa, produces/requests video-qa-report.md and contact sheet evidence, and does not rely on the player first frame."
+  }
+]

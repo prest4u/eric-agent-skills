@@ -1,0 +1,61 @@
+{
+  "assets": [
+    {
+      "id": "canyon-cover",
+      "path": "assets/generated/canyon-cover.png",
+      "kind": "imagegen",
+      "role": "cover_hero",
+      "allowed_templates": ["cover"],
+      "status": "approved_for_sample",
+      "text_policy": "no visible text, not used to carry questions or answers",
+      "source_note": "Generated locally for this template lab; original remains in Codex generated_images.",
+      "prompt_summary": "Editorial canyon path image for a writing textbook sample, with no text or watermark.",
+      "content_brief": "Starter sample for paragraph writing: moving from sentence observation to paragraph planning.",
+      "visual_direction": "Open canyon path as a metaphor for writing progression, with quiet sky space for the cover title.",
+      "visual_family": "nature-landscape",
+      "family_rationale": "Uses Eric's preferred first visual family: an immediately understandable outdoor landscape rather than an abstract writing metaphor.",
+      "uniqueness_note": "Starter-only writing sample cover; future projects must generate a new content-specific direction rather than reuse this image.",
+      "width": 1086,
+      "height": 1448,
+      "focus": "center path, upper sky negative space"
+    },
+    {
+      "id": "sentence-basics-unit-opener",
+      "path": "assets/generated/sentence-basics-unit-opener.png",
+      "kind": "imagegen",
+      "role": "unit_opener",
+      "allowed_templates": ["unit-opener"],
+      "status": "approved_for_sample",
+      "text_policy": "no visible text, no questions, no answers, no teaching body",
+      "source_note": "Generated with ImageGen for the starter unit opener; original remains in Codex generated_images.",
+      "generation_prompt": "Premium editorial textbook unit opener image for an English writing starter unit about sentence basics and paragraph planning. A quiet sunlit classroom desk with separate sentence cards, a simple notebook, pencils, and a soft open window; visual metaphor of building a sentence step by step. Teal, warm rust, and clean paper tones. No letters, no words, no readable text, no logos, no watermark. Portrait composition with clear lower band space for an objectives overlay.",
+      "content_brief": "Starter unit opener for sentence basics and paragraph planning.",
+      "visual_direction": "Sunlit classroom desk with blank sentence cards and notebook, showing sentence building as a concrete writing process.",
+      "visual_family": "learning-life",
+      "nature_first_rationale": "Chosen as the second visual family because this unit opener needs a concrete school writing surface; the cover already carries the landscape direction.",
+      "uniqueness_note": "Distinct from the canyon cover; used only for the unit opener composition.",
+      "width": 1024,
+      "height": 1536,
+      "focus": "center desk and open window, lower area for objectives"
+    },
+    {
+      "id": "place-observation-passage",
+      "path": "assets/generated/place-observation-passage.png",
+      "kind": "imagegen",
+      "role": "photo_passage",
+      "allowed_templates": ["photo-passage"],
+      "status": "approved_for_sample",
+      "text_policy": "no visible text, no questions, no answers, no teaching body",
+      "source_note": "Generated with ImageGen for the starter photo-passage page; original remains in Codex generated_images.",
+      "generation_prompt": "Premium editorial textbook photo-passage image for a beginner English writing unit about observing a place before writing. A quiet outdoor path beside low rocks and soft morning light, with a small blank notebook and pencil on a stone bench in the foreground; calm observation mood, not a dramatic landscape. Teal, warm rust, and cream paper accents. No letters, no words, no signs, no logos, no watermark. Portrait textbook composition suitable for a passage page.",
+      "content_brief": "Starter photo-passage page about observing a place before writing.",
+      "visual_direction": "Quiet outdoor path with a blank notebook and pencil, focused on observation rather than journey symbolism.",
+      "visual_family": "nature-study-hybrid",
+      "family_rationale": "Keeps the page in the preferred outdoor/nature family while adding a small study object to connect the image to writing observation.",
+      "uniqueness_note": "Distinct from both the canyon cover and classroom unit opener; used only for the photo-passage page.",
+      "width": 1024,
+      "height": 1536,
+      "focus": "blank notebook foreground and quiet path background"
+    }
+  ]
+}

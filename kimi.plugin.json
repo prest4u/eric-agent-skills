@@ -1,0 +1,17 @@
+{
+  "name": "eric-agent-skills",
+  "version": "1.0.0",
+  "description": "Portable skills for documents, PDF design, websites, video, teaching, and agent workflows.",
+  "author": "prest4u",
+  "homepage": "https://github.com/prest4u/eric-agent-skills",
+  "license": "MIT",
+  "keywords": ["agent-skills", "pdf", "education", "web", "video"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Eric Agent Skills",
+    "shortDescription": "Portable Eric workflows for Kimi Code CLI",
+    "longDescription": "Independent skills for educational and business documents, PDFs, presentations, websites, video, and reliable delivery workflows.",
+    "developerName": "prest4u",
+    "websiteURL": "https://github.com/prest4u/eric-agent-skills"
+  }
+}

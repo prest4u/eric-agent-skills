@@ -1,0 +1,4 @@
+interface:
+  display_name: "Eric Teaching Polish"
+  short_description: "Remove AI/internal wording from Eric teaching materials"
+  default_prompt: "Use $eric-teaching-polish to polish this teaching material so it sounds natural and contains no internal production wording."

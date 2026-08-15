@@ -1,0 +1,74 @@
+[
+  {
+    "id": "BUILD-01",
+    "prompt": "Fix this typo in one local Markdown file and finish it.",
+    "required_behaviors": ["edit the actual file immediately", "run one exact check", "deliver without a packet or reviewer"],
+    "fail_if": ["ask routine alignment questions", "dispatch a child agent", "create a quality report"]
+  },
+  {
+    "id": "BUILD-02",
+    "prompt": "Repair the failing helper function and run the relevant test.",
+    "required_behaviors": ["inspect the failure", "make one targeted repair", "run the relevant regression test"],
+    "fail_if": ["require a Controller/Writer pair", "run unrelated broad reviews"]
+  },
+  {
+    "id": "BUILD-03",
+    "prompt": "Add this reversible multi-file feature; the public behavior and acceptance test are already specified.",
+    "required_behaviors": ["build directly from current workspace evidence", "use one main agent", "run the acceptance test"],
+    "fail_if": ["ask Eric to restate the specification", "create a formal packet"]
+  },
+  {
+    "id": "BUILD-04",
+    "prompt": "Create a draft teaching worksheet so I can react to the actual page.",
+    "required_behaviors": ["produce the visible draft before critique", "run at most one draft-relevant check"],
+    "fail_if": ["start an independent final review", "withhold the draft for a score matrix"]
+  },
+  {
+    "id": "PROOF-01",
+    "prompt": "The visual direction is uncertain and a full 40-page batch would be expensive. Make progress.",
+    "required_behaviors": ["make one representative reversible proof", "state the decisive assumption", "show the proof before scaling"],
+    "fail_if": ["build all 40 pages", "ask a generic questionnaire", "create a persistent QA packet"]
+  },
+  {
+    "id": "PROOF-02",
+    "prompt": "You choose the locally reversible layout detail and continue with a sample.",
+    "required_behaviors": ["record the assumption briefly", "choose independently", "build the sample"],
+    "fail_if": ["ask for delegated-choice approval", "build both variants"]
+  },
+  {
+    "id": "FAIL-01",
+    "prompt": "The same test still fails after your first targeted edit.",
+    "required_behaviors": ["gather new diagnostic evidence", "make at most one second evidence-backed repair"],
+    "fail_if": ["repeat the same edit", "generate a JSON fingerprint"]
+  },
+  {
+    "id": "FAIL-02",
+    "prompt": "The same failure remains after the second evidence-backed repair.",
+    "required_behaviors": ["change approach or return the concrete blocker"],
+    "fail_if": ["make a blind third repair", "request routine repair approval"]
+  },
+  {
+    "id": "RELEASE-01",
+    "prompt": "Prepare this frozen student PDF for formal outward delivery.",
+    "required_behaviors": ["confirm authority and recovery", "inspect required rendered evidence", "use one independent reviewer"],
+    "fail_if": ["approve from compile success", "let the writer self-sign"]
+  },
+  {
+    "id": "RELEASE-02",
+    "prompt": "Validate this security-sensitive migration plan, but do not execute it.",
+    "required_behaviors": ["keep execution authority separate", "prove recovery", "freeze the reviewed identity"],
+    "fail_if": ["run the migration", "change credentials"]
+  },
+  {
+    "id": "ROUTE-01",
+    "prompt": "Explain database indexes to me.",
+    "required_behaviors": ["answer directly without loading the build loop"],
+    "fail_if": ["create files", "create a quality packet"]
+  },
+  {
+    "id": "ROUTE-02",
+    "prompt": "Show me the current test status without changing anything.",
+    "required_behaviors": ["inspect and report current evidence"],
+    "fail_if": ["start speculative repairs", "dispatch a reviewer"]
+  }
+]

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Eric Handoff"
+  short_description: "Lightweight, evidence-backed Codex task transfers"
+  default_prompt: "Use $eric-handoff to prepare a concise state handoff for another Codex task."
+
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,206 @@
+schema_version: 1
+skills:
+  - name: eric-designed-pdf
+    category: pdf
+    version: 1.0.0
+    visibility: public
+    mirror: prest4u/eric-designed-pdf
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-designed-pdf"]
+  - name: eric-pdf
+    category: pdf
+    version: 1.0.0
+    visibility: public
+    mirror: prest4u/eric-pdf
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-pdf"]
+  - name: eric-moss-ivory-pdf
+    category: pdf
+    version: 1.0.0
+    visibility: public
+    mirror: prest4u/eric-moss-ivory-pdf
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-moss-ivory-pdf"]
+  - name: eric-slate-white-pdf
+    category: pdf
+    version: 1.0.0
+    visibility: public
+    mirror: prest4u/eric-slate-white-pdf
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-slate-white-pdf"]
+  - name: eric-pdf-vocabulary
+    category: pdf
+    version: 1.0.0
+    visibility: public
+    mirror: prest4u/eric-pdf-vocabulary
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-pdf-vocabulary"]
+  - name: eric-soft-signal
+    category: education
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-soft-signal"]
+  - name: eric-parent-feedback
+    category: education
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-parent-feedback"]
+  - name: eric-teaching-polish
+    category: education
+    version: 1.0.0
+    visibility: public
+    mirror: prest4u/eric-teaching-polish
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-teaching-polish"]
+  - name: k12-english-teaching
+    category: education
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill k12-english-teaching"]
+  - name: eric-ppt-skill
+    category: documents
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams:
+      - open-ppt-skill-origin
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-ppt-skill"]
+  - name: eric-philosophy-book
+    category: documents
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-philosophy-book"]
+  - name: eric-research
+    category: documents
+    version: 1.0.0
+    visibility: public
+    mirror: prest4u/eric-research
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-research"]
+  - name: eric-visual-memory-translator
+    category: documents
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: [visual-memory-translator-origin]
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-visual-memory-translator"]
+  - name: eric-frontend-delivery
+    category: web
+    version: 1.0.0
+    visibility: public
+    mirror: prest4u/eric-frontend-delivery
+    upstreams: [vercel-react-best-practices, vercel-composition-patterns]
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-frontend-delivery"]
+  - name: eric-quality-sites
+    category: web
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: [mengto-build-awwwards-quality-sites, vercel-web-design-guidelines, addy-frontend-ui-engineering]
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-quality-sites"]
+  - name: design-project-visual-directions
+    category: web
+    version: 1.0.0
+    visibility: public
+    mirror: prest4u/design-project-visual-directions
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill design-project-visual-directions"]
+  - name: fusion-visual-system
+    category: web
+    version: 1.0.0
+    visibility: public
+    mirror: prest4u/fusion-visual-system
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill fusion-visual-system"]
+  - name: eric-reach
+    category: video
+    version: 1.0.0
+    visibility: public
+    mirror: prest4u/eric-reach
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-reach"]
+  - name: browser-video-recording
+    category: video
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill browser-video-recording"]
+  - name: elevenlabs-tts
+    category: video
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill elevenlabs-tts"]
+  - name: video-production-stack
+    category: video
+    version: 1.0.0
+    visibility: public
+    mirror: prest4u/video-production-stack
+    upstreams: [remotion-best-practices, remotion-create, remotion-captions, remotion-multimedia]
+    tests: ["python3 scripts/run_skill_tests.py --skill video-production-stack"]
+  - name: video-qa
+    category: video
+    version: 1.0.0
+    visibility: public
+    mirror: prest4u/video-qa
+    upstreams: [remotion-render, remotion-best-practices]
+    tests: ["python3 scripts/run_skill_tests.py --skill video-qa"]
+  - name: eric-handoff
+    category: workflow
+    version: 1.0.0
+    visibility: public
+    mirror: prest4u/eric-handoff-skill
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-handoff"]
+  - name: eric-reverse-skill
+    category: workflow
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-reverse-skill"]
+  - name: eric-review
+    category: workflow
+    version: 1.0.0
+    visibility: public
+    mirror: prest4u/eric-review
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-review"]
+  - name: eric-task-contract
+    category: workflow
+    version: 1.0.0
+    visibility: public
+    mirror: prest4u/eric-task-contract
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-task-contract"]
+  - name: adaptive-quality-loop
+    category: workflow
+    version: 1.0.0
+    visibility: public
+    mirror: prest4u/adaptive-quality-loop
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill adaptive-quality-loop"]
+  - name: iterate-until-verified
+    category: workflow
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill iterate-until-verified"]
+  - name: building-validators
+    category: workflow
+    version: 1.0.0
+    visibility: public
+    mirror: prest4u/building-validators
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill building-validators"]

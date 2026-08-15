@@ -1,0 +1,49 @@
+schema_version: 1
+collections:
+  pdf:
+    description: Five independent PDF workflows; installing this collection does not merge them.
+    skills:
+      - eric-designed-pdf
+      - eric-pdf
+      - eric-moss-ivory-pdf
+      - eric-slate-white-pdf
+      - eric-pdf-vocabulary
+  education:
+    description: Teaching, learner materials, and parent communication.
+    skills:
+      - eric-soft-signal
+      - eric-parent-feedback
+      - eric-teaching-polish
+      - k12-english-teaching
+  documents:
+    description: Presentations, research, books, and visual memory translation.
+    skills:
+      - eric-ppt-skill
+      - eric-philosophy-book
+      - eric-research
+      - eric-visual-memory-translator
+  web:
+    description: Web design direction, implementation, and delivery verification.
+    skills:
+      - eric-frontend-delivery
+      - eric-quality-sites
+      - design-project-visual-directions
+      - fusion-visual-system
+  video:
+    description: Video creation, recording, voice, reach, and QA.
+    skills:
+      - eric-reach
+      - browser-video-recording
+      - elevenlabs-tts
+      - video-production-stack
+      - video-qa
+  workflow:
+    description: Task contracts, review, validation, handoff, and iteration.
+    skills:
+      - eric-handoff
+      - eric-reverse-skill
+      - eric-review
+      - eric-task-contract
+      - adaptive-quality-loop
+      - iterate-until-verified
+      - building-validators

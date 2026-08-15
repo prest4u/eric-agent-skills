@@ -1,0 +1,51 @@
+# SkillSpector baseline — findings listed here are suppressed on future scans.
+# Edit 'reason' fields and add glob 'rules' as needed. See docs/SUPPRESSION.md.
+version: 2
+scanner_version: 2.9.4
+rules: []
+fingerprints:
+- hash: sha256:3a4f053201bbc3ba1749dcbc77df1e21257696995f6e556c97925afbaf2a95d3
+  rule_id: AST4
+  file: scripts/render_pdf.py
+  reason: Reviewed test-only Typst and pdftotext subprocess calls; arguments are explicit
+    and artifacts stay in a temporary directory.
+- hash: sha256:cffbd7021627c6a7a2feff56d3ea63227efecc7e3bef5eb362ced19cad031608
+  rule_id: AST4
+  file: tests/test_output_first_contract.py
+  reason: Reviewed test-only Typst and pdftotext subprocess calls; arguments are explicit
+    and artifacts stay in a temporary directory.
+- hash: sha256:f81baa9da31daced671000edfa3ce83e9e5d1ab3fdcb77179ca93fb4fbaa0f97
+  rule_id: AST4
+  file: tests/test_output_first_contract.py
+  reason: Reviewed test-only Typst and pdftotext subprocess calls; arguments are explicit
+    and artifacts stay in a temporary directory.
+- hash: sha256:5e428dcc6b15ffe463a1e629c6b9013ea4e9a0039586c4d550855c13a3f43401
+  rule_id: AST4
+  file: tests/test_output_first_contract.py
+  reason: Reviewed test-only Typst and pdftotext subprocess calls; arguments are explicit
+    and artifacts stay in a temporary directory.
+- hash: sha256:cac72033bff3fbb59b24e8b4d64ea4c0d087109553f4a854b38f244a2feef08b
+  rule_id: LP3
+  file: SKILL.md
+  reason: Reviewed test-only Typst and pdftotext subprocess calls; arguments are explicit
+    and artifacts stay in a temporary directory.
+- hash: sha256:d335a7136f049589314686613d3d2f0be1913263051606ce2e068987b7c58273
+  rule_id: EA3
+  file: assets/fonts/OFL-1.1.txt
+  reason: Reviewed test-only Typst and pdftotext subprocess calls; arguments are explicit
+    and artifacts stay in a temporary directory.
+- hash: sha256:76da0b8fd38cb1916abb104d1fff7ee1c2c7390df3340174dfefc7c3ce7d819f
+  rule_id: OH1
+  file: tests/test_output_first_contract.py
+  reason: Reviewed test-only Typst and pdftotext subprocess calls; arguments are explicit
+    and artifacts stay in a temporary directory.
+- hash: sha256:2338e0d403e5b58c577ec87320cbd61564770aac792b6f3a7d3a79967397bb00
+  rule_id: OH1
+  file: tests/test_output_first_contract.py
+  reason: Reviewed test-only Typst and pdftotext subprocess calls; arguments are explicit
+    and artifacts stay in a temporary directory.
+- hash: sha256:598fdb4ad67821cb8b94e67791de1c7387b0763f2af5f1fe6bfe20360acb3fae
+  rule_id: OH1
+  file: tests/test_output_first_contract.py
+  reason: Reviewed test-only Typst and pdftotext subprocess calls; arguments are explicit
+    and artifacts stay in a temporary directory.

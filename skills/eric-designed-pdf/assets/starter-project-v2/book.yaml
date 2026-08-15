@@ -1,0 +1,110 @@
+title: "Full Coverage Student Book Gallery"
+footer_title: "Full Coverage Student Book"
+subtitle: "Grammar, Reading, Workbook, Writing, and Handbook Forms"
+level: "Template Matrix V2"
+edition: "Full-Coverage Scaffold"
+profile_default: "book-trim"
+qa:
+  allow_starter_residue: true
+  page_family_mode: v2-full
+  asset_mode: proof-placeholder
+  min_pages: 25
+  max_pages: 25
+  required_templates:
+    - cover
+    - title
+    - contents-route
+    - diagnostic-entry
+    - unit-opener
+    - article-opener
+    - article-evidence
+    - elements
+    - skill-method
+    - sentence-map
+    - activity
+    - categorizing-chart
+    - exam-mini-set
+    - paragraph-practice
+    - photo-passage
+    - writing-planner
+    - correction-rewrite
+    - final-check
+    - handbook
+    - vocab-bank
+    - connector-index
+    - teacher-guide-page
+  required_components:
+    - cover
+    - cover-brand
+    - title-page
+    - title-navigation
+    - unit-opener
+    - objectives-band
+    - elements-page
+    - mechanics-table
+    - activity-block
+    - word-box
+    - words-to-know
+    - workbook-practice
+    - paragraph-practice
+    - photo-passage
+    - writing-planner
+    - editing-checklist
+    - handbook-page
+    - answer-key-page
+    - section-ribbon
+    - skill-side-label
+    - article-title-lockup
+    - lettered-paragraph
+    - definition-footnote
+    - guided-mcq-set
+    - categorizing-chart
+    - critical-thinking-strip
+    - diagram-callout
+    - practice-word-box
+    - teacher-guide-page
+    - teacher-page-note
+    - teacher-answer-strip
+unit:
+  number: 2
+  title: "Clause Connections"
+  color: "#b8642f"
+profiles:
+  book-trim:
+    page_width_pt: 594.96
+    page_height_pt: 761.133
+    label: "Book Trim"
+    output_html: outputs/full-coverage-v2-book-trim.html
+    output_pdf: outputs/full-coverage-v2-book-trim.pdf
+  lesson-a4:
+    page_width_pt: 594.96
+    page_height_pt: 841.92
+    label: "Lesson A4"
+    output_html: outputs/full-coverage-v2-lesson-a4.html
+    output_pdf: outputs/full-coverage-v2-lesson-a4.pdf
+pages:
+  - pages/01-cover.md
+  - pages/02-title.md
+  - pages/03-contents-route.md
+  - pages/04-diagnostic-entry.md
+  - pages/05-unit-opener.md
+  - pages/06-article-opener.md
+  - pages/07-article-evidence.md
+  - pages/08-elements.md
+  - pages/09-skill-method.md
+  - pages/10-sentence-map.md
+  - pages/11-activity.md
+  - pages/12-categorizing-chart.md
+  - pages/13-sentence-transformation.md
+  - pages/14-exam-mini-set.md
+  - pages/15-paragraph-practice.md
+  - pages/16-photo-passage.md
+  - pages/17-long-sentence-transfer.md
+  - pages/18-writing-planner.md
+  - pages/19-correction-rewrite.md
+  - pages/20-final-check.md
+  - pages/21-handbook.md
+  - pages/22-vocab-bank.md
+  - pages/23-connector-index.md
+  - pages/24-teacher-guide.md
+  - pages/25-reading-close.md

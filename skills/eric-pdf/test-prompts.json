@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "prompt": "用 $eric-pdf 把一份初三英语课堂练习 Markdown 做成 A4 学生版 PDF，包含一篇完形填空、正式 ABCD 选项行、答案记录表、线索/证据表和错因总结表。要求 Typst 编译、渲染关键页截图并报告 QA 证据。",
+    "expected": "使用 Eric 暖色 Typst 模板，读取 document-types grammar，保留长文可读性，使用 exam-style option rows 和答案/证据/错因表，编译 PDF 后渲染 cover/正文/表格/末页并报告视觉 QA。"
+  },
+  {
+    "id": 2,
+    "prompt": "用 $eric-pdf 做一个中考数学专题讲义，输出 student 和 teacher 两个版本。题目包含函数图像和一道几何证明，但我没有给原题图。要求学生版不能泄漏答案和教师话术。",
+    "expected": "读取 math-materials grammar，建立 student/teacher 版本切换；函数/几何图若无可核验图源则使用 diagram-needed 或要求补图，不凭空画复杂 scored diagram；学生版隐藏解答、评分点和内部术语，教师版包含解题步骤和评分表，并分别渲染 QA。"
+  },
+  {
+    "id": 3,
+    "prompt": "这个 Eric PDF 已经能编译，但封面页码露出来了，正文第一页不是 1，几处写作横线挤在一起，最后一页只有一个小标题。请用 $eric-pdf 做 polish 和 QA 修复。",
+    "expected": "定位为 PDF layout QA/polish；修正 cover/body page counter，替换不稳定横线为 eric-writing-area 或 workspace helper，处理 orphan heading/page break，重新编译并渲染受影响页面，最终给出 PDF 路径和 QA 证据。"
+  },
+  {
+    "id": 4,
+    "prompt": "我已经有一个 Typst 输出的 Eric PDF 和源文件，帮我做交付前验收。要求不要改内容，只判断能不能发给学生，如果不行告诉我卡在哪个门禁。",
+    "expected": "运行 scripts/qa_eric_pdf.py 对 PDF/source 做自动门禁，检查 Typst 元数据、A4、空白页、内部术语泄漏并渲染关键页；随后人工查看截图判断页码、密度、写作线、公式/图形、孤行等视觉问题。若 gate fail，给出失败 JSON 项和下一步修复点，不交付。"
+  },
+  {
+    "id": 5,
+    "prompt": "用 $eric-pdf 做一本场景词汇/表达手册，但我要保留《首字母填空_场景词汇手册》这个版本的 view，不要再做得臃肿或模板化。",
+    "expected": "读取 references/handbook-view.md 的原创文字版式语法；保留暖白纸、clay 单色强调、轻卡片、浅表格和克制层级，避免新增装饰、重卡片、图标、渐变或过度强调，也不要复刻来源书页。"
+  }
+]

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Eric Task Contract"
+  short_description: "Compile a bounded Codex task brief"
+  default_prompt: "Use $eric-task-contract to compile my intent into a bounded Codex task brief."
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,336 @@
+# SkillSpector baseline — findings listed here are suppressed on future scans.
+# Edit 'reason' fields and add glob 'rules' as needed. See docs/SUPPRESSION.md.
+version: 2
+scanner_version: 2.9.4
+rules: []
+fingerprints:
+- hash: sha256:3bf5427057d95605d8945f0be0ff602f85105c4a0d8668f839b8acdddd53ae6a
+  rule_id: AST4
+  file: scripts/extract_frames.py
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:15a3ec517af1fad0a715959593d327c390fc27024929a3abf4aa24314ea28df5
+  rule_id: AST4
+  file: scripts/extract_frames.py
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:ee8761048a11d887025bc638855450dc2560b4b982fa978d337bfa16d39f84d9
+  rule_id: AST4
+  file: scripts/extract_frames.py
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:d6bbe048193b6f02c7cdd269ddd9fd984bc9fe08f57c752cdcd39ee7538b5347
+  rule_id: AST4
+  file: scripts/video_probe.py
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:719719669d1fe9afcc4171a43c43e22d747d99d6831c1abd257162ec7b63742d
+  rule_id: AST4
+  file: scripts/video_probe.py
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:21371ab6352fdc41ba70582e55a7885efbf6a0da3528cdbd651f16573009e733
+  rule_id: LP3
+  file: SKILL.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:282790022dd4b4874d90fc7818bd0f493aaaffc3eb8ae56e8b9b95c090534fb6
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/SKILL.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:ccf6bb24d29b5d9ecf96275608dac43fb2393658b17861c52ce980cf48445d66
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/SKILL.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:fc6f519f2d9b5b429c47cfaf0d52c744f0d6ae4fa7e8594bda5b758cb2474e17
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/SKILL.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:c28ea50d8cdec88836b4ae96e04d32a99cb93cbb9e91e3ef53181147da161e46
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-captions/display-captions.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:c1330827665b8ffa6871dda0961d057245b0bf2b5b91f173d43134e506a754fa
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-captions/import-srt-captions.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:df103bf75aec8b608af8016c2512444dbf8ce55b8beb270c70c87fdc4fa0b15f
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-captions/transcribe-captions.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:7a4f6569bae8c6d45072a963ffde6d47e716667d6ab0279a69112ac4a6ef31cb
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-create/REFERENCE.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:32912ada27984e668a86b4215b147c47cbd98371769e25d0a8b726e7b1e34ae8
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-create/REFERENCE.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:6ca4521ab5a1c1aa6c90e8c8f84f8bef7f56ffa07b76b0a3039530e3f20c8e6a
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-create/REFERENCE.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:19568f50a82953a9a45382f79a0d9fd56c22e9ec606c8a101bfe89d8636931e2
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-markup/3d.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:6013149a45bb80bdc4a67a9f98e96f79a3a068b891816f7dca29e8b76e20151c
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-markup/REFERENCE.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:9606c5b52220961e502c8811cc4ac78c363a06aafaa6d3b34b41405e4fb26d4e
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-markup/REFERENCE.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:76ba2afa7ca06c49fbc626e8c76db64ad85e779ceff244ae9698b6d23f84b582
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-markup/REFERENCE.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:0fc4036e0e98e15834cd1a2951902a2aa20aae3332c08d54f4412dbf9ccff58d
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-markup/REFERENCE.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:634547737181c681cd8988668822a1d79fef35abbbcb8ccc550a82cc45efcbfd
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-markup/audio-visualization.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:a235c7d64d531d372c40dbe01d7c4d6c4a5162b9cc24e0ac3338dd5f13ab43c7
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-markup/audio.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:fc8ddda78e9eac0b9720bd4efe0af629238ba12f6c8e66c8f8ca70bfbffb4eba
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-markup/effects.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:b663c772a627be29afb471891c132846d7a223cf3f46f81feb4cb74d6fb3ed32
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-markup/embedding-videos.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:bfda50024dcd08c736de704fd3959ec98cb9d00a50f26238d18631b4c8ef37a2
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-markup/ffmpeg.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:9ed675375e150ec7c116750bcf9f82947d4a4e4c94b59f73077d2c2d8314fd67
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-markup/ffmpeg.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:ef333eda6610ae2fdc5735dfcf89190b9102edbeeb4509f9ae38f77889bdb6f6
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-markup/ffmpeg.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:ce630008cd92da6ea567adac9a15a6078963494b37bf379694010c7fac79beaa
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-markup/gifs.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:532aa1bc367d06887876d191adc131fff70eed713dc55679878cafff921dbd73
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-markup/gifs.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:064450e0763806753f4d37db2526ff23c5ee4fe90e9974830e763cbcb4a3415a
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-markup/google-fonts.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:e5af5f6fc44ebacd2f9367a6543ac5ea327924f5e6beac16c028889db3fce792
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-markup/html-in-canvas.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:1592af33b8974695f86d7da3d3cbbcd5619d44c4711be91bbcb3e59262d6b7af
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-markup/light-leaks.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:6b4e62c1d0be81af6d661c5edd17e75b272580885a6ffd450b6e4af1860bee16
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-markup/light-leaks.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:a4e9e67600f21eebf6c13ceaefb0b32905acd7ea53db2186feab0812a04d6d32
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-markup/local-fonts.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:2375f16e733eea93bdc8152a3618e70dae2bf99b010b81e896e98f699f9c2356
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-markup/lottie.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:24358a04df53a3de09fa0b1b032068769dad30bb3a20dba29d3a9d88773b7cf8
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-markup/measuring-text.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:5fe66e1503aa96fcb98626463e1c238dc5dea43e6631c0700bbf9ca9c2a8ca19
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-markup/multi-scene-video.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:2202b0798375ded29f29645d11599c134b3df37de3d8be2c633b0fa200debb27
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-markup/parameters.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:3a659b092bdbf5ac3251ff96208417f5aaaedaa1076e114f8afe3cfe377b7ed6
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-markup/silence-detection.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:96f232bb3d4b2cc7bf9f9bdb5a76668109f8d75a87ba365e2584d52884d8be6d
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-markup/silence-detection.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:2d77c1f118823181d9828a5db62c4acf4dce61223dcb34662521ae45bbf9e5d6
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-markup/transitions.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:a3f02bc1de80858080023b183aa4e575a97fa0ebf981f2b9296b0ba696e81734
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-markup/video-editing.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:480b931779e4819de1409d47b9be140230c2bf4bc465b2499b364eb02927a539
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-render/REFERENCE.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:5c8c76aeb67abc6526ce6ee731fef2c659160b6399132ebcd4cd25acd063c482
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-render/REFERENCE.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:7eb47bc0945782e322122b724fcda18ef7e390cb62455c46fe9322e2cda24061
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-render/transparent-videos.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:6488751b576beed1caf2bddcb634962aae320712d3ffb3b67ffd529b7a05552f
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-render/transparent-videos.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:a7f496fb8fdfd9fb0b4b039e684c92576c6912a996895ff688c2a1172fa1dd80
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-saas/rendering.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:6b4cddc458ef34bd018c9220e6550fad401e86a6a2d85ee83b537d2d61d569ad
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-saas/rendering.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:ff1682959ed65adb2a70097d01002a901e13253987388a15b661483e47335404
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-saas/rendering.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:bc050efc7109dc1a9ada915fc57b6559bfe5453778a9255696aa26f31277e846
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-saas/rendering.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:a397638d9b75eb12484860609f98453f2d729a228f3568d8cfe2e211a2f938fb
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-studio/REFERENCE.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:91614ff0e90ce1bb18fda62dc15a82f1ac30218f16bc7b19848624d2ea151236
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-upgrade/REFERENCE.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:0f4fa992ba38fc148e54a74ea84f0235870a6a9551d18a1dc1bc867f69d7ad99
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-upgrade/REFERENCE.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:65715049254b5df36a32b17fdac39b135e157b4528a1a2d5f81461d06036e214
+  rule_id: RP1
+  file: references/upstream/remotion-best-practices/remotion-upgrade/REFERENCE.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:a3fd56bb5995e52259721df38e1da69d1979230075e587bb09609862e27897d8
+  rule_id: RP1
+  file: references/upstream/remotion-render/SKILL.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:b744878d0b6a51933fbe254c2d1831a0e877473e58a86a0a806f9823282ccdbe
+  rule_id: RP1
+  file: references/upstream/remotion-render/SKILL.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:57d8e60b794caef8f804cdf07fad9af835558aedb1fe88280df0360726cdb94f
+  rule_id: RP1
+  file: references/upstream/remotion-render/transparent-videos.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:d7450935191d151eba09268050ea71426bcee66a34908906222a2486a3e93ad4
+  rule_id: RP1
+  file: references/upstream/remotion-render/transparent-videos.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:e110b5b38e53f8b527f1b134d49cb627ebc8da77263f3a1d55cd557f76c3c764
+  rule_id: E1
+  file: references/upstream/remotion-best-practices/remotion-maps/techniques/maptiler/assets/MapTilerVectorElement.ts
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:8fb14c0971842bd8dfbe9f372cf3e2271b929193fcc8ef78b99ab138bfb2f7de
+  rule_id: E1
+  file: references/upstream/remotion-best-practices/remotion-markup/remotion-maps/techniques/maptiler/assets/MapTilerVectorElement.ts
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:a261502268a47d8c73b5970b872c62ecc029d6927a13f6c8da7d5f8e071b1697
+  rule_id: PE3
+  file: references/upstream/remotion-best-practices/remotion-maps/techniques/mapbox/TECHNIQUE.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:48c0c35ab66feb89532e2be9c66a7e6313b6321efb70f747179efc890f738f96
+  rule_id: PE3
+  file: references/upstream/remotion-best-practices/remotion-maps/techniques/mapbox/TECHNIQUE.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:79472fcd38e57a653d8787cb81182e402532c84fcebd242fc431dd6630af5044
+  rule_id: PE3
+  file: references/upstream/remotion-best-practices/remotion-maps/techniques/mapbox/TECHNIQUE.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:e3199aaf3fdf21327c0125e38b01c34b4b92038666dff178dad182d232ab7137
+  rule_id: PE3
+  file: references/upstream/remotion-best-practices/remotion-markup/remotion-maps/techniques/mapbox/TECHNIQUE.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:92451ba860021c8d3b656ab7e4bea24353ad2172fa31a9cea5268ea9d3fb79e9
+  rule_id: PE3
+  file: references/upstream/remotion-best-practices/remotion-markup/remotion-maps/techniques/mapbox/TECHNIQUE.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.
+- hash: sha256:e8ae0f34b0a3326cd4117bae2cf7729a4bba41ded44ed41b38c00318ca7a4a62
+  rule_id: PE3
+  file: references/upstream/remotion-best-practices/remotion-markup/remotion-maps/techniques/mapbox/TECHNIQUE.md
+  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
+    but contains no credential value.

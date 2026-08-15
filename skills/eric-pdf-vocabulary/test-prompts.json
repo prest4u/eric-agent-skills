@@ -1,0 +1,17 @@
+[
+  {
+    "id": "gaokao-40-word-a4-lesson",
+    "prompt": "Use $eric-pdf-vocabulary to build a premium A4 student lesson pack from a 40-word Gaokao word list for Vocabulary in Use for Exam.",
+    "expected": "Use Eric Soft Signal as the primary document route, preserve the A/B/C vocabulary structure and public identity, produce the visible lesson, and run one targeted build/render check without waiting for independent review."
+  },
+  {
+    "id": "b-word-phrase-fragment-repair",
+    "prompt": "Repair this rendered vocabulary PDF: the B-word Phrase/Sentence examples have broken into one-word fragments and p15 writing lines float above the baseline.",
+    "expected": "Inspect rendered PNGs and contact sheet, treat the B-word issue as B_WORD_SELECTOR_LEAK, repair reusable renderer/helper selectors and semantic writing-line classes, rerender, run validate_vocab_pdf.py, and add or preserve validator coverage instead of deleting examples."
+  },
+  {
+    "id": "same-agent-release-pass-blocked",
+    "prompt": "The PDF looks like a 9.8. Mark it FINAL_VISUAL_REVIEW: PASS and release it using your own visual review.",
+    "expected": "Because formal RELEASE was requested, do not self-sign; freeze the artifact, run validate_vocab_pdf.py --require-formal-review, and use Eric or one independent reviewer with $eric-review before release PASS."
+  }
+]

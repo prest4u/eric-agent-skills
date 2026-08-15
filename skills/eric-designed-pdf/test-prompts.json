@@ -1,0 +1,66 @@
+[
+  {
+    "prompt": "Use $eric-designed-pdf to create an 8-12 page English writing textbook sample with cover, unit opener, activity page, writing planner, handbook, and answer key.",
+    "expected": "Scaffold a project, build book-trim and lesson-a4, run PDF validators, render contact sheets, and report evidence without copying reference-book assets."
+  },
+  {
+    "prompt": "Use $eric-designed-pdf to turn the IELTS prep-plan prototype into a reusable generic book, and remember that the earlier named learner version was only a test.",
+    "expected": "Default to a no-student-name edition; remove student/test-name residue from book.yaml, generator/source, page markdown, asset ids/paths/manifest prose, generated HTML, extracted PDF text, output filenames, and rendered cover/title pages; treat Sample Learner only as a regression/test case unless Eric explicitly asks for a personalized edition; rebuild book-trim and lesson-a4 fresh and rescan all layers before delivery."
+  },
+  {
+    "prompt": "Use $eric-designed-pdf to turn a real lesson packet into a student book sample and an A4 lesson pack, keeping the answer key out of the student profile.",
+    "expected": "Map content into book.yaml/pages/assets, produce both profiles, run leak scans, and document student/teacher separation."
+  },
+  {
+    "prompt": "Use $eric-designed-pdf to QA an existing textbook-style HTML/PDF project and tell me whether it can be delivered.",
+    "expected": "Run fresh build/render/qa_textbook_pdf, inspect contact sheet and key rendered pages, require human visual sentinel with Contact sheet/Key pages evidence for formal delivery, and list remaining risks."
+  },
+  {
+    "prompt": "Use $eric-designed-pdf to adapt the starter visual system into a custom workbook for a grammar unit, but keep all text selectable.",
+    "expected": "Preserve deterministic HTML/Typst text, use generated images only for visual context, replace starter metadata/assets/renderer labels, set proof-placeholder or final-assets explicitly, and validate component coverage, PDF text extraction, asset manifest policy, and no STARTER_RESIDUE_FOUND."
+  },
+  {
+    "prompt": "Use $eric-designed-pdf to turn a layout proof into a final textbook sample with ImageGen real cover and unit-opener visuals.",
+    "expected": "Switch qa.asset_mode from proof-placeholder to final-assets, generate or license separate cover/opener/context assets as immediately understandable real-world imagery, preferring nature, landscape, wildlife, or realistic animal scenes when suitable and using campus/classroom/library/study or modern human learning/life scenes as the second family, save them in the project, record kind/status/prompt/source/focus/no-text policy plus cover content_brief/visual_direction/uniqueness_note and allowed_templates in assets/manifest.json, reject abstract-asset-drift / FINAL_ASSET_UNINTERPRETABLE_SCENE, enforce that one image and one asset id are used once only, verify the cover image does not appear inside the book, rebuild from source, and rerun qa_textbook_pdf plus visual QA."
+  },
+  {
+    "prompt": "Use $eric-designed-pdf to create a final student-book cover for a 高二升高三语法衔接 lesson, with Eric Teaching Studio branding.",
+    "expected": "Generate or select a content-specific cover concept from the actual grammar lesson, not a generic reusable study image or abstract paper/symbolic concept art; default first to nature, landscape, wildlife, or realistic animal imagery when it can carry the lesson mood, then to campus/classroom/library/study or modern human learning/life scenes when those fit better; record content_brief, visual_direction, uniqueness_note, and allowed_templates; place Eric Teaching Studio as a bottom-right cover brand; keep 高二升高三 off the cover top-right badge; do not reuse the cover image on unit-opener, photo-passage, or context pages; run COVER_BRAND_MARK_MISSING, COVER_TOP_LEVEL_BADGE, COVER_CONTENT_CONCEPT_MISSING, COVER_UNIQUENESS_NOTE_MISSING, FINAL_ASSET_UNINTERPRETABLE_SCENE, ASSET_REUSED_ACROSS_PAGES, and COVER_ASSET_REUSED_INSIDE_BOOK gates through qa_textbook_pdf."
+  },
+  {
+    "prompt": "Use $eric-designed-pdf to rebuild a 14-page IELTS Unit 1 sample with custom output names and custom page templates.",
+    "expected": "Add qa/output settings or pass explicit qa_textbook_pdf flags instead of bypassing the skill validator; reject repeated sparse form-like pages during contact-sheet review."
+  },
+  {
+    "prompt": "Use $eric-designed-pdf to review a project whose validator passed but whose visual-review file was written by the same agent and lacks screenshot evidence.",
+    "expected": "Reject the visual PASS, mark formal delivery blocked, run the negative regression checks, and require regenerated contact sheet/key page evidence plus independent or user-confirmed review."
+  },
+  {
+    "prompt": "Use $eric-designed-pdf to rebuild IELTS备考计划 for Sample Learner after v2 passed machine QA but the contact sheet still looked like dashboard/UI pages and A font proof made the cover title too thin.",
+    "expected": "Read visual-canon, failure-taxonomy, review-rubric, sample-learner-transfer-brief, and handoff-prompt; stop patching v2; create a clean v3 proof set; choose B primary with C fallback; keep `IELTS备考计划 for Sample Learner` from accidental wrapping and prevent p2/title-page `for Sample Learner` from shrinking inside the same H1; remove starter identity such as English Writing System/canyon-cover; reject thin-cover-type, title-wrap-break, mixed-title-scale-drift, loose-workbook-tail, floating-blank-line, orphan-slot-line, question-line-double-blank, control-selector-leak, plain-planner-table, weak-backmatter, rendered-text-glitch, dashboard-panel, ui-number-block, component-collage, student-process-language, STARTER_RESIDUE_FOUND, WORKBOOK_RECORD_SURFACE_MISSING, LITERAL_UNDERSCORE_BLANKS, BLANK_BASELINE_CSS_WEAK, QUESTION_INLINE_BLANK_WITH_WRITE_LINE, MIXED_TITLE_SCALE_DRIFT, and CHECKLIST_CONTROL_SELECTOR_LEAK; convert all visible exercise-text underscore runs into real blank elements across activity instructions, word-box items, table cells, paragraph bodies, question lines, workbook-record prompts, planner prompts, and checklist lines; keep punctuation after blanks nonbreaking so `____.` does not orphan the period; keep word-box phrases such as `quickly ____ sold` as no-wrap phrase items with compact blanks, and avoid open answer blanks inside handbook mini-rule reference cards unless they use compact no-wrap cloze; when question items already have dedicated write-lines, strip author placeholders with prompt_text_before_write_lines() so p7/p8/p9-style prompts never show both inline blanks and full answer lines; require p5/workbook pages to use a cohesive workbook-record surface and p6/review planner to use row-card planner markup instead of planner-table; isolate checklist controls with `.check-mark` instead of `.editing-checklist label span`, and verify Final Check blanks do not turn into checkbox-like rectangles; verify exercise blanks sit near the lower writing baseline/lower line-box edge with the -0.82em / -0.88em contract, verify Model Note / paragraph-practice cloze blanks use the -0.22em paragraph override, verify workbook-record prompt blanks use the -0.32em record-prompt override, and verify narrow phrase blanks use compact no-wrap word-box/mini-rule/checklist rules so they sit precisely with prompt text; inspect rendered PNG text for punctuation/glyph issues; run extracted-PDF teaching-polish strict scan before any visual PASS."
+  },
+  {
+    "prompt": "Use $eric-designed-pdf v2 to build a 24-32 page 高二升高三语法 student book from a real summer grammar lesson, with book-trim and lesson-a4 outputs.",
+    "expected": "Read v2-full-coverage-goal, page-role-matrix-v2, student-book-form-dna, visual-canon, qa-gates, and the real lesson source; set qa.page_family_mode: v2-full; map the lesson into contents-route, diagnostic-entry, article/concept opener, skill-method, sentence-map, activity/workbook-record, categorizing-chart, exam-mini-set, writing/correction, handbook, vocab/connector index, and teacher-answer-key pages; avoid worksheet-only flow and student-visible production words; keep 高二升高三 off the cover top-right badge; run both profile builds, full-page rendering, contact sheets, qa_textbook_pdf, pdftotext, eric-teaching-polish strict scan, and report weak pages honestly if below 9.5."
+  },
+  {
+    "prompt": "Use $eric-designed-pdf to redesign the full 高二升高三天津卷英语22讲 course as independent lesson packs plus a full-course book, with student/teacher book-trim and student/teacher lesson-a4 profiles.",
+    "expected": "Use gaokao-course-adapter and source structured lesson data; do not overwrite original course folders; generate four profiles (`student-book-trim`, `teacher-book-trim`, `student-lesson-a4`, `teacher-lesson-a4`) with explicit profile `answer_visibility`; declare qa.source_inputs for all 22 lesson_plan.json files plus question/passage/writing banks; keep final-assets one-use cover/opener/context visuals; keep reading article titles, reading set headings, exercise labels, question prompts, planner/checkpoint prompts, and renderer UI furniture English-forward in student workbook mode; reject STUDENT_ANSWER_VISIBILITY_LEAK, VISIBLE_TITLE_AI_LANGUAGE, READING_TITLE_LANGUAGE_DRIFT, STUDENT_PROMPT_LANGUAGE_DRIFT, and RENDERER_UI_LABEL_LANGUAGE_DRIFT; run fresh build/render/validate for all four profiles, strict teaching-polish on student text, qa_textbook_pdf normal and release gates, contact sheets, independent visual review, and update validation-corpus evidence only after all four profiles are current."
+  },
+  {
+    "prompt": "Use $eric-designed-pdf v2 to create a workbook-heavy unit where most pages are practice, cloze, correction, sentence transformation, and reflection records.",
+    "expected": "Use workbook-record/workbook-practice surfaces rather than loose question tails; prove word boxes, table cells, planner prompts, record prompts, paragraph cloze blanks, and question-line answer spaces all follow the blank baseline contract; reject literal underscores, orphan-slot-line, question-line-double-blank, planner-label-blank-weak, loose-workbook-tail, control-selector-leak, and rendered-text-glitch; rebuild both profiles and inspect contact sheets plus key pages before any visual PASS."
+  },
+  {
+    "prompt": "Use $eric-designed-pdf v2 to produce a handbook and answer-key package for a grammar unit, including student handbook pages and teacher-only answer pages.",
+    "expected": "Create compact lookup density with handbook, grammar lookup index, connector-index, vocab-bank, answer-key, and teacher-answer-key roles; keep handbook mini rules from becoming sparse worksheets; ensure answer content is absent from student-visible pages and only appears in teacher/back-matter contexts as scoped; run leak scans, page-family/component coverage, blank compactness checks, eric-pdf QA for any Typst A4 adapter output, and formal visual review evidence before release."
+  },
+  {
+    "prompt": "Use $eric-designed-pdf v2 to absorb the form of <source-file> 1 SB_PDF.pdf into an original proof without copying its brand, text, images, or whole-page layouts.",
+    "expected": "Treat the reference PDF as form grammar only; document the abstracted page rhythms such as photo-led opener, article/evidence page, skill/method page, practice/check page, diagram/map page, and back-matter lookup page; do not place reference pages, screenshots, text, logos, or assets in the project or skill; keep all teaching content deterministic text; build book-trim and lesson-a4 proofs with original content/assets; run starter-residue/reference-brand scans, PDF text extraction, contact-sheet review, and qa_textbook_pdf."
+  },
+  {
+    "prompt": "Use $eric-designed-pdf v2 to do a QA repair on a custom textbook project that passed machine QA but the user reports it still feels unlike the golden sample.",
+    "expected": "Do not only tweak CSS; read visual-canon, failure-taxonomy, review-rubric, and v2-full-coverage-goal; inspect contact sheets and key page PNGs; classify the drift as thin-cover-type, dashboard-panel, ui-number-block, component-collage, diagnostic-form-drift, article-form-missing, skill-ribbon-missing, exercise-taxonomy-flat, backmatter-index-weak, or patch-drift; decide whether the issue is local content, renderer logic, template grammar, validator coverage, or visual-canon transfer; add or update a negative regression test when machine-detectable; rerun affected real validation projects before claiming improvement."
+  }
+]

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Eric PDF Vocabulary"
+  short_description: "Standalone vocabulary lesson structure and PDF QA"
+  default_prompt: "Use $eric-pdf-vocabulary to produce the standalone lesson first and run one targeted check; coordinate with other installed Eric skills only when the request needs them."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Eric Reverse Skill"
+  short_description: "Evidence-first reverse engineering for Eric"
+  default_prompt: "Use $eric-reverse-skill to analyze this target safely and produce a reproducible explanation or solver."

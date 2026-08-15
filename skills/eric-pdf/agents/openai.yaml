@@ -1,0 +1,6 @@
+interface:
+  display_name: "Eric PDF"
+  short_description: "Typst A4 classroom adapter and QA"
+  default_prompt: "Use $eric-pdf to adapt and QA this Typst A4 classroom PDF."
+policy:
+  allow_implicit_invocation: false
