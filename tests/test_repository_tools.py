@@ -4,6 +4,7 @@ import importlib.util
 import hashlib
 import json
 import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -396,6 +397,52 @@ class IndependentInstallTest(unittest.TestCase):
                     if path.is_file()
                 }
                 self.assertEqual(source_files, target_files, record["name"])
+
+    def test_qingyun_scene_packages_scaffold_after_standalone_copy(self) -> None:
+        scenes = (
+            "service-brief",
+            "consent",
+            "profile",
+            "subject",
+            "signoff",
+            "briefing",
+            "plan",
+            "checklist",
+        )
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            for scene in scenes:
+                name = f"eric-qingyun-{scene}-pdf"
+                source = REPO / "skills" / name
+                installed = root / "installed" / name
+                shutil.copytree(source, installed)
+                output = root / "outputs" / scene
+                completed = subprocess.run(
+                    [
+                        sys.executable,
+                        str(installed / "scripts" / "new_document.py"),
+                        "--scene",
+                        scene,
+                        "--out",
+                        str(output),
+                        "--title",
+                        f"{scene} smoke",
+                    ],
+                    text=True,
+                    capture_output=True,
+                    check=False,
+                )
+                self.assertEqual(0, completed.returncode, completed.stderr)
+                self.assertTrue((output / "document.typ").is_file())
+                self.assertTrue((output / "theme.typ").is_file())
+                generated = (output / "document.typ").read_text(encoding="utf-8")
+                self.assertNotIn("__TITLE__", generated)
+                skill = (installed / "SKILL.md").read_text(encoding="utf-8")
+                self.assertNotIn("<eric-qingyun-pdf>", skill)
+                visual = (
+                    installed / "references" / "visual-contract.md"
+                ).read_text(encoding="utf-8")
+                self.assertIn("无需安装或读取 `$eric-slate-white-pdf`", visual)
 
 
 if __name__ == "__main__":

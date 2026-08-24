@@ -40,7 +40,12 @@ D6 通过后，选科报告 / D4 / D5 封面才可写「已签发」。已交付
 
 ## 工作流
 
-`--scene signoff`，`check_pdf.py --scene signoff`。
+```bash
+python3 scripts/new_document.py \
+  --scene signoff --out <fresh-dir> --title "复核签发单"
+typst compile <fresh-dir>/document.typ <fresh-dir>/document.pdf
+python3 scripts/check_pdf.py --pdf <fresh-dir>/document.pdf --scene signoff
+```
 
 ## 验收
 

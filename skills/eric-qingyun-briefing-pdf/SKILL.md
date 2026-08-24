@@ -40,7 +40,12 @@ description: 【家长讲解提纲】Create the 2-page 青云未来家长讲解�
 
 ## 工作流
 
-`--scene briefing`，`check_pdf.py --scene briefing`。
+```bash
+python3 scripts/new_document.py \
+  --scene briefing --out <fresh-dir> --title "家长讲解提纲"
+typst compile <fresh-dir>/document.typ <fresh-dir>/document.pdf
+python3 scripts/check_pdf.py --pdf <fresh-dir>/document.pdf --scene briefing
+```
 
 ## 验收
 

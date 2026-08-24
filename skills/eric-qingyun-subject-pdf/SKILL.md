@@ -11,7 +11,7 @@ description: 【选科指导报告】Create the 4-8 page 青云未来选科指�
 
 **用：** 新高一/高二家庭决定科目组合；刘月牵头的选科产品化交付。
 
-**不用：** 出分后填报（`$eric-qingyun-plan-pdf`）；早鸟定金说明（`--scene early-bird`）；把冲稳保院校表塞进来。
+**不用：** 出分后填报（`$eric-qingyun-plan-pdf`）；早鸟定金说明（另用 `$eric-qingyun-pdf` 的 `early-bird` 场景）；把冲稳保院校表塞进来。
 
 ## 规格
 
@@ -43,7 +43,12 @@ description: 【选科指导报告】Create the 4-8 page 青云未来选科指�
 
 ## 工作流
 
-`--scene subject`，`check_pdf.py --scene subject`。
+```bash
+python3 scripts/new_document.py \
+  --scene subject --out <fresh-dir> --title "选科指导报告"
+typst compile <fresh-dir>/document.typ <fresh-dir>/document.pdf
+python3 scripts/check_pdf.py --pdf <fresh-dir>/document.pdf --scene subject
+```
 
 ## 验收
 

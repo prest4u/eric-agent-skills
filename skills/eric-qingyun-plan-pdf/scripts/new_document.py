@@ -7,18 +7,7 @@ import argparse
 import shutil
 from pathlib import Path
 
-SCENES = (
-    "service-brief",
-    "consent",
-    "profile",
-    "plan",
-    "checklist",
-    "signoff",
-    "briefing",
-    "subject",
-    "early-bird",
-    "teacher",
-)
+SCENES = ("plan",)
 
 
 def main() -> int:

@@ -50,12 +50,13 @@ description: 【志愿方案】Create the 8-14 page 青云未来志愿方案报�
 ## 工作流
 
 ```bash
-python3 <eric-qingyun-pdf>/scripts/new_document.py \
+python3 scripts/new_document.py \
   --scene plan --out <fresh-dir> --title "方案报告" \
   --case-id "案例合成-TJ2026-0042" --alias "林同"
-typst compile document.typ document.pdf
-pdftoppm -png -r 144 document.pdf _qa/page
-python3 <eric-qingyun-pdf>/scripts/check_pdf.py --pdf document.pdf --scene plan
+typst compile <fresh-dir>/document.typ <fresh-dir>/document.pdf
+mkdir -p <fresh-dir>/_qa
+pdftoppm -png -r 144 <fresh-dir>/document.pdf <fresh-dir>/_qa/page
+python3 scripts/check_pdf.py --pdf <fresh-dir>/document.pdf --scene plan
 ```
 
 默认合成数据。换真实家庭前须有授权，且仍用化名，除非 Eric 明确要求实名。

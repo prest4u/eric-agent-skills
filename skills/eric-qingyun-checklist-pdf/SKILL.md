@@ -41,7 +41,12 @@ description: 【填报清单】Create the 2-6 page 青云未来填报执行清�
 
 ## 工作流
 
-`--scene checklist`，`check_pdf.py --scene checklist`。
+```bash
+python3 scripts/new_document.py \
+  --scene checklist --out <fresh-dir> --title "填报执行清单"
+typst compile <fresh-dir>/document.typ <fresh-dir>/document.pdf
+python3 scripts/check_pdf.py --pdf <fresh-dir>/document.pdf --scene checklist
+```
 
 ## 验收
 

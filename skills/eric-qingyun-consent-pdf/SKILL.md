@@ -42,7 +42,12 @@ D1 说明范围，D2 签字。D3 另签约束。不要把方案表订进确认�
 
 ## 工作流
 
-`--scene consent`，然后 `check_pdf.py --scene consent`。
+```bash
+python3 scripts/new_document.py \
+  --scene consent --out <fresh-dir> --title "服务确认书"
+typst compile <fresh-dir>/document.typ <fresh-dir>/document.pdf
+python3 scripts/check_pdf.py --pdf <fresh-dir>/document.pdf --scene consent
+```
 
 ## 验收
 

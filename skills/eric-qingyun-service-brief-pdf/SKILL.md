@@ -11,7 +11,7 @@ description: 【服务说明】Create the 2-4 page 青云未来服务说明与�
 
 **用：** 面谈前、微信先发、老师转介绍后家长还没付钱。本季默认写选科指导，不默认一对一志愿填报。
 
-**不用：** 已决定签约（改 D2）；已有学生约束（改 D3）；要具体院校表（改旺季 D4）；早鸟定金说明（`--scene early-bird`）。
+**不用：** 已决定签约（改 D2）；已有学生约束（改 D3）；要具体院校表（改旺季 D4）；早鸟定金说明（转 `$eric-qingyun-pdf` 的 `early-bird` 场景）。
 
 ## 规格
 
@@ -44,10 +44,10 @@ description: 【服务说明】Create the 2-4 page 青云未来服务说明与�
 ## 工作流
 
 ```bash
-python3 <eric-qingyun-pdf>/scripts/new_document.py \
+python3 scripts/new_document.py \
   --scene service-brief --out <fresh-dir> --title "服务说明与边界"
-typst compile document.typ document.pdf
-python3 <eric-qingyun-pdf>/scripts/check_pdf.py --pdf document.pdf --scene service-brief
+typst compile <fresh-dir>/document.typ <fresh-dir>/document.pdf
+python3 scripts/check_pdf.py --pdf <fresh-dir>/document.pdf --scene service-brief
 ```
 
 ## 验收

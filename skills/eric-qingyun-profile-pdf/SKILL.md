@@ -41,7 +41,12 @@ description: 【档案约束】Create the 2-4 page 青云未来档案与家庭�
 
 ## 工作流
 
-`--scene profile`，`check_pdf.py --scene profile`。
+```bash
+python3 scripts/new_document.py \
+  --scene profile --out <fresh-dir> --title "档案与家庭约束确认"
+typst compile <fresh-dir>/document.typ <fresh-dir>/document.pdf
+python3 scripts/check_pdf.py --pdf <fresh-dir>/document.pdf --scene profile
+```
 
 ## 验收
 
