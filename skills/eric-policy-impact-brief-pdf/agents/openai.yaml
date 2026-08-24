@@ -1,0 +1,4 @@
+interface:
+  display_name: "Eric｜政策影响简报 PDF"
+  short_description: "用于政策分析、影响评估与公共部门决策材料专业设计制作"
+  default_prompt: "使用 $eric-policy-impact-brief-pdf 制作一份具备证据链和责任闭环的政策影响简报。"

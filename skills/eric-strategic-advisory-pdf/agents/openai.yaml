@@ -1,0 +1,4 @@
+interface:
+  display_name: "Eric｜战略咨询 PDF"
+  short_description: "用于咨询提案、转型研究与管理层决策文件专业设计制作"
+  default_prompt: "使用 $eric-strategic-advisory-pdf 制作一份面向管理层决策的专业战略咨询 PDF。"

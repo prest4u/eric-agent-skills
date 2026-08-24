@@ -1,0 +1,4 @@
+interface:
+  display_name: "Eric｜技术图谱 PDF"
+  short_description: "用于工程说明、技术手册、系统剖面与运营图谱设计制作"
+  default_prompt: "使用 $eric-technical-atlas-pdf 制作一份具有真实工程图像和严谨标注的技术图谱 PDF。"

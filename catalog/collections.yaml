@@ -8,6 +8,17 @@ collections:
       - eric-moss-ivory-pdf
       - eric-slate-white-pdf
       - eric-pdf-vocabulary
+  professional-pdf-series:
+    description: Eight independent professional PDF workflows for advisory, transaction, policy, technical, learning, research, and archive documents.
+    skills:
+      - eric-strategic-advisory-pdf
+      - eric-transaction-dealbook-pdf
+      - eric-policy-impact-brief-pdf
+      - eric-technical-atlas-pdf
+      - eric-learning-field-guide-pdf
+      - eric-executive-learning-reader-pdf
+      - eric-research-monograph-pdf
+      - eric-knowledge-archive-pdf
   education:
     description: Teaching, learner materials, and parent communication.
     skills:

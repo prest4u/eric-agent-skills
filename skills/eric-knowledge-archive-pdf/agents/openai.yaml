@@ -1,0 +1,4 @@
+interface:
+  display_name: "Eric｜知识档案 PDF"
+  short_description: "用于档案目录、知识库、藏品记录与保护修复报告设计制作"
+  default_prompt: "使用 $eric-knowledge-archive-pdf 制作一份专业、可检索且适合打印的知识档案 PDF。"

@@ -1,0 +1,60 @@
+:root {
+  /* Color */
+  --color-paper: #f8f7f3;
+  --color-ink: #102331;
+  --color-primary: #12344a;
+  --color-secondary: #a6673d;
+  --color-signal: #e66528;
+  --color-carbon: #0b1f2d;
+  --color-graphite: #465761;
+  --color-mid: #71808a;
+  --color-rule: #8e9aa0;
+  --color-mist: #dce2e3;
+  --color-fog: #edf1f0;
+
+  /* Type */
+  --font-display: Roboto, "Hiragino Sans GB", "PingFang SC", sans-serif;
+  --font-body: Roboto, "Hiragino Sans GB", "PingFang SC", sans-serif;
+  --font-mono: Menlo, "Roboto Mono", monospace;
+  --type-body: 9.2pt;
+  --type-label: 8.6pt;
+  --type-micro: 8.5pt;
+
+  /* Space */
+  --space-unit: 1mm;
+  --space-1: 2mm;
+  --space-2: 4mm;
+  --space-3: 6mm;
+  --space-4: 10mm;
+  --space-5: 16mm;
+
+  /* Geometry */
+  --page-width: 210mm;
+  --page-height: 297mm;
+  --page-left: 22mm;
+  --page-right: 15mm;
+  --datum-x: 15mm;
+  --corner-radius: 0;
+
+  /* Border */
+  --line-hair: 0.2mm solid var(--color-rule);
+  --line-rule: 0.35mm solid var(--color-ink);
+  --line-heavy: 0.7mm solid var(--color-ink);
+
+  /* Shadow */
+  --shadow-none: none;
+
+  /* Image */
+  --image-treatment: saturate(0.92);
+  --image-contrast: 1.03;
+  --image-brightness: 1.00;
+
+  /* Chart and diagram */
+  --chart-axis: var(--color-ink);
+  --chart-grid: var(--color-rule);
+  --chart-fill: var(--color-fog);
+
+  /* Motion */
+  --motion-policy: none;
+  --motion-none: 0s;
+}

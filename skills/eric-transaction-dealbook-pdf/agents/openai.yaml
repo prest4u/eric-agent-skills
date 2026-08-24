@@ -1,0 +1,4 @@
+interface:
+  display_name: "Eric｜交易与尽调 PDF"
+  short_description: "用于并购、尽调、交易备忘录、整合与风险材料设计制作"
+  default_prompt: "使用 $eric-transaction-dealbook-pdf 制作一份证据、风险和责任结构清晰的交易尽调 PDF。"

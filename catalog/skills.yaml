@@ -35,6 +35,62 @@ skills:
     mirror: prest4u/eric-pdf-vocabulary
     upstreams: []
     tests: ["python3 scripts/run_skill_tests.py --skill eric-pdf-vocabulary"]
+  - name: eric-strategic-advisory-pdf
+    category: professional-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-strategic-advisory-pdf"]
+  - name: eric-transaction-dealbook-pdf
+    category: professional-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-transaction-dealbook-pdf"]
+  - name: eric-policy-impact-brief-pdf
+    category: professional-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-policy-impact-brief-pdf"]
+  - name: eric-technical-atlas-pdf
+    category: professional-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-technical-atlas-pdf"]
+  - name: eric-learning-field-guide-pdf
+    category: professional-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-learning-field-guide-pdf"]
+  - name: eric-executive-learning-reader-pdf
+    category: professional-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-executive-learning-reader-pdf"]
+  - name: eric-research-monograph-pdf
+    category: professional-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-research-monograph-pdf"]
+  - name: eric-knowledge-archive-pdf
+    category: professional-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-knowledge-archive-pdf"]
   - name: eric-soft-signal
     category: education
     version: 1.0.0

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Eric｜研究专著 PDF"
+  short_description: "用于研究报告、文献综述、证据综合与方法专著设计制作"
+  default_prompt: "使用 $eric-research-monograph-pdf 制作一份严谨、证据导向且适合打印的研究专著 PDF。"

@@ -2,7 +2,7 @@
 
 [English](README.md)
 
-这是 Eric 的 29 个跨脚手架 Agent Skill 权威仓库，覆盖学生与企业文档、PDF、PPT、网站、视频和交付质量工作流。
+这是 Eric 的 37 个跨脚手架 Agent Skill 权威仓库，覆盖学生与企业文档、PDF、PPT、网站、视频和交付质量工作流。
 
 五个 PDF Skill 始终保持独立目录、独立安装和独立版本：
 
@@ -13,6 +13,8 @@
 - `eric-pdf-vocabulary`
 
 `pdf` 集合只是批量安装清单，不会生成统一 PDF 超级 Skill，也不会让五者互相依赖。
+
+新增的 `professional-pdf-series` 集合包含八个彼此独立的职业 PDF Skill，分别覆盖战略咨询、交易尽调、政策影响、技术图谱、学习指南、高管读本、研究专著与知识档案。
 
 ## 安装单个 Skill
 
@@ -34,6 +36,16 @@ npx -y skills@latest add prest4u/eric-agent-skills \
 - Kimi Code CLI：`kimi.plugin.json`
 - Claude Code：`.claude-plugin/marketplace.json`
 - OpenCode、Cursor：通过标准 Agent Skills 目录复制安装
+
+## 多工具共用同一版本
+
+在本仓库运行：
+
+```bash
+python3 scripts/sync_user_install.py --apply
+```
+
+同步器会先备份冲突副本，再让 Codex、Kimi Code、Kimi Desktop、Cursor、Claude Code 与 Hermes Agent 指向同一份 GitHub checkout。使用 `--check` 只检查漂移；使用 `--update --apply` 先从 GitHub 快进更新，再修复本机发现路径。
 
 ## 上游与镜像
 

@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "skill": "eric-knowledge-archive-pdf",
+  "cases": [
+    {
+      "id": "baseline-new-archive",
+      "category": "baseline",
+      "section": "Workflow",
+      "decision": "proceed with a fresh local derivative and full evidence chain",
+      "required": ["no-overwrite policy", "PDF-origin PNGs", "Freeze hashes only after"],
+      "forbidden_actions": ["overwrite", "stale-evidence-reuse", "global-install", "publication", "self-approval"]
+    },
+    {
+      "id": "forward-conservation-report",
+      "category": "forward",
+      "section": "Visual rules",
+      "decision": "adapt the archival grammar to a conservation report with unique, documented imagery",
+      "required": ["documentary object, material, conservation, or collection photography", "Use each image once", "effective 180 DPI or higher"],
+      "forbidden_actions": ["overwrite", "stale-evidence-reuse", "global-install", "publication", "self-approval"]
+    },
+    {
+      "id": "failure-existing-output",
+      "category": "adversarial-failure",
+      "section": "Existing-output collision",
+      "decision": "stop and select at most one fresh derivative path",
+      "required": ["already exists", "One recovery", "never delete, replace, rename, or overwrite", "Withhold sign-off"],
+      "forbidden_actions": ["overwrite", "delete-existing-output", "self-approval"]
+    },
+    {
+      "id": "failure-missing-dependency",
+      "category": "adversarial-failure",
+      "section": "Unavailable dependency",
+      "decision": "stop; use one installed equivalent or request authority",
+      "required": ["unavailable", "already-installed local equivalent", "request authority", "Withhold sign-off"],
+      "forbidden_actions": ["silent-install", "global-install", "self-approval"]
+    },
+    {
+      "id": "failure-render-validator",
+      "category": "adversarial-failure",
+      "section": "Render or validator failure",
+      "decision": "stop; make one hypothesis-bounded repair and rerun dependent evidence",
+      "required": ["returns non-zero", "one falsifiable hypothesis", "same fingerprint repeats", "Withhold sign-off"],
+      "forbidden_actions": ["weaken-gate", "repeat-patching", "self-approval"]
+    },
+    {
+      "id": "failure-stale-evidence",
+      "category": "adversarial-failure",
+      "section": "Stale derivative evidence",
+      "decision": "stop and regenerate the complete derivative chain once",
+      "required": ["predates", "dependency order", "never reuse stale evidence", "Withhold sign-off"],
+      "forbidden_actions": ["stale-evidence-reuse", "partial-refreeze", "self-approval"]
+    },
+    {
+      "id": "failure-hash-mismatch",
+      "category": "adversarial-failure",
+      "section": "Hash or identity mismatch",
+      "decision": "stop, resolve one exact identity, revalidate, and refreeze",
+      "required": ["differs from the artifact under review", "new frozen identity", "fresh independent review", "Withhold sign-off"],
+      "forbidden_actions": ["rewrite-history", "mixed-identity", "self-approval"]
+    },
+    {
+      "id": "failure-provenance-licensing",
+      "category": "adversarial-failure",
+      "section": "Incomplete image provenance or licensing",
+      "decision": "stop; complete authorized records or replace the asset once",
+      "required": ["lacks owned/licensed source authority", "replace the asset once", "never infer rights", "Withhold sign-off"],
+      "forbidden_actions": ["rights-assumption", "private-upload", "publication", "self-approval"]
+    },
+    {
+      "id": "closeout-frozen-skill",
+      "category": "closeout",
+      "section": "Boundaries",
+      "decision": "freeze exact hashes, close the writer window, and withhold approval for an independent reviewer",
+      "required": ["Never overwrite", "Never reuse stale", "Never install", "Never publish", "Never self-approve"],
+      "forbidden_actions": ["overwrite", "stale-evidence-reuse", "global-install", "publication", "self-approval"]
+    }
+  ]
+}

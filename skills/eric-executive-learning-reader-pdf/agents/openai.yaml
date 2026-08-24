@@ -1,0 +1,4 @@
+interface:
+  display_name: "Eric｜高管学习读本 PDF"
+  short_description: "用于高管教育、研讨会读本、领导力案例与职业学习材料"
+  default_prompt: "使用 $eric-executive-learning-reader-pdf 制作一份克制、高级且适合打印的高管学习读本。"

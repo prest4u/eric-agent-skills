@@ -204,8 +204,8 @@ def validate(repo: Path, only_skill: str | None = None) -> list[Issue]:
     if not isinstance(records, list):
         return [Issue("CATALOG_SHAPE", "catalog/skills.yaml", "skills must be a list")]
     names = [record.get("name") for record in records if isinstance(record, dict)]
-    if len(names) != 29 or len(set(names)) != 29:
-        issues.append(Issue("CORE_COUNT", "catalog/skills.yaml", f"expected 29 unique skills, found {len(set(names))}"))
+    if len(names) != 37 or len(set(names)) != 37:
+        issues.append(Issue("CORE_COUNT", "catalog/skills.yaml", f"expected 37 unique skills, found {len(set(names))}"))
 
     actual_names = sorted(path.name for path in (repo / "skills").iterdir() if path.is_dir())
     if sorted(names) != actual_names:

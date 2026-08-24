@@ -1,0 +1,4 @@
+interface:
+  display_name: "Eric｜学习实践指南 PDF"
+  short_description: "用于成人学习、工作坊、培训手册与教育项目材料设计制作"
+  default_prompt: "使用 $eric-learning-field-guide-pdf 制作一份适合工作坊或培训项目的成人学习实践指南。"

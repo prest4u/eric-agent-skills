@@ -2,7 +2,7 @@
 
 [简体中文](README.zh-CN.md)
 
-Eric Agent Skills is the canonical, cross-harness home for 29 independently installable workflows covering educational and business documents, PDF design, presentations, websites, video, and delivery quality.
+Eric Agent Skills is the canonical, cross-harness home for 37 independently installable workflows covering educational and business documents, PDF design, presentations, websites, video, and delivery quality.
 
 The five PDF skills remain separate packages. Collections only make bulk installation easier; they do not merge behavior or introduce mandatory dependencies.
 
@@ -33,9 +33,19 @@ If an older global Skill has the same name, some harnesses prefer the global cop
 
 ## Collections
 
-Six metadata-only collections are defined in [`catalog/collections.yaml`](catalog/collections.yaml): PDF, education, documents, web, video, and workflow.
+Seven metadata-only collections are defined in [`catalog/collections.yaml`](catalog/collections.yaml): PDF, professional PDF series, education, documents, web, video, and workflow.
 
-The `pdf` collection installs five directories; it never creates a PDF super-Skill or cross-dependency. Claude exposes all six collections as marketplace plugins. For other harnesses, run the fixed install command once per Skill listed in the collection.
+The `pdf` collection installs five directories and `professional-pdf-series` installs eight more; neither creates a PDF super-Skill or cross-dependency. Claude exposes all seven collections as marketplace plugins. For other harnesses, run the fixed install command once per Skill listed in the collection.
+
+## One source across local agents
+
+Use the repository's local sync command to make this checkout the single physical source for Codex, Kimi Code, Kimi Desktop, Cursor, Claude Code, and Hermes Agent:
+
+```bash
+python3 scripts/sync_user_install.py --apply
+```
+
+The command backs up conflicting copies, links the shared `~/.agents/skills/` entries to this checkout, removes higher-priority duplicates, and wires product-specific discovery where needed. Run with `--check` for a non-mutating drift audit or `--update --apply` to fast-forward from GitHub before reconciling the local agent surfaces.
 
 ## Maintenance
 

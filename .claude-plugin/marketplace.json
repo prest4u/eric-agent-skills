@@ -5,7 +5,7 @@
     "name": "prest4u"
   },
   "description": "Eric's curated portable skill collections.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "plugins": [
     {
       "name": "eric-pdf-skills",
@@ -19,6 +19,23 @@
         "./skills/eric-moss-ivory-pdf",
         "./skills/eric-slate-white-pdf",
         "./skills/eric-pdf-vocabulary"
+      ]
+    },
+    {
+      "name": "eric-professional-pdf-series",
+      "source": "./",
+      "strict": false,
+      "description": "Eight independent professional PDF workflows for advisory, transaction, policy, technical, learning, research, and archive documents.",
+      "version": "1.0.0",
+      "skills": [
+        "./skills/eric-strategic-advisory-pdf",
+        "./skills/eric-transaction-dealbook-pdf",
+        "./skills/eric-policy-impact-brief-pdf",
+        "./skills/eric-technical-atlas-pdf",
+        "./skills/eric-learning-field-guide-pdf",
+        "./skills/eric-executive-learning-reader-pdf",
+        "./skills/eric-research-monograph-pdf",
+        "./skills/eric-knowledge-archive-pdf"
       ]
     },
     {
