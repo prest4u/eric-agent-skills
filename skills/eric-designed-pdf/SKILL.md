@@ -1,6 +1,6 @@
 ---
 name: eric-designed-pdf
-description: 'Create, adapt, compile, repair, or QA Eric-designed premium textbook-style PDF systems: English student books, workbook pages, unit openers, writing handbooks, answer-key back matter, book-trim samples, A4 lesson packs, deterministic HTML/CSS-to-PDF teaching books, visual canon transfer, contact-sheet review, and textbook visual QA. Use when the user asks for 教材级 PDF, student book/workbook/handbook/answer key, professional English textbook page style, book-like course materials, visual mismatch repair, full visual QA gates, or the Eric-designed-pdf skill.'
+description: '【教材级 PDF】Create, adapt, compile, repair, or QA Eric-designed premium textbook-style PDF systems: English student books, workbook pages, unit openers, writing handbooks, answer-key back matter, book-trim samples, A4 lesson packs, deterministic HTML/CSS-to-PDF teaching books, visual canon transfer, contact-sheet review, and textbook visual QA. Use when the user asks for 教材级 PDF, student book/workbook/handbook/answer key, professional English textbook page style, book-like course materials, visual mismatch repair, full visual QA gates, or the Eric-designed-pdf skill.'
 ---
 
 # Eric-designed-pdf

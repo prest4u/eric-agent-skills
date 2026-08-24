@@ -1,6 +1,6 @@
 ---
 name: eric-frontend-delivery
-description: Create, prototype, repair, run, and check real frontend product surfaces such as web apps, tools, dashboards, routes, components, and interactive HTML. Use when responsive layout, states, interaction, accessibility basics, resources, runtime behavior, or visual finish matters. Do not use for backend-only, infrastructure-only, content-only, non-visual code review, unrendered data analysis, PDFs, or generic visual art.
+description: 【前端交付】Create, prototype, repair, run, and check real frontend product surfaces such as web apps, tools, dashboards, routes, components, and interactive HTML. Use when responsive layout, states, interaction, accessibility basics, resources, runtime behavior, or visual finish matters. Do not use for backend-only, infrastructure-only, content-only, non-visual code review, unrendered data analysis, PDFs, or generic visual art.
 ---
 
 # Eric Frontend Delivery

@@ -1,6 +1,6 @@
 ---
 name: eric-pdf-vocabulary
-description: Create, repair, and QA standalone A4 vocabulary lesson PDFs for Gaokao vocabulary, Vocabulary in Use for Exam, memory-chain pages, red-word review, and 40-word lesson packs. Use alone for a portable vocabulary lesson or optionally combine with Eric Soft Signal and Eric-designed-pdf when those skills are installed.
+description: 【词汇讲义】Create, repair, and QA standalone A4 vocabulary lesson PDFs for Gaokao vocabulary, Vocabulary in Use for Exam, memory-chain pages, red-word review, and 40-word lesson packs. Use alone for a portable vocabulary lesson or optionally combine with Eric Soft Signal and Eric-designed-pdf when those skills are installed.
 ---
 
 # Eric PDF Vocabulary

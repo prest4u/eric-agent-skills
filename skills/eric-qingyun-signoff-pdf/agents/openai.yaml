@@ -1,0 +1,4 @@
+interface:
+  display_name: "青云 · 复核签发"
+  short_description: "选科报告与志愿方案正式导出前的签发闸门"
+  default_prompt: "Use $eric-qingyun-pdf then $eric-qingyun-signoff-pdf."

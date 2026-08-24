@@ -5,14 +5,14 @@
     "name": "prest4u"
   },
   "description": "Eric's curated portable skill collections.",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "plugins": [
     {
       "name": "eric-pdf-skills",
       "source": "./",
       "strict": false,
       "description": "Five independent Eric PDF design and production skills.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "skills": [
         "./skills/eric-designed-pdf",
         "./skills/eric-pdf",
@@ -43,9 +43,10 @@
       "source": "./",
       "strict": false,
       "description": "Teaching, parent feedback, and educational material workflows.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "skills": [
         "./skills/eric-soft-signal",
+        "./skills/eric-teaching-deck",
         "./skills/eric-parent-feedback",
         "./skills/eric-teaching-polish",
         "./skills/k12-english-teaching"
@@ -56,7 +57,7 @@
       "source": "./",
       "strict": false,
       "description": "Presentation, research, book, and visual memory workflows.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "skills": [
         "./skills/eric-ppt-skill",
         "./skills/eric-philosophy-book",
@@ -69,12 +70,13 @@
       "source": "./",
       "strict": false,
       "description": "Website direction, design systems, and delivery verification.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "skills": [
         "./skills/eric-frontend-delivery",
         "./skills/eric-quality-sites",
         "./skills/design-project-visual-directions",
-        "./skills/fusion-visual-system"
+        "./skills/fusion-visual-system",
+        "./skills/eric-web-pipeline"
       ]
     },
     {
@@ -82,7 +84,7 @@
       "source": "./",
       "strict": false,
       "description": "Video production, recording, voice, distribution, and QA.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "skills": [
         "./skills/eric-reach",
         "./skills/browser-video-recording",
@@ -96,7 +98,7 @@
       "source": "./",
       "strict": false,
       "description": "Planning, review, validation, handoff, and iteration workflows.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "skills": [
         "./skills/eric-handoff",
         "./skills/eric-reverse-skill",
@@ -104,7 +106,41 @@
         "./skills/eric-task-contract",
         "./skills/adaptive-quality-loop",
         "./skills/iterate-until-verified",
-        "./skills/building-validators"
+        "./skills/building-validators",
+        "./skills/eric-catalog",
+        "./skills/eric-workflow-router"
+      ]
+    },
+    {
+      "name": "eric-qingyun-pdf-series",
+      "source": "./",
+      "strict": false,
+      "description": "Twenty-three standalone Qingyun advisory document and visual-skin workflows.",
+      "version": "1.0.0",
+      "skills": [
+        "./skills/eric-qingyun-pdf",
+        "./skills/eric-qingyun-service-brief-pdf",
+        "./skills/eric-qingyun-consent-pdf",
+        "./skills/eric-qingyun-profile-pdf",
+        "./skills/eric-qingyun-subject-pdf",
+        "./skills/eric-qingyun-signoff-pdf",
+        "./skills/eric-qingyun-briefing-pdf",
+        "./skills/eric-qingyun-plan-pdf",
+        "./skills/eric-qingyun-checklist-pdf",
+        "./skills/eric-qingyun-binder-pdf",
+        "./skills/eric-qingyun-booklet-pdf",
+        "./skills/eric-qingyun-cold-ink-pdf",
+        "./skills/eric-qingyun-editorial-pdf",
+        "./skills/eric-qingyun-fold-pdf",
+        "./skills/eric-qingyun-frost-pdf",
+        "./skills/eric-qingyun-lattice-pdf",
+        "./skills/eric-qingyun-news-pdf",
+        "./skills/eric-qingyun-night-pdf",
+        "./skills/eric-qingyun-parent-pdf",
+        "./skills/eric-qingyun-seal-pdf",
+        "./skills/eric-qingyun-stub-pdf",
+        "./skills/eric-qingyun-teal-pdf",
+        "./skills/eric-qingyun-thumb-pdf"
       ]
     }
   ]

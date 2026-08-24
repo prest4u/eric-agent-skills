@@ -1,6 +1,6 @@
 ---
 name: eric-pdf
-description: Explicit-only Typst A4 classroom adapter and QA workflow. Use only when the user invokes $eric-pdf to start from the bundled A4 Typst starter, adapt an already-defined classroom document into Typst, or freshly compile and inspect an A4 Typst PDF. Do not use for teaching-content authorship (use eric-soft-signal), long textbook/book systems (use eric-designed-pdf), or generic PDF operations (use pdf).
+description: 【教学 Typst PDF】Explicit-only Typst A4 classroom adapter and QA workflow. Use only when the user invokes $eric-pdf to start from the bundled A4 Typst starter, adapt an already-defined classroom document into Typst, or freshly compile and inspect an A4 Typst PDF. Do not use for teaching-content authorship (use eric-soft-signal), long textbook/book systems (use eric-designed-pdf), or generic PDF operations (use pdf).
 ---
 
 # Eric PDF

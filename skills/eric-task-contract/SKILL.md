@@ -1,6 +1,6 @@
 ---
 name: eric-task-contract
-description: Manually compile Eric's intent into a bounded Codex task brief or, only when the active prompt explicitly authorizes it, a native task/thread dispatch message. Use only through explicit $eric-task-contract invocation for drafting a reusable execution brief, creating a new Codex task, or updating an identified existing task. Do not use for handoffs or resumption snapshots, ordinary prompt writing, status reports, or direct implementation requests.
+description: 【任务合同】Manually compile Eric's intent into a bounded Codex task brief or, only when the active prompt explicitly authorizes it, a native task/thread dispatch message. Use only through explicit $eric-task-contract invocation for drafting a reusable execution brief, creating a new Codex task, or updating an identified existing task. Do not use for handoffs or resumption snapshots, ordinary prompt writing, status reports, or direct implementation requests.
 ---
 
 # Eric Task Contract

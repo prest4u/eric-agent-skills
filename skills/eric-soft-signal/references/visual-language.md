@@ -2,6 +2,12 @@
 
 Use warm paper, restrained contrast, and generous breathing room. Treat color as a learning signal: clay marks an active section or action, violet marks a strategy or evidence cue, pale yellow marks a caution, and muted ink carries supporting information. Keep the body quiet enough for handwriting and print.
 
+## Title type
+
+English-only cover titles (`Clause`, `Song of the Humpback` Latin lockups) use **Libertinus Serif** (`soft-latin-title-font`). Chinese cover titles and every `soft-section` title stay **朱雀仿宋** (`Zhuque Fangsong`). `soft-heading-font` equals `soft-title-font`. Do not set Chinese titles or section titles in Noto Serif SC, PingFang, or Libertinus. Do not switch body English to serif. Keep PingFang SC for body, captions, and running headers. Teaching Deck HTML does not use this paper display pair.
+
+`soft-cover` picks the Latin face when the title is English or when `latin: true`. Default Chinese covers stay Zhuque.
+
 ## Compose the page
 
 - Establish one primary action per section; give it the strongest heading and the clearest entry point.
@@ -11,6 +17,10 @@ Use warm paper, restrained contrast, and generous breathing room. Treat color as
 - Reserve writing space before finalizing text. Use one `soft-reflection` block for a reflection marker, heading, prompt, and ruled response area so these elements remain attached and cannot collide.
 - Keep the cover or opening zone simple: title, learner purpose, and only the metadata needed for use.
 
+## Multiple-choice surface
+
+The only Soft Signal MCQ surface is `soft-question` → the 2×2 A–D `soft-choice` boxes. Do not set 单项选择 as a run-on line of `A. … B. … C. …` or `（A. … B. … C. …）`. Opening confirmation items and 课末 items must match later 中考单选 pages. Three real options still require a fourth distractor or a recast; never fall back to inline 三选.
+
 ## Choose the page mode
 
 Use **compact handout mode** for a short worksheet, recap, or single classroom task. A deliberate page break and generous response space are appropriate when the student must write, mark, or speak from the page.
@@ -19,7 +29,7 @@ Use **editorial self-study mode** for a multi-part lesson, review book, or cours
 
 - Let content flow continuously. A new chapter or subsection may begin midway down a page after the previous practice concludes.
 - Build a stable hierarchy: quiet running header; numbered chapter title; numbered subsection; core rule; example or contrast; caution or strategy; nearby practice.
-- Keep ordinary knowledge pages visibly occupied—roughly 55–80% of the usable page height is a useful diagnostic, not a quota. Reserve very large blank areas for actual writing, reading records, chapter transitions, or intentional reflection.
+- Keep ordinary knowledge pages visibly occupied—roughly 55–80% of the usable page height is a useful diagnostic, not a quota. Measure it with `check_layout.py` content-height ratio instead of by eye. Reserve very large blank areas for actual writing, reading records, chapter transitions, or intentional reflection.
 - Avoid forced page-count padding and avoid one fixed module per page. Rebalance related content before shrinking type or creating a nearly empty overflow page.
 - Use short page headers. Do not repeat the same lesson number, English label, Chinese title, and audience label in both the header and body.
 

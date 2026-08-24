@@ -1,6 +1,6 @@
 ---
 name: eric-soft-signal
-description: Use as Eric's primary Skill for creating, editing, structuring, or delivering English teaching documents in the Soft Signal system, including student handouts, practice, homework, review materials, teacher editions, Markdown/structured content, and A4 Typst/PDF output. Use even when the request says “PDF” if the real product is an Eric English teaching document. Do not use for generic PDF file operations, DOCX/PPTX, posters, frontend work, or long textbook publishing systems.
+description: 【软信号】Use as Eric's primary Skill for creating, editing, structuring, or delivering English teaching documents in the Soft Signal system, including student handouts, practice, homework, review materials, teacher editions, Markdown/structured content, and A4 Typst/PDF output. Use even when the request says “PDF” if the real product is an Eric English teaching document. Do not use for generic PDF file operations, DOCX/PPTX, posters, frontend work, or long textbook publishing systems.
 ---
 
 # Eric Soft Signal
@@ -14,6 +14,22 @@ Own the teaching document from source material to a usable learning surface. Cre
 - Use `eric-designed-pdf` only for long textbook or publishing-system work that exceeds the Soft Signal document contract.
 - Treat `$eric-pdf` as the explicit-only Typst A4 adapter/QA route, not the default document creator.
 
+## HARD: 单项选择 / MCQ surface
+
+Every 单项选择, MCQ, or choose-A–D item — opening checks, 课末 items, homework, and later exam pages — must use `#soft-question(stem:, choices: (...exactly 4...), ...)`. That helper is the only student-facing choice surface. It renders the 2×2 A–D four-box grid (`soft-choice`).
+
+Never write inline `A. … B. … C. …`, `（A. … B. … C. …）`, or a 3-option run-on line. If a source item has only three real options, invent a plausible fourth distractor or recast the task as a non-MCQ. A local `mcq(...)` wrapper is allowed only when it calls `soft-question` with four choices.
+
+Copy `assets/soft-signal-template.typ` verbatim into a new lesson. Do not silently upgrade a historical local copy just because the official template later gained helpers (`soft-task`, and so on). Use only helpers that exist in that lesson's local template. Do not invent a parallel MCQ visual dialect.
+
+Run `python3 scripts/check_layout.py source path/to/source.typ` from this skill before treating a draft as classroom-ready. Inline A.B.C. is a release error.
+
+## HARD: 标题字体
+
+English-only cover titles (`Clause`, `Song of the Humpback` Latin lockups) use **Libertinus Serif** via `soft-latin-title-font` and `soft-cover-display-title` / `soft-cover(..., latin: auto | true)`. Auto-detect: Latin letters and no CJK. Pass `latin: true` when the lockup is English; pass `latin: false` to force 朱雀.
+
+Chinese cover titles and every `soft-section` / heading title stay **朱雀仿宋** (`Zhuque Fangsong`). `soft-heading-font` must equal `soft-title-font`. Do not set Chinese titles or section titles in Noto Serif SC, PingFang, or Libertinus. Do not switch body English to serif. Body text stays PingFang SC. Teaching Deck HTML does not use this paper display pair.
+
 ## BUILD: default
 
 1. Derive the learner, classroom use, authoritative source, output path, and student/teacher boundary from the request and workspace.
@@ -22,10 +38,11 @@ Own the teaching document from source material to a usable learning surface. Cre
    - Treat sounds as `new target`, `previously taught`, or `carrier`. An untaught carrier may appear only inside an ordinarily spelled whole word or sentence that the teacher models first; do not expose its IPA, require independent decoding/transcription, or deduct for it.
    - A visible whole-word IPA decoding or spelling task is allowed only when every scored unit is already taught. Blind listening must hide the spoken word/sentence until the attempt is complete and must not use a periodic answer order that can be guessed without listening.
    - Keep the teacher's actual listening stimulus separate from accepted student production variants. Score listening against what was read; accept a documented, stable pronunciation variant in production instead of treating it as an error.
+   - Every 单项选择 / MCQ uses `#soft-question` with exactly four choices (2×2 A–D four-box). Never inline `A. B. C.` Opening and 课末 items use the same surface as later exam pages.
 3. For A4 output, copy `assets/soft-signal-template.typ` verbatim and the complete `assets/fonts/` directory into the delivery folder; keep imports relative. Build subject-specific components on top of that copied template. Do not substitute a custom base theme that merely imitates the palette. Preserve the public `soft-section(num:, title:)` signature and its sticky title behavior: a section title must travel with the first following content block instead of remaining alone at a page foot.
 4. Read [visual language](references/visual-language.md) before composing pages and [English teaching grammar](references/english-teaching-grammar.md) when organizing explanations or practice. Select compact handout mode or editorial self-study mode before setting page flow.
 5. When Eric supplies a reference PDF or a verified Soft Signal artifact exists in the workspace, inspect representative rendered pages and reuse its page grammar or compatible local components. Do not infer the style from colors alone.
-6. Produce the visible source/PDF first. For a draft, run only the cheapest check that can disprove the requested result, such as a fresh compile plus inspection of the changed page.
+6. Produce the visible source/PDF first. For a draft, run only the cheapest check that can disprove the requested result, such as a fresh compile plus inspection of the changed page. For any file that contains 单项选择 / MCQ, also run `scripts/check_layout.py source` so inline `A. B. C.` cannot pass as a draft.
 7. Deliver the artifact path, source identity, check evidence, and any genuine gap. The same agent may make ordinary fixes and recheck them.
 
 Do not require a writer/reviewer handoff, persistent QA packet, dimension score, or formal verdict for a draft or normal classroom iteration.
@@ -51,7 +68,7 @@ Embed a scene image only when students must observe it to complete a meaningful 
 
 1. Freeze the exact Typst/PDF identity and confirm output/overwrite authority.
 2. Read [render and evidence](references/render-and-evidence.md), compile fresh from the delivery root, confirm A4 size and the intended page count.
-3. Run `scripts/render_pdf.py` with `PYTHONDONTWRITEBYTECODE=1`, inspect the contact sheet and every page, and check clipping, blank pages, missing glyphs, detached writing areas, student-facing answer leaks, decorative empty space, repeated page skeletons that flatten the teaching hierarchy, and any section title left at a page foot while its first content begins on the next page. For a beginner pronunciation release, also validate the cumulative taught-sound ledger against every student-visible IPA/scoring surface and assessment target. A ledger declaration alone is insufficient: retain evidence of student-visible teach → teacher model → word practice before independent use.
+3. Run `scripts/render_pdf.py` with `PYTHONDONTWRITEBYTECODE=1`, inspect the contact sheet and every page, and check clipping, blank pages, missing glyphs, detached writing areas, student-facing answer leaks, decorative empty space, repeated page skeletons that flatten the teaching hierarchy, and any section title left at a page foot while its first content begins on the next page. Then run `scripts/check_layout.py source` on student-facing Typst and resolve every `inline-mcq` alarm before sign-off. For a beginner pronunciation release, also validate the cumulative taught-sound ledger against every student-visible IPA/scoring surface and assessment target. A ledger declaration alone is insufficient: retain evidence of student-visible teach → teacher model → word practice before independent use.
 4. Stop mutation and obtain at most one independent review when the artifact is a formal outward/student delivery or Eric explicitly requests sign-off.
 5. Keep review separate from publish, send, upload, or overwrite authority.
 

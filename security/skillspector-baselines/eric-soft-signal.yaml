@@ -1,51 +1,91 @@
-# SkillSpector baseline — findings listed here are suppressed on future scans.
-# Edit 'reason' fields and add glob 'rules' as needed. See docs/SUPPRESSION.md.
+# SkillSpector baseline — exact, reviewed findings only.
+# No glob rules are used; changed code must be reviewed and re-baselined.
 version: 2
 scanner_version: 2.9.4
 rules: []
 fingerprints:
+- hash: sha256:40d83681c9a1f5361aa1f5e090b68b5b54c322ce85fac03306aca34ebf2f4877
+  rule_id: AST4
+  file: scripts/check_layout.py
+  reason: Fixed pdftoppm argv with shell disabled; the PDF path is passed as one
+    file argument and generated output stays in a temporary directory.
+- hash: sha256:ceb6e73bac48535c5488e00ac123b6a800493f23194e9849ed83cad3782ede45
+  rule_id: AST4
+  file: scripts/check_layout.py
+  reason: Fixed pdftotext argv with shell disabled; the PDF path is passed as one
+    file argument and output is captured in memory.
+- hash: sha256:c9fcc0eeb5f17572cf5d7a1db9f1df8b89afbd0802268991ebf51124739d532f
+  rule_id: AST4
+  file: scripts/check_layout.py
+  reason: Fixed pdftohtml argv with shell disabled; input and temporary output
+    paths are individual arguments, never command text.
 - hash: sha256:3a4f053201bbc3ba1749dcbc77df1e21257696995f6e556c97925afbaf2a95d3
   rule_id: AST4
   file: scripts/render_pdf.py
-  reason: Reviewed test-only Typst and pdftotext subprocess calls; arguments are explicit
-    and artifacts stay in a temporary directory.
-- hash: sha256:cffbd7021627c6a7a2feff56d3ea63227efecc7e3bef5eb362ced19cad031608
+  reason: Fixed pdftoppm argv with shell disabled; generated page images stay in
+    the caller-selected output directory.
+- hash: sha256:5658599b9bb0e0f94347aabf29d7c35beacfc7ac46890c3f99dcf2fed46ab5ff
   rule_id: AST4
   file: tests/test_output_first_contract.py
-  reason: Reviewed test-only Typst and pdftotext subprocess calls; arguments are explicit
-    and artifacts stay in a temporary directory.
-- hash: sha256:f81baa9da31daced671000edfa3ce83e9e5d1ab3fdcb77179ca93fb4fbaa0f97
+  reason: Test-only Typst invocation uses a resolved executable, an explicit argv
+    list, no shell, and files contained by TemporaryDirectory.
+- hash: sha256:ec092dc083b0a90f33ddeb4f7e9d75fbdd917948a433e562850c60abd9247e15
   rule_id: AST4
   file: tests/test_output_first_contract.py
-  reason: Reviewed test-only Typst and pdftotext subprocess calls; arguments are explicit
-    and artifacts stay in a temporary directory.
-- hash: sha256:5e428dcc6b15ffe463a1e629c6b9013ea4e9a0039586c4d550855c13a3f43401
+  reason: Test-only pdftotext invocation uses a resolved executable, an explicit
+    argv list, no shell, and a TemporaryDirectory PDF.
+- hash: sha256:735bc4689f4625e04364ac8ebf23616c9301597cfabd81f65e08109272803e1e
   rule_id: AST4
   file: tests/test_output_first_contract.py
-  reason: Reviewed test-only Typst and pdftotext subprocess calls; arguments are explicit
-    and artifacts stay in a temporary directory.
-- hash: sha256:cac72033bff3fbb59b24e8b4d64ea4c0d087109553f4a854b38f244a2feef08b
+  reason: Test-only pdftotext invocation uses a resolved executable, an explicit
+    argv list, no shell, and a TemporaryDirectory PDF.
+- hash: sha256:675d48879a7d37746c2c2cc8a7bf69d4f8dd6abf79ea0029f6f7e20b1644f56e
+  rule_id: AST4
+  file: tests/test_output_first_contract.py
+  reason: Test-only Typst invocation uses a resolved executable, an explicit argv
+    list, no shell, and files contained by TemporaryDirectory.
+- hash: sha256:d3a02920ee8e779dc624db3226cea4322632d7a268e6db1d82322533bcf354e8
+  rule_id: AST4
+  file: tests/test_output_first_contract.py
+  reason: Test-only pdftotext invocation uses a fixed executable name, an explicit
+    argv list, no shell, and a TemporaryDirectory PDF.
+- hash: sha256:7a486c9d31db4c70b1f31f950d8681d4f37cf2693f4a73b1e9226d9b5056da84
+  rule_id: AST4
+  file: tests/test_output_first_contract.py
+  reason: Test-only Typst invocation uses a resolved executable, an explicit argv
+    list, no shell, and files contained by TemporaryDirectory.
+- hash: sha256:a8afe9a151ab404b5c7127564f4d091dfa8c0c63421790250a90540dcb113e04
+  rule_id: AST4
+  file: tests/test_output_first_contract.py
+  reason: Test-only Typst invocation uses a resolved executable, an explicit argv
+    list, no shell, and files contained by TemporaryDirectory.
+- hash: sha256:716a90a19601e6ea4151b1d19473c3269bb721a2084957e3789b817b1313db53
   rule_id: LP3
   file: SKILL.md
-  reason: Reviewed test-only Typst and pdftotext subprocess calls; arguments are explicit
-    and artifacts stay in a temporary directory.
+  reason: The repository frontmatter contract intentionally allows only name and
+    description; tool permissions are enforced by the host and task policy.
 - hash: sha256:d335a7136f049589314686613d3d2f0be1913263051606ce2e068987b7c58273
   rule_id: EA3
   file: assets/fonts/OFL-1.1.txt
-  reason: Reviewed test-only Typst and pdftotext subprocess calls; arguments are explicit
-    and artifacts stay in a temporary directory.
-- hash: sha256:76da0b8fd38cb1916abb104d1fff7ee1c2c7390df3340174dfefc7c3ce7d819f
+  reason: Inert SIL Open Font License text bundled to document the redistribution
+    terms of the included font assets.
+- hash: sha256:888ce52b2957917eda1a22253d30ec2321a3f9b3a563abe1f6c87efa00a8925c
   rule_id: OH1
   file: tests/test_output_first_contract.py
-  reason: Reviewed test-only Typst and pdftotext subprocess calls; arguments are explicit
-    and artifacts stay in a temporary directory.
-- hash: sha256:2338e0d403e5b58c577ec87320cbd61564770aac792b6f3a7d3a79967397bb00
+  reason: Test-only pdftotext execution uses fixed arguments and reads only a PDF
+    generated inside TemporaryDirectory.
+- hash: sha256:73d08546c019106a7b379eacbfc945eb76db66a9d27b9feba0d91a5057af9bda
   rule_id: OH1
   file: tests/test_output_first_contract.py
-  reason: Reviewed test-only Typst and pdftotext subprocess calls; arguments are explicit
-    and artifacts stay in a temporary directory.
-- hash: sha256:598fdb4ad67821cb8b94e67791de1c7387b0763f2af5f1fe6bfe20360acb3fae
+  reason: Test-only pdftotext execution uses fixed arguments and reads only a PDF
+    generated inside TemporaryDirectory.
+- hash: sha256:5b0ad20fb691786920ac1343171dcd25dc7059fdfcf5ccde58263a5a557dad05
   rule_id: OH1
   file: tests/test_output_first_contract.py
-  reason: Reviewed test-only Typst and pdftotext subprocess calls; arguments are explicit
-    and artifacts stay in a temporary directory.
+  reason: Test-only pdftotext execution uses fixed arguments and reads only a PDF
+    generated inside TemporaryDirectory.
+- hash: sha256:2297a836c9498c7c7de0eebe725642f58f5c2a11f34848cba6f09ba3da26a96b
+  rule_id: OH1
+  file: tests/test_output_first_contract.py
+  reason: Test-only pdftotext execution uses fixed arguments and reads only a PDF
+    generated inside TemporaryDirectory.

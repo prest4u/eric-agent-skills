@@ -1,0 +1,4 @@
+interface:
+  display_name: "青云 · 选科指导"
+  short_description: "本季主交付：选科报告，不是缩小版志愿方案"
+  default_prompt: "Use $eric-qingyun-pdf then $eric-qingyun-subject-pdf for the first synthetic 选科报告."

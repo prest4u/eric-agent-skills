@@ -1,6 +1,6 @@
 ---
 name: eric-slate-white-pdf
-description: Create, restructure, render, and visually QA restrained reader-facing PDFs in the official Eric Slate White PDF｜雾蓝白 editorial theme. Use for polished essays, thought pieces, briefs, explanatory documents, personal writing, and premium Chinese or bilingual PDFs that need cool white paper, slate-blue editorial structure, role-based typography, generous whitespace, and audience-first organization. Do not use for PDF forms, OCR, merging/splitting, posters, dashboards, or worksheet-heavy teaching packs.
+description: 【雾蓝白】Create, restructure, render, and visually QA restrained reader-facing PDFs in the official Eric Slate White PDF｜雾蓝白 editorial theme. Use for polished essays, thought pieces, briefs, explanatory documents, personal writing, and premium Chinese or bilingual PDFs that need cool white paper, slate-blue editorial structure, role-based typography, generous whitespace, and audience-first organization. Do not use for PDF forms, OCR, merging/splitting, posters, dashboards, or worksheet-heavy teaching packs.
 ---
 
 # Eric Slate White PDF｜雾蓝白

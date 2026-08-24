@@ -1,0 +1,4 @@
+interface:
+  display_name: "青云 · 填报清单"
+  short_description: "出分后对着官方系统勾的执行清单"
+  default_prompt: "Use $eric-qingyun-pdf then $eric-qingyun-checklist-pdf."

@@ -1,6 +1,6 @@
 ---
 name: eric-handoff
-description: Create or consume a lightweight, evidence-backed Eric Handoff when Eric explicitly asks to transfer work to another Codex task, pause for later resumption, generate a project state snapshot, or continue from an existing Eric Handoff. Do not use for ordinary status reports, routine completion summaries, same-task context compaction, or merely because a task is long.
+description: 【任务交接】Create or consume a lightweight, evidence-backed Eric Handoff when Eric explicitly asks to transfer work to another Codex task, pause for later resumption, generate a project state snapshot, or continue from an existing Eric Handoff. Do not use for ordinary status reports, routine completion summaries, same-task context compaction, or merely because a task is long.
 ---
 
 # Eric Handoff

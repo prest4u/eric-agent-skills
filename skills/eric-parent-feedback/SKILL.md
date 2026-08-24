@@ -1,6 +1,6 @@
 ---
 name: eric-parent-feedback
-description: 'Use when writing, revising, auditing, or saving Eric''s parent-facing post-class feedback for one-to-one or class/group courses as copy-ready TXT. Trigger for 课后反馈, 家长反馈, 学生反馈, 班课反馈, 一对一反馈, 试听课反馈, 课后总结发家长, 去 AI 味反馈, and converting lesson notes into a polished Chinese parent message. Determine the format from the course type, never the number attending: a class course with only one student still uses class metadata and structure. Must enforce exactly three visible plain-text sections: ①课上内容, ②课上反馈, ③课后作业, with no Markdown headings, no fourth section, no next-lesson preview, and no internal teaching labels.'
+description: '【家长反馈】Use when writing, revising, auditing, or saving Eric''s parent-facing post-class feedback for one-to-one or class/group courses as copy-ready TXT. Trigger for 课后反馈, 家长反馈, 学生反馈, 班课反馈, 一对一反馈, 试听课反馈, 课后总结发家长, 去 AI 味反馈, and converting lesson notes into a polished Chinese parent message. Determine the format from the course type, never the number attending: a class course with only one student still uses class metadata and structure. Must enforce exactly three visible plain-text sections: ①课上内容, ②课上反馈, ③课后作业, with no Markdown headings, no fourth section, no next-lesson preview, and no internal teaching labels.'
 ---
 
 # Eric Parent Feedback

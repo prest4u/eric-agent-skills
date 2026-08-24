@@ -10,6 +10,7 @@ Use this rubric only for formal RELEASE sign-off. The reviewer remains read-only
 - Do blind listening tasks conceal their stimuli, resist answer-pattern guessing, and distinguish the actual stimulus from accepted oral-production variants?
 - Is the artifact safe for its stated audience, with no answers, teacher notes, internal instructions, or local locations exposed to students?
 - Does the current source freshly produce an A4 PDF with bundled fonts and resolvable imports?
+- Does every 单项选择 / MCQ use `soft-question` four-box (exactly four choices), with no inline `A. … B. … C. …` run?
 - Does every rendered page remain readable, nonblank, unclipped, connected to its writing surface, and free of a section title stranded at the page foot?
 - Does the evidence identify commands, hashes, coverage, and reviewer provenance?
 

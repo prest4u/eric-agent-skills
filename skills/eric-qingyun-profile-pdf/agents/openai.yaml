@@ -1,0 +1,4 @@
+interface:
+  display_name: "青云 · 档案确认"
+  short_description: "本季默认选科版约束确认单"
+  default_prompt: "Use $eric-qingyun-pdf then $eric-qingyun-profile-pdf."

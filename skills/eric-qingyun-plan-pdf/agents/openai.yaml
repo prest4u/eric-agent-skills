@@ -1,0 +1,4 @@
+interface:
+  display_name: "青云 · 方案报告"
+  short_description: "出分后志愿方案母本，本季不是默认第一份"
+  default_prompt: "Use $eric-qingyun-pdf then $eric-qingyun-plan-pdf after volunteer D3 is locked."

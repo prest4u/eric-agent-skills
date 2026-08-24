@@ -1,0 +1,4 @@
+interface:
+  display_name: "青云 · 服务说明"
+  short_description: "售前 2–4 页，本季默认选科边界"
+  default_prompt: "Use $eric-qingyun-pdf then $eric-qingyun-service-brief-pdf."

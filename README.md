@@ -2,7 +2,7 @@
 
 [简体中文](README.zh-CN.md)
 
-Eric Agent Skills is the canonical, cross-harness home for 37 independently installable workflows covering educational and business documents, PDF design, presentations, websites, video, and delivery quality.
+Eric Agent Skills is the canonical, cross-harness home for 64 independently installable workflows covering educational and business documents, PDF design, presentations, websites, video, advisory materials, and delivery quality.
 
 The five PDF skills remain separate packages. Collections only make bulk installation easier; they do not merge behavior or introduce mandatory dependencies.
 
@@ -33,9 +33,9 @@ If an older global Skill has the same name, some harnesses prefer the global cop
 
 ## Collections
 
-Seven metadata-only collections are defined in [`catalog/collections.yaml`](catalog/collections.yaml): PDF, professional PDF series, education, documents, web, video, and workflow.
+Eight metadata-only collections are defined in [`catalog/collections.yaml`](catalog/collections.yaml): PDF, professional PDF series, Qingyun PDF series, education, documents, web, video, and workflow.
 
-The `pdf` collection installs five directories and `professional-pdf-series` installs eight more; neither creates a PDF super-Skill or cross-dependency. Claude exposes all seven collections as marketplace plugins. For other harnesses, run the fixed install command once per Skill listed in the collection.
+The `pdf` collection installs five directories, `professional-pdf-series` installs eight, and `qingyun-pdf-series` installs twenty-three standalone document and visual-skin workflows. Collections do not merge behavior or create runtime dependencies. Claude exposes all eight collections as marketplace plugins. For other harnesses, run the fixed install command once per Skill listed in the collection.
 
 ## One source across local agents
 
@@ -46,6 +46,8 @@ python3 scripts/sync_user_install.py --apply
 ```
 
 The command backs up conflicting copies, links the shared `~/.agents/skills/` entries to this checkout, removes higher-priority duplicates, and wires product-specific discovery where needed. Run with `--check` for a non-mutating drift audit or `--update --apply` to fast-forward from GitHub before reconciling the local agent surfaces.
+
+Catalog versions identify the latest **validated** release of each Skill. A newer filesystem timestamp does not win by itself: local paths, private fixtures, unlicensed assets, and regressions are rejected before a version is promoted.
 
 ## Maintenance
 
@@ -60,6 +62,7 @@ Vendored upstream references are pinned by commit and tree hash. Weekly automati
 
 Release, upstream, mirror, and private-fixture procedures are documented in [`docs/maintenance.md`](docs/maintenance.md).
 The v1.0 candidate gate matrix is tracked in [`docs/release/hub-v1.0.0-acceptance.md`](docs/release/hub-v1.0.0-acceptance.md).
+The cross-agent latest-valid-version decisions for this release are recorded in [`docs/release/v1.2.0-version-audit.md`](docs/release/v1.2.0-version-audit.md).
 
 ## Privacy and licensing
 

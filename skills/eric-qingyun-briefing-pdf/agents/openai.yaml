@@ -1,0 +1,4 @@
+interface:
+  display_name: "青云 · 讲解提纲"
+  short_description: "两页讲解提纲，从已签发主交付抽取"
+  default_prompt: "Use $eric-qingyun-pdf then $eric-qingyun-briefing-pdf."

@@ -1,6 +1,6 @@
 ---
 name: eric-philosophy-book
-description: 'Use when designing, rebuilding, reviewing, or QA-ing Eric''s philosophy book publication workflow, including cover, A5/PDF interior typography, illustration placement, illustration briefs, historical/philosophical visual language, book-feel proofs, and final publication readiness for 《东西方哲学史故事集》 or related philosophy-book artifacts.'
+description: '【哲学书】Use when designing, rebuilding, reviewing, or QA-ing Eric''s philosophy book publication workflow, including cover, A5/PDF interior typography, illustration placement, illustration briefs, historical/philosophical visual language, book-feel proofs, and final publication readiness for 《东西方哲学史故事集》 or related philosophy-book artifacts.'
 ---
 
 # Eric Philosophy Book

@@ -23,6 +23,7 @@ collections:
     description: Teaching, learner materials, and parent communication.
     skills:
       - eric-soft-signal
+      - eric-teaching-deck
       - eric-parent-feedback
       - eric-teaching-polish
       - k12-english-teaching
@@ -40,6 +41,7 @@ collections:
       - eric-quality-sites
       - design-project-visual-directions
       - fusion-visual-system
+      - eric-web-pipeline
   video:
     description: Video creation, recording, voice, reach, and QA.
     skills:
@@ -58,3 +60,31 @@ collections:
       - adaptive-quality-loop
       - iterate-until-verified
       - building-validators
+      - eric-catalog
+      - eric-workflow-router
+  qingyun-pdf-series:
+    description: Twenty-three independently installable Qingyun advisory document and visual-skin workflows.
+    skills:
+      - eric-qingyun-pdf
+      - eric-qingyun-service-brief-pdf
+      - eric-qingyun-consent-pdf
+      - eric-qingyun-profile-pdf
+      - eric-qingyun-subject-pdf
+      - eric-qingyun-signoff-pdf
+      - eric-qingyun-briefing-pdf
+      - eric-qingyun-plan-pdf
+      - eric-qingyun-checklist-pdf
+      - eric-qingyun-binder-pdf
+      - eric-qingyun-booklet-pdf
+      - eric-qingyun-cold-ink-pdf
+      - eric-qingyun-editorial-pdf
+      - eric-qingyun-fold-pdf
+      - eric-qingyun-frost-pdf
+      - eric-qingyun-lattice-pdf
+      - eric-qingyun-news-pdf
+      - eric-qingyun-night-pdf
+      - eric-qingyun-parent-pdf
+      - eric-qingyun-seal-pdf
+      - eric-qingyun-stub-pdf
+      - eric-qingyun-teal-pdf
+      - eric-qingyun-thumb-pdf

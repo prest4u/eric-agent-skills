@@ -2,7 +2,7 @@
 
 [English](README.md)
 
-这是 Eric 的 37 个跨脚手架 Agent Skill 权威仓库，覆盖学生与企业文档、PDF、PPT、网站、视频和交付质量工作流。
+这是 Eric 的 64 个跨工具 Agent Skill 权威仓库，覆盖学生与企业文档、PDF、PPT、网站、视频、咨询材料和交付质量工作流。
 
 五个 PDF Skill 始终保持独立目录、独立安装和独立版本：
 
@@ -15,6 +15,8 @@
 `pdf` 集合只是批量安装清单，不会生成统一 PDF 超级 Skill，也不会让五者互相依赖。
 
 新增的 `professional-pdf-series` 集合包含八个彼此独立的职业 PDF Skill，分别覆盖战略咨询、交易尽调、政策影响、技术图谱、学习指南、高管读本、研究专著与知识档案。
+
+`qingyun-pdf-series` 集合包含 23 个可独立安装的青云未来文种与视觉底盘；每个目录都自带使用所需的视觉、伦理、构建或质检基线，不依赖另一项 Skill 才能运行。
 
 ## 安装单个 Skill
 
@@ -47,6 +49,8 @@ python3 scripts/sync_user_install.py --apply
 
 同步器会先备份冲突副本，再让 Codex、Kimi Code、Kimi Desktop、Cursor、Claude Code 与 Hermes Agent 指向同一份 GitHub checkout。使用 `--check` 只检查漂移；使用 `--update --apply` 先从 GitHub 快进更新，再修复本机发现路径。
 
+目录中的版本号代表“通过隐私、许可、可移植性和测试门禁的最新有效版本”。文件修改时间更晚但含本机路径、私有夹具、未授权素材或功能倒退的副本，不会覆盖权威版本。
+
 ## 上游与镜像
 
 本仓库是唯一可编辑权威源。精选上游锁定 Commit、目录哈希和许可证证据，只更新 `references/upstream/` 机器管理区；每周自动化仅提出 PR，不自动合并。
@@ -58,5 +62,7 @@ python3 scripts/sync_user_install.py --apply
 公开仓库只含匿名或合成夹具，以及有明确再分发许可的素材。真实学生、客户或企业回归材料只进入独立私有夹具仓库，并且必须先有精确文件清单和明确批准。
 
 第三方与字体许可见 [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)，维护与发布流程见 [`docs/maintenance.md`](docs/maintenance.md)。
+
+本次跨工具“最新有效版本”取舍记录见 [`docs/release/v1.2.0-version-audit.md`](docs/release/v1.2.0-version-audit.md)。
 
 首版候选的验收矩阵与尚未解除的发布门禁见 [`docs/release/hub-v1.0.0-acceptance.md`](docs/release/hub-v1.0.0-acceptance.md)。

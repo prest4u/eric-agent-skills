@@ -1,0 +1,4 @@
+interface:
+  display_name: "青云文书系统｜雾蓝白"
+  short_description: "青云选科与志愿咨询 PDF 的视觉合同、伦理与 Typst 主题"
+  default_prompt: "Use $eric-qingyun-pdf then $eric-qingyun-subject-pdf for the first synthetic 选科报告."

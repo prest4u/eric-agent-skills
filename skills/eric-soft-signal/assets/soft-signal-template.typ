@@ -19,7 +19,45 @@
 #let soft-hair = 0.36pt + soft-line
 #let soft-body-font = ("PingFang SC", "Hiragino Sans GB")
 #let soft-title-font = ("Zhuque Fangsong (technical preview)", "Noto Serif SC", "Songti SC", "STSong", "PingFang SC")
-#let soft-heading-font = ("Noto Serif SC", "Zhuque Fangsong (technical preview)", "Songti SC", "PingFang SC")
+#let soft-heading-font = soft-title-font
+#let soft-latin-title-font = ("Libertinus Serif", "New Computer Modern")
+
+#let soft-plain-title-text(title) = {
+  if type(title) == str {
+    title
+  } else if type(title) == content {
+    repr(title)
+  } else {
+    str(title)
+  }
+}
+
+#let soft-title-is-latin(title) = {
+  let s = soft-plain-title-text(title)
+  let has-cjk = s.contains(regex("[\u{4e00}-\u{9fff}]"))
+  let has-latin = s.contains(regex("[A-Za-z]"))
+  has-latin and not has-cjk
+}
+
+#let soft-cover-title-face(title, latin: auto) = {
+  let use-latin = if latin == true {
+    true
+  } else if latin == false {
+    false
+  } else {
+    soft-title-is-latin(title)
+  }
+  if use-latin { soft-latin-title-font } else { soft-title-font }
+}
+
+#let soft-cover-display-title(title, latin: auto, size: 28pt, weight: 520) = {
+  text(
+    font: soft-cover-title-face(title, latin: latin),
+    size: size,
+    weight: weight,
+    fill: soft-ink,
+  )[#title]
+}
 
 #let soft-checkbox = rect(width: 8pt, height: 8pt, stroke: 0.45pt + soft-muted, inset: 0pt)
 #let soft-blank(width: 3.6em) = box(line(length: width, stroke: 0.45pt + soft-muted))
@@ -55,6 +93,10 @@
 )
 
 #let soft-setup(body, title: none, meta: none, body-size: 10.7pt, leading: 0.88em) = {
+  assert(
+    body-size >= 10pt,
+    message: "soft-setup body-size is below the 10pt print floor; shorten copy or rebalance task groups instead of shrinking type",
+  )
   set page(
     paper: "a4",
     fill: soft-paper,
@@ -86,19 +128,29 @@
   body
 }
 
-#let soft-cover-title(prefix, rest) = grid(
-  columns: (auto, 1fr),
-  gutter: 4pt,
-  align: horizon,
-  [#text(font: soft-title-font, size: 25.2pt, weight: 520, fill: soft-ink)[#prefix]],
-  [#text(font: soft-title-font, size: 28pt, weight: 520, fill: soft-ink)[#rest]],
-)
+#let soft-cover-title(prefix, rest, latin: auto) = {
+  let use-latin = if latin == true {
+    true
+  } else if latin == false {
+    false
+  } else {
+    soft-title-is-latin(prefix) and soft-title-is-latin(rest)
+  }
+  let face = if use-latin { soft-latin-title-font } else { soft-title-font }
+  grid(
+    columns: (auto, 1fr),
+    gutter: 4pt,
+    align: horizon,
+    [#text(font: face, size: 25.2pt, weight: 520, fill: soft-ink)[#prefix]],
+    [#text(font: face, size: 28pt, weight: 520, fill: soft-ink)[#rest]],
+  )
+}
 
 #let soft-cover-brand(footer) = place(bottom + right)[
   #text(size: 7.8pt, fill: soft-muted)[#footer]
 ]
 
-#let soft-cover(title: none, subtitle: none, meta: none, code: none, footer: none, title-prefix: none, title-rest: none) = [
+#let soft-cover(title: none, subtitle: none, meta: none, code: none, footer: none, title-prefix: none, title-rest: none, latin: auto) = [
   #set page(
     paper: "a4",
     fill: soft-paper,
@@ -122,9 +174,9 @@
     v(12pt)
   }
   #if title-prefix != none and title-rest != none {
-    soft-cover-title(title-prefix, title-rest)
+    soft-cover-title(title-prefix, title-rest, latin: latin)
   } else {
-    text(font: soft-title-font, size: 28pt, weight: 520, fill: soft-ink)[#title]
+    soft-cover-display-title(title, latin: latin, size: 28pt, weight: 520)
   }
   #v(7pt)
   #text(size: 13pt, weight: 540, fill: soft-clay)[#subtitle]
@@ -272,6 +324,10 @@
 ]
 
 #let soft-table(columns, text-size: 9pt, leading: 0.86em, row-y: 6.4pt, row-x: 7pt, ..cells) = {
+  assert(
+    text-size >= 8.5pt,
+    message: "soft-table text-size is below the 8.5pt print floor; split or rebalance the table instead of shrinking type",
+  )
   set text(size: text-size)
   set par(leading: leading)
   table(
@@ -369,13 +425,22 @@
   #soft-reason-line(label: reason-label, after: after)
 ]
 
-#let soft-writing-area(label: none, lines: 5, label-gap: 5.5pt, gap: 14pt, line-drop: none) = [
+#let soft-writing-area(label: none, lines: 5, preset: none, label-gap: 5.5pt, gap: 14pt, line-drop: none) = [
+  // Named writing-length presets keep task types consistent across documents.
+  #let preset-lines = ("short": 1, "rewrite": 2, "translate": 2, "composition": 8)
+  #let effective-lines = if preset != none {
+    assert(
+      preset in preset-lines,
+      message: "unknown soft-writing-area preset; use one of: short, rewrite, translate, composition",
+    )
+    preset-lines.at(preset)
+  } else { lines }
   #let effective-line-drop = if line-drop == none { gap - 1.6pt } else { line-drop }
   #if label != none {
     text(size: 8.8pt, fill: soft-muted)[#label]
     v(label-gap)
   }
-  #for i in range(lines) {
+  #for i in range(effective-lines) {
     box(width: 100%, height: gap)[
       #v(effective-line-drop)
       #line(length: 100%, stroke: 0.42pt + soft-line)
@@ -383,8 +448,10 @@
   }
 ]
 
-// Public question contract: pass exactly four choices and keep every mark,
-// A-D label, and option inside one unbreakable cell.
+// Public MCQ contract: this is the only student-facing choice surface.
+// Pass exactly four choices. Renders a 2x2 A-D four-box grid (soft-choice).
+// Never write inline dotted A/B/C runs or a 3-option line; invent a fourth
+// distractor or recast the task. Local wrappers (e.g. mcq) must call this helper.
 #let soft-choice(label: none, body: none, correct: false) = box(
   width: 100%,
   inset: (x: 7pt, y: 5.2pt),
@@ -447,4 +514,42 @@
   #text(size: 9.25pt, fill: soft-ink)[#prompt]
   #v(5pt)
   #soft-writing-area(lines: lines, gap: 14pt)
+]
+
+// Keep a written-response prompt and its writing lines in one unbreakable
+// block so the answer surface can never separate from the task. Use this for
+// rewrite, translate, and correction items instead of joining a bare prompt
+// and bare writing lines with manual spacing.
+#let soft-task(prompt, lines: 2, preset: none, after: 12pt, prompt-after: 6pt) = block(
+  width: 100%,
+  breakable: false,
+  above: 10pt,
+)[
+  #soft-prompt-line(prompt, after: prompt-after)
+  #soft-writing-area(lines: lines, preset: preset)
+  #v(after)
+]
+
+// A reading or cloze passage that stays attached to the first task that
+// follows it. Breakable so long passages may flow across pages; sticky keeps
+// the passage from sitting alone at a page foot while its questions begin on
+// the next page. When a short passage and its whole task group fit one page,
+// prefer soft-exercise-group.
+#let soft-passage(body, label: none, title: none, meta: none, above: 6pt, below: 8pt) = block(
+  width: 100%,
+  sticky: true,
+  above: above,
+  below: below,
+)[
+  #if label != none and title != none {
+    soft-passage-title(label, title, meta: meta)
+  }
+  #body
+]
+
+// Keep a short passage and its entire task group on one page. Use for cloze
+// or short-reading sets that comfortably fit within one page; use
+// soft-passage instead when the passage alone may approach a full page.
+#let soft-exercise-group(body) = block(width: 100%, breakable: false, above: 8pt)[
+  #body
 ]

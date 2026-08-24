@@ -1,6 +1,6 @@
 ---
 name: eric-research
-description: Use only when Eric explicitly invokes $eric-research to investigate, verify, compare, or synthesize claims across finance, education/academic, marketing, news/social/entertainment, or mixed evidence domains. Supports new public-source research and supplied-source-only review with evidence depth scaled to risk; does not trigger from ordinary research-like requests.
+description: 【研究路由】Use only when Eric explicitly invokes $eric-research to investigate, verify, compare, or synthesize claims across finance, education/academic, marketing, news/social/entertainment, or mixed evidence domains. Supports new public-source research and supplied-source-only review with evidence depth scaled to risk; does not trigger from ordinary research-like requests.
 ---
 
 # Eric Research

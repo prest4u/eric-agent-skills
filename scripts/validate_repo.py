@@ -16,6 +16,7 @@ import yaml
 
 
 NAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+SEMVER_RE = re.compile(r"^\d+\.\d+\.\d+$")
 MARKDOWN_LINK_RE = re.compile(r"(?<!!)\[[^\]]*\]\(([^)]+)\)")
 SECRET_RE = re.compile(
     r"(?i)(?:api[_-]?key|access[_-]?token|auth[_-]?token|password|client[_-]?secret)"
@@ -204,12 +205,18 @@ def validate(repo: Path, only_skill: str | None = None) -> list[Issue]:
     if not isinstance(records, list):
         return [Issue("CATALOG_SHAPE", "catalog/skills.yaml", "skills must be a list")]
     names = [record.get("name") for record in records if isinstance(record, dict)]
-    if len(names) != 37 or len(set(names)) != 37:
-        issues.append(Issue("CORE_COUNT", "catalog/skills.yaml", f"expected 37 unique skills, found {len(set(names))}"))
+    if len(names) != 64 or len(set(names)) != 64:
+        issues.append(Issue("CORE_COUNT", "catalog/skills.yaml", f"expected 64 unique skills, found {len(set(names))}"))
 
     actual_names = sorted(path.name for path in (repo / "skills").iterdir() if path.is_dir())
     if sorted(names) != actual_names:
         issues.append(Issue("CATALOG_DIRECTORY_DRIFT", "skills", "catalog names and skill directories differ"))
+    for record in records:
+        if not isinstance(record, dict):
+            continue
+        version = record.get("version")
+        if not isinstance(version, str) or not SEMVER_RE.fullmatch(version):
+            issues.append(Issue("CATALOG_VERSION", "catalog/skills.yaml", f"{record.get('name')}: {version}"))
 
     collection_names: list[str] = []
     for value in collections.get("collections", {}).values():
@@ -254,6 +261,8 @@ def validate(repo: Path, only_skill: str | None = None) -> list[Issue]:
         description = metadata.get("description")
         if not isinstance(description, str) or not description.strip() or len(description) > 1024:
             issues.append(Issue("DESCRIPTION", str(skill_md.relative_to(repo)), "description must contain 1-1024 characters"))
+        elif name.startswith("eric-") and not re.match(r"^[【\u4e00-\u9fff]", description.lstrip()):
+            issues.append(Issue("ERIC_CHINESE_ENTRY", str(skill_md.relative_to(repo)), "Eric Skill descriptions must begin with a Chinese label or Chinese text"))
         if len(skill_md.read_text(encoding="utf-8").splitlines()) > 500:
             issues.append(Issue("SKILL_LENGTH", str(skill_md.relative_to(repo)), "SKILL.md exceeds 500 lines"))
         if (skill_dir / "README.md").exists():
@@ -325,15 +334,34 @@ def validate(repo: Path, only_skill: str | None = None) -> list[Issue]:
             except ValueError:
                 issues.append(Issue("BASELINE_PATH_ESCAPE", relative, key[2]))
 
+    manifest_data: dict[Path, dict] = {}
     for manifest in (
         repo / ".codex-plugin" / "plugin.json",
         repo / ".claude-plugin" / "marketplace.json",
         repo / "kimi.plugin.json",
     ):
         try:
-            json.loads(manifest.read_text(encoding="utf-8"))
-        except (OSError, json.JSONDecodeError) as exc:
+            data = json.loads(manifest.read_text(encoding="utf-8"))
+            if not isinstance(data, dict):
+                raise ValueError("manifest root must be an object")
+            manifest_data[manifest] = data
+        except (OSError, json.JSONDecodeError, ValueError) as exc:
             issues.append(Issue("MANIFEST_JSON", str(manifest.relative_to(repo)), str(exc)))
+
+    if len(manifest_data) == 3:
+        versions = {data.get("version") for data in manifest_data.values()}
+        if len(versions) != 1 or not all(isinstance(version, str) and SEMVER_RE.fullmatch(version) for version in versions):
+            issues.append(Issue("MANIFEST_VERSION_DRIFT", "plugin manifests", f"found {sorted(str(version) for version in versions)}"))
+        marketplace = manifest_data[repo / ".claude-plugin" / "marketplace.json"]
+        marketplace_names: list[str] = []
+        for plugin in marketplace.get("plugins", []):
+            if not isinstance(plugin, dict):
+                continue
+            for skill_path in plugin.get("skills", []):
+                if isinstance(skill_path, str):
+                    marketplace_names.append(Path(skill_path).name)
+        if sorted(marketplace_names) != sorted(names):
+            issues.append(Issue("MARKETPLACE_COVERAGE", ".claude-plugin/marketplace.json", "each catalog Skill must appear exactly once"))
 
     public_docs = [
         repo / "README.md",

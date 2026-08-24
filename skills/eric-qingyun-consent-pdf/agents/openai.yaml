@@ -1,0 +1,4 @@
+interface:
+  display_name: "青云 · 服务确认"
+  short_description: "签约确认书，待专业审查，本季默认选科"
+  default_prompt: "Use $eric-qingyun-pdf then $eric-qingyun-consent-pdf."

@@ -371,12 +371,12 @@ class MirrorExportTest(unittest.TestCase):
 
 
 class IndependentInstallTest(unittest.TestCase):
-    def test_all_37_skills_copy_as_self_contained_directories(self) -> None:
+    def test_all_64_skills_copy_as_self_contained_directories(self) -> None:
         catalog = yaml.safe_load(
             (REPO / "catalog" / "skills.yaml").read_text(encoding="utf-8")
         )
         records = catalog["skills"]
-        self.assertEqual(37, len(records))
+        self.assertEqual(64, len(records))
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             for record in records:

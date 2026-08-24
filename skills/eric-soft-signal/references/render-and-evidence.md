@@ -62,15 +62,20 @@ For a cover plus body pages:
 
 This is synthetic scaffold content, not delivery content. Replace every uppercase identity placeholder, sentence, option, number, and reflection prompt with material supported by the current authoritative source.
 
-`soft-cover` is named-only: never pass its title positionally. `soft-section`, `soft-question`, and `soft-reflection` are also named-only. Pass exactly four strings to `choices`.
+`soft-cover` is named-only: never pass its title positionally. `soft-section`, `soft-question`, and `soft-reflection` are also named-only. Pass exactly four strings to `choices`. `soft-question` is the only MCQ surface: the 2×2 A–D four-box. Anti-pattern: `1. She lives here. （A. lives B. live C. living）` or `A. bought  B. had  C. buy`. Rewrite those as `#soft-question`. If only three options exist, invent a fourth distractor or recast the task.
+
+`soft-task(prompt:, lines:)` binds a written-response prompt and its writing lines into one unbreakable block. Pass a `preset:` of `short`, `rewrite`, `translate`, or `composition` to `soft-task` or `soft-writing-area` instead of hand-picking a line count. Use sticky `soft-passage(label:, title:)` for a reading or cloze passage so it travels with its first question, and `soft-exercise-group` to keep a short passage plus its whole task group on one page.
 
 `soft-section(num:, title:)` has a frozen public signature and sticky page behavior. Its heading block is unbreakable and moves with the first following content block when the remaining page space is insufficient. Local teaching components may wrap it, but must not remove `sticky: true`, replace it with a free-standing grid, or add a forced break between the heading and its first content.
 
 ## Fragile syntax rules
 
 - Use `#soft-blank()` or `#soft-blank(width: 5em)` inside markup. Never type raw underscore runs such as `____`; Typst parses them as markup and may hide the blank or break delimiters.
-- Use `soft-question` for every A–D item. It keeps each mark, label, and option in one unbreakable cell. Do not place checkboxes in a separate grid row.
+- Use `soft-question` for every A–D item, including opening checks and 课末 items. It keeps each mark, label, and option in one unbreakable cell and is the only student-facing choice surface. Do not place checkboxes in a separate grid row, and do not write inline `A. B. C.` runs.
 - Use `soft-reflection` for the closing heading, prompt, and ruled response surface. The whole block moves together when space is insufficient, and its fixed marker column prevents label collisions.
+- Use `soft-task` for every written-response item so the prompt and its writing lines form one unbreakable block. `soft-output-task` and `soft-reflection` already bind their own surfaces; never join a bare prompt and bare writing lines with manual `#v()` spacing.
+- Wrap a short passage plus its whole task group in `soft-exercise-group` when they fit one page, and use sticky `soft-passage` for a longer passage. Never place a manual page break between a passage and its first question.
+- Do not tune density with manual `#pagebreak()`, runs of `#v()`, or smaller type. Rebalance semantic task groups instead; `soft-setup` and `soft-table` assert the print-size floor.
 - Set paragraph leading with a scoped block and `#set par(leading: 1em)`. Do not pass `leading` to `text`.
 - Keep type at or above comfortable print size and preserve the requested writing lines. If the page budget fails, shorten nonessential copy, reduce decorative padding, or rebalance task groups.
 
@@ -110,4 +115,11 @@ PYTHONDONTWRITEBYTECODE=1 python3 /path/to/eric-soft-signal/scripts/render_pdf.p
 
 Inspect each contact sheet and every page at full size. Confirm the locked page budget, A4 geometry, embedded fonts, visible blanks, attached choices, reflection attachment, nonblank pages, margins, glyphs, absence of clipping/overlap, and absence of a section heading stranded at a page foot. Extracted student text must contain no answer, rationale, `TEACHER`, `教师版`, internal path, or production note; teacher text must be unmistakably teacher-only.
 
-Record source/PDF/render hashes, exact command exits, page counts, inspected pages, and findings. Compilation proves only buildability; rendered pages prove visible integrity.
+Record a checklist for every iteration:
+
+- Source/PDF/render hashes and exact command exits
+- Page counts and inspected pages
+- `check_layout.py` findings and how each alarm was resolved
+- Every iteration's renders directory kept beside the output PDF it proves; the release render directory must hash-match the delivered PDF, with no silent post-release edits
+
+Compilation proves only buildability; rendered pages prove visible integrity.

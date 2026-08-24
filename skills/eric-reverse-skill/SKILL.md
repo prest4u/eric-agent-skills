@@ -1,6 +1,6 @@
 ---
 name: eric-reverse-skill
-description: Use when Eric asks to understand, recover, explain, or verify how a compiled, obfuscated, packed, virtualized, or unfamiliar executable target works, including ELF/PE/Mach-O binaries, APK/native libraries, firmware, WASM, bytecode, custom VMs, kernel drivers, and anti-analysis logic. Start with the smallest safe local evidence, preserve originals, move from triage to static and then justified dynamic analysis, and finish with a reproducible explanation or solver. Do not use when the target logic is already understood and the remaining work is exploitation, for pure web testing, standalone cryptography, or general digital forensics.
+description: 【逆向工程】Use when Eric asks to understand, recover, explain, or verify how a compiled, obfuscated, packed, virtualized, or unfamiliar executable target works, including ELF/PE/Mach-O binaries, APK/native libraries, firmware, WASM, bytecode, custom VMs, kernel drivers, and anti-analysis logic. Start with the smallest safe local evidence, preserve originals, move from triage to static and then justified dynamic analysis, and finish with a reproducible explanation or solver. Do not use when the target logic is already understood and the remaining work is exploitation, for pure web testing, standalone cryptography, or general digital forensics.
 ---
 
 # Eric Reverse Skill

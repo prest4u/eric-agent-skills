@@ -1,6 +1,6 @@
 ---
 name: eric-teaching-polish
-description: Use when polishing Eric's teaching materials, lesson plans, worksheets, student-facing handouts, parent-facing notes, class summaries, PDFs/DOCX/slides text, or generated teaching drafts to remove AI flavor and internal production wording. Trigger for 教学材料去 AI 味, 去后台腔, 去内部词, 入口/回收/卡片/路由/动作链/维修层 cleanup, student-facing polish, parent-facing polish, and making teaching content sound like a real teacher rather than an AI workflow.
+description: 【教学去AI味】Use when polishing Eric's teaching materials, lesson plans, worksheets, student-facing handouts, parent-facing notes, class summaries, PDFs/DOCX/slides text, or generated teaching drafts to remove AI flavor and internal production wording. Trigger for 教学材料去 AI 味, 去后台腔, 去内部词, 入口/回收/卡片/路由/动作链/维修层 cleanup, student-facing polish, parent-facing polish, and making teaching content sound like a real teacher rather than an AI workflow.
 ---
 
 # Eric Teaching Polish

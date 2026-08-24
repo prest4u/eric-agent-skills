@@ -1,6 +1,6 @@
 ---
 name: eric-moss-ivory-pdf
-description: Create, restructure, render, and visually QA restrained reader-facing PDFs in the official Eric Moss Ivory PDF｜苔绿象牙 editorial theme. Use for polished essays, thought pieces, briefs, explanatory documents, personal writing, and premium Chinese or bilingual PDFs that need warm ivory paper, moss-green primary structure, slate-blue secondary cues, role-based typography, generous whitespace, and audience-first organization. Do not use for PDF forms, OCR, merging/splitting, posters, dashboards, or worksheet-heavy teaching packs.
+description: 【苔绿象牙】Create, restructure, render, and visually QA restrained reader-facing PDFs in the official Eric Moss Ivory PDF｜苔绿象牙 editorial theme. Use for polished essays, thought pieces, briefs, explanatory documents, personal writing, and premium Chinese or bilingual PDFs that need warm ivory paper, moss-green primary structure, slate-blue secondary cues, role-based typography, generous whitespace, and audience-first organization. Do not use for PDF forms, OCR, merging/splitting, posters, dashboards, or worksheet-heavy teaching packs.
 ---
 
 # Eric Moss Ivory PDF｜苔绿象牙

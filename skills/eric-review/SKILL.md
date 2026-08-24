@@ -1,6 +1,6 @@
 ---
 name: eric-review
-description: Use only when Eric explicitly asks to review, critique, check, audit, review-and-fix, or formally sign off an existing artifact. Supports QUICK_REVIEW, REVIEW_AND_FIX, and FORMAL_SIGNOFF. Do not invoke before an artifact exists and do not use as a default completion gate.
+description: 【独立评审】Use only when Eric explicitly asks to review, critique, check, audit, review-and-fix, or formally sign off an existing artifact. Supports QUICK_REVIEW, REVIEW_AND_FIX, and FORMAL_SIGNOFF. Do not invoke before an artifact exists and do not use as a default completion gate.
 ---
 
 # Eric Review

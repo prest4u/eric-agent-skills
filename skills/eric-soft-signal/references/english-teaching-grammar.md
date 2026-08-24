@@ -16,7 +16,8 @@ Build each teaching artifact around an observable learner action: notice, select
 - Keep the stem, options, and punctuation parallel.
 - Use context that determines the intended tense, word class, connector, reference, or meaning.
 - Avoid clues created by option length, grammatical mismatch, or repeated wording.
-- Author each item with `soft-question(stem:, choices:)`. Keep each checkbox, A–D label, and option text in the same `soft-choice` cell; never build marks as a separate row or column.
+- Author each item with `soft-question(stem:, choices:)` and exactly four choices. That is the only MCQ surface: the 2×2 A–D four-box. Keep each checkbox, A–D label, and option text in the same `soft-choice` cell; never build marks as a separate row or column.
+- Never write inline `A. … B. … C. …`, `（A. … B. … C. …）`, or a 3-option run-on line. Opening checks and 课末 items use the same four-box as later exam pages. If a source item has only three real options, invent a plausible fourth distractor or recast the task; do not fall back to inline 三选.
 - Replace every source blank with `soft-blank`; never carry raw underscore runs into Typst markup.
 - Separate items visually so students can scan, mark, and revisit them without losing place. Keep one question block unbroken across pages.
 

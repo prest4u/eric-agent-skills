@@ -1,6 +1,6 @@
 ---
 name: eric-visual-memory-translator
-description: 将用户照片转译为克制的编辑设计、艺术出版或视觉手札图像，并生成可执行的图像生成/编辑指令。 当用户明确调用 Eric Visual Memory Translator、$eric-visual-memory-translator、视觉记忆转译、 影像转译，或要求把照片做成艺术出版页、记忆页、展览票、邮票记忆时使用。
+description: 【视觉记忆转译】将用户照片转译为克制的编辑设计、艺术出版或视觉手札图像，并生成可执行的图像生成/编辑指令。 当用户明确调用 Eric Visual Memory Translator、$eric-visual-memory-translator、视觉记忆转译、 影像转译，或要求把照片做成艺术出版页、记忆页、展览票、邮票记忆时使用。
 ---
 
 # Eric Visual Memory Translator / Eric 视觉记忆转译

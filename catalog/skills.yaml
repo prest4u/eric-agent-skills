@@ -2,35 +2,35 @@ schema_version: 1
 skills:
   - name: eric-designed-pdf
     category: pdf
-    version: 1.0.0
+    version: 1.0.1
     visibility: public
     mirror: prest4u/eric-designed-pdf
     upstreams: []
     tests: ["python3 scripts/run_skill_tests.py --skill eric-designed-pdf"]
   - name: eric-pdf
     category: pdf
-    version: 1.0.0
+    version: 1.0.1
     visibility: public
     mirror: prest4u/eric-pdf
     upstreams: []
     tests: ["python3 scripts/run_skill_tests.py --skill eric-pdf"]
   - name: eric-moss-ivory-pdf
     category: pdf
-    version: 1.0.0
+    version: 1.0.1
     visibility: public
     mirror: prest4u/eric-moss-ivory-pdf
     upstreams: []
     tests: ["python3 scripts/run_skill_tests.py --skill eric-moss-ivory-pdf"]
   - name: eric-slate-white-pdf
     category: pdf
-    version: 1.0.0
+    version: 1.0.1
     visibility: public
     mirror: prest4u/eric-slate-white-pdf
     upstreams: []
     tests: ["python3 scripts/run_skill_tests.py --skill eric-slate-white-pdf"]
   - name: eric-pdf-vocabulary
     category: pdf
-    version: 1.0.0
+    version: 1.0.1
     visibility: public
     mirror: prest4u/eric-pdf-vocabulary
     upstreams: []
@@ -93,21 +93,21 @@ skills:
     tests: ["python3 scripts/run_skill_tests.py --skill eric-knowledge-archive-pdf"]
   - name: eric-soft-signal
     category: education
-    version: 1.0.0
+    version: 1.1.0
     visibility: public
     mirror: null
     upstreams: []
     tests: ["python3 scripts/run_skill_tests.py --skill eric-soft-signal"]
   - name: eric-parent-feedback
     category: education
-    version: 1.0.0
+    version: 1.0.1
     visibility: public
     mirror: null
     upstreams: []
     tests: ["python3 scripts/run_skill_tests.py --skill eric-parent-feedback"]
   - name: eric-teaching-polish
     category: education
-    version: 1.0.0
+    version: 1.0.1
     visibility: public
     mirror: prest4u/eric-teaching-polish
     upstreams: []
@@ -121,7 +121,7 @@ skills:
     tests: ["python3 scripts/run_skill_tests.py --skill k12-english-teaching"]
   - name: eric-ppt-skill
     category: documents
-    version: 1.0.0
+    version: 1.0.1
     visibility: public
     mirror: null
     upstreams:
@@ -129,35 +129,35 @@ skills:
     tests: ["python3 scripts/run_skill_tests.py --skill eric-ppt-skill"]
   - name: eric-philosophy-book
     category: documents
-    version: 1.0.0
+    version: 1.0.1
     visibility: public
     mirror: null
     upstreams: []
     tests: ["python3 scripts/run_skill_tests.py --skill eric-philosophy-book"]
   - name: eric-research
     category: documents
-    version: 1.0.0
+    version: 1.0.1
     visibility: public
     mirror: prest4u/eric-research
     upstreams: []
     tests: ["python3 scripts/run_skill_tests.py --skill eric-research"]
   - name: eric-visual-memory-translator
     category: documents
-    version: 1.0.0
+    version: 1.0.1
     visibility: public
     mirror: null
     upstreams: [visual-memory-translator-origin]
     tests: ["python3 scripts/run_skill_tests.py --skill eric-visual-memory-translator"]
   - name: eric-frontend-delivery
     category: web
-    version: 1.0.0
+    version: 1.0.1
     visibility: public
     mirror: prest4u/eric-frontend-delivery
     upstreams: [vercel-react-best-practices, vercel-composition-patterns]
     tests: ["python3 scripts/run_skill_tests.py --skill eric-frontend-delivery"]
   - name: eric-quality-sites
     category: web
-    version: 1.0.0
+    version: 1.0.1
     visibility: public
     mirror: null
     upstreams: [mengto-build-awwwards-quality-sites, vercel-web-design-guidelines, addy-frontend-ui-engineering]
@@ -178,7 +178,7 @@ skills:
     tests: ["python3 scripts/run_skill_tests.py --skill fusion-visual-system"]
   - name: eric-reach
     category: video
-    version: 1.0.0
+    version: 1.0.1
     visibility: public
     mirror: prest4u/eric-reach
     upstreams: []
@@ -213,28 +213,28 @@ skills:
     tests: ["python3 scripts/run_skill_tests.py --skill video-qa"]
   - name: eric-handoff
     category: workflow
-    version: 1.0.0
+    version: 1.0.1
     visibility: public
     mirror: prest4u/eric-handoff-skill
     upstreams: []
     tests: ["python3 scripts/run_skill_tests.py --skill eric-handoff"]
   - name: eric-reverse-skill
     category: workflow
-    version: 1.0.0
+    version: 1.0.1
     visibility: public
     mirror: null
     upstreams: []
     tests: ["python3 scripts/run_skill_tests.py --skill eric-reverse-skill"]
   - name: eric-review
     category: workflow
-    version: 1.0.0
+    version: 1.0.1
     visibility: public
     mirror: prest4u/eric-review
     upstreams: []
     tests: ["python3 scripts/run_skill_tests.py --skill eric-review"]
   - name: eric-task-contract
     category: workflow
-    version: 1.0.0
+    version: 1.0.1
     visibility: public
     mirror: prest4u/eric-task-contract
     upstreams: []
@@ -260,3 +260,192 @@ skills:
     mirror: prest4u/building-validators
     upstreams: []
     tests: ["python3 scripts/run_skill_tests.py --skill building-validators"]
+  - name: eric-catalog
+    category: workflow
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-catalog"]
+  - name: eric-workflow-router
+    category: workflow
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-workflow-router"]
+  - name: eric-teaching-deck
+    category: education
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-teaching-deck"]
+  - name: eric-web-pipeline
+    category: web
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-web-pipeline"]
+  - name: eric-qingyun-pdf
+    category: qingyun-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-qingyun-pdf"]
+  - name: eric-qingyun-service-brief-pdf
+    category: qingyun-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-qingyun-service-brief-pdf"]
+  - name: eric-qingyun-consent-pdf
+    category: qingyun-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-qingyun-consent-pdf"]
+  - name: eric-qingyun-profile-pdf
+    category: qingyun-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-qingyun-profile-pdf"]
+  - name: eric-qingyun-subject-pdf
+    category: qingyun-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-qingyun-subject-pdf"]
+  - name: eric-qingyun-signoff-pdf
+    category: qingyun-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-qingyun-signoff-pdf"]
+  - name: eric-qingyun-briefing-pdf
+    category: qingyun-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-qingyun-briefing-pdf"]
+  - name: eric-qingyun-plan-pdf
+    category: qingyun-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-qingyun-plan-pdf"]
+  - name: eric-qingyun-checklist-pdf
+    category: qingyun-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-qingyun-checklist-pdf"]
+  - name: eric-qingyun-binder-pdf
+    category: qingyun-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-qingyun-binder-pdf"]
+  - name: eric-qingyun-booklet-pdf
+    category: qingyun-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-qingyun-booklet-pdf"]
+  - name: eric-qingyun-cold-ink-pdf
+    category: qingyun-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-qingyun-cold-ink-pdf"]
+  - name: eric-qingyun-editorial-pdf
+    category: qingyun-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-qingyun-editorial-pdf"]
+  - name: eric-qingyun-fold-pdf
+    category: qingyun-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-qingyun-fold-pdf"]
+  - name: eric-qingyun-frost-pdf
+    category: qingyun-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-qingyun-frost-pdf"]
+  - name: eric-qingyun-lattice-pdf
+    category: qingyun-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-qingyun-lattice-pdf"]
+  - name: eric-qingyun-news-pdf
+    category: qingyun-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-qingyun-news-pdf"]
+  - name: eric-qingyun-night-pdf
+    category: qingyun-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-qingyun-night-pdf"]
+  - name: eric-qingyun-parent-pdf
+    category: qingyun-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-qingyun-parent-pdf"]
+  - name: eric-qingyun-seal-pdf
+    category: qingyun-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-qingyun-seal-pdf"]
+  - name: eric-qingyun-stub-pdf
+    category: qingyun-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-qingyun-stub-pdf"]
+  - name: eric-qingyun-teal-pdf
+    category: qingyun-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-qingyun-teal-pdf"]
+  - name: eric-qingyun-thumb-pdf
+    category: qingyun-pdf
+    version: 1.0.0
+    visibility: public
+    mirror: null
+    upstreams: []
+    tests: ["python3 scripts/run_skill_tests.py --skill eric-qingyun-thumb-pdf"]
