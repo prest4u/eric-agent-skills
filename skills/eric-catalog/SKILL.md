@@ -1,6 +1,6 @@
 ---
 name: eric-catalog
-description: 【Eric系列目录】Eric 系列中文名、分类与选用说明。当用户问有哪些 Eric skill、该用哪一个、技能很乱、中文介绍、或整理 Cursor 技能清单时使用。
+description: 【Eric Skill总库】查看、选择、创建、升级或跨工具同步 Eric Skill 时使用。把 Codex、Cursor、Kimi、Claude、Hermes、OpenCode、Zed、Roo Code、Cline 等入口收束到同一 GitHub 权威库；不用于普通项目代码或非 Eric 社区 Skill。
 ---
 
 # Eric 系列目录
@@ -8,6 +8,43 @@ description: 【Eric系列目录】Eric 系列中文名、分类与选用说明�
 Eric 系列是你自己的交付操作系统，不是社区视觉素材库。调用名保持 `eric-...`。中文名只用于认路和介绍。
 
 本文件提供中文可读目录；机器可读的完整版本与版本号以 GitHub 仓库的 [`catalog/skills.yaml`](https://github.com/prest4u/eric-agent-skills/blob/main/catalog/skills.yaml) 为准。
+
+## 总库治理
+
+`prest4u/eric-agent-skills` 是唯一可编辑权威源。先读 `~/.local/state/eric-agent-skills/status.json` 取得当前 checkout；默认是 `~/.local/share/eric-agent-skills`。产品目录只负责发现，不是第二份源码。
+
+当用户要求创建、升级、迭代、安装、重命名或同步 Eric Skill：
+
+1. 已有 Skill 只编辑 `<checkout>/skills/<name>/`。如果入口来自 `.cursor/skills`、`.claude/skills`、`.roo/skills` 等路径，先解析链接，确认最终落在 checkout。
+2. 新 Skill 直接创建在 `<checkout>/skills/<name>/`，同时登记 `catalog/skills.yaml`、恰好一个 collection 和各产品 manifest；不要先在某个产品目录造副本再搬运。
+3. “最新”指通过隐私、许可、可移植性、安全和测试门禁的最新有效版本，不按修改时间盲目覆盖。
+4. 本地验证后再请求发布授权；发布后运行 `<checkout>/scripts/sync_user_install.py --apply`，并以 `--check --json` 的零漂移结果验收。
+5. 不自动启用 LaunchAgent、定时同步或后台上传。外部推送仍需当前任务授权。
+
+### 已内置的产品入口
+
+| 读取方式 | 产品 |
+|---|---|
+| 原生读取 `$HOME/.agents/skills`，清理高优先级同名副本 | Codex、Cursor、Kimi Code、OpenCode、Zed、Roo Code |
+| 每个 Skill 链接到共享源 | Claude Code、Hermes Agent、Cline |
+| 配置共享源为第一搜索路径 | Kimi Desktop |
+
+### 登记其他 Agent 工具
+
+先查该工具官方说明，确认它的全局 Skill 根目录及优先级。然后从本 Skill 目录运行：
+
+```bash
+python3 scripts/register_tool_surface.py \
+  --name <tool-name> --mode links --skills-root "$HOME/.tool/skills"
+python3 <checkout>/scripts/sync_user_install.py --apply
+```
+
+- `links`：工具不能原生读取 `$HOME/.agents/skills`，在它的专用根目录创建指向共享源的逐 Skill 链接。
+- `shadows`：工具已经原生读取共享源；专用根目录只用于检测并备份会抢优先级的同名副本。
+
+机器专属路径只写入 `~/.config/eric-agent-skills/tool-surfaces.json`，不进入公开 GitHub。只接受末级名称以 `skills` 结尾的专用目录；注册器拒绝 `/`、用户主目录、共享根和权威 checkout 等危险目标，同步器会再次校验并在任何变更前停止。
+
+同步器不会沿“目录集合链接”跨出已登记根目录执行移动；如果该链接暴露了同名 Eric Skill，会在任何写入前停止并要求人工核对。单个 Skill 链接只备份链接本身，不移动其外部目标。
 
 ## 怎么选
 

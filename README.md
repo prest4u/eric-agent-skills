@@ -39,13 +39,23 @@ The `pdf` collection installs five directories, `professional-pdf-series` instal
 
 ## One source across local agents
 
-Use the repository's local sync command to make this checkout the single physical source for Codex, Kimi Code, Kimi Desktop, Cursor, Claude Code, and Hermes Agent:
+Use the repository's local sync command to make this checkout the single physical source for Codex, Kimi Code, Kimi Desktop, Cursor, Claude Code, Hermes Agent, OpenCode, Zed, Roo Code, and Cline:
 
 ```bash
 python3 scripts/sync_user_install.py --apply
 ```
 
 The command backs up conflicting copies, links the shared `~/.agents/skills/` entries to this checkout, removes higher-priority duplicates, and wires product-specific discovery where needed. Run with `--check` for a non-mutating drift audit or `--update --apply` to fast-forward from GitHub before reconciling the local agent surfaces.
+
+For another Agent Skills-compatible product, register its global Skill root once and rerun the sync:
+
+```bash
+python3 skills/eric-catalog/scripts/register_tool_surface.py \
+  --name my-agent --mode links --skills-root ~/.my-agent/skills
+python3 scripts/sync_user_install.py --apply
+```
+
+Use `links` when the product requires its own Skill root. Use `shadows` when it already reads `~/.agents/skills` and its product root should only be checked for higher-priority duplicates. Machine-specific roots stay in `~/.config/eric-agent-skills/tool-surfaces.json`, outside the public repository.
 
 Catalog versions identify the latest **validated** release of each Skill. A newer filesystem timestamp does not win by itself: local paths, private fixtures, unlicensed assets, and regressions are rejected before a version is promoted.
 
@@ -63,6 +73,7 @@ Vendored upstream references are pinned by commit and tree hash. Weekly automati
 Release, upstream, mirror, and private-fixture procedures are documented in [`docs/maintenance.md`](docs/maintenance.md).
 The v1.0 candidate gate matrix is tracked in [`docs/release/hub-v1.0.0-acceptance.md`](docs/release/hub-v1.0.0-acceptance.md).
 The cross-agent latest-valid-version decisions for this release are recorded in [`docs/release/v1.2.0-version-audit.md`](docs/release/v1.2.0-version-audit.md).
+The extensible tool-surface architecture is recorded in [`docs/release/v1.3.0-tool-authority.md`](docs/release/v1.3.0-tool-authority.md).
 
 ## Privacy and licensing
 

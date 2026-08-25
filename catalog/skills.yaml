@@ -262,7 +262,7 @@ skills:
     tests: ["python3 scripts/run_skill_tests.py --skill building-validators"]
   - name: eric-catalog
     category: workflow
-    version: 1.0.0
+    version: 1.1.0
     visibility: public
     mirror: null
     upstreams: []

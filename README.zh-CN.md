@@ -47,7 +47,17 @@ npx -y skills@latest add prest4u/eric-agent-skills \
 python3 scripts/sync_user_install.py --apply
 ```
 
-同步器会先备份冲突副本，再让 Codex、Kimi Code、Kimi Desktop、Cursor、Claude Code 与 Hermes Agent 指向同一份 GitHub checkout。使用 `--check` 只检查漂移；使用 `--update --apply` 先从 GitHub 快进更新，再修复本机发现路径。
+同步器会先备份冲突副本，再让 Codex、Kimi Code、Kimi Desktop、Cursor、Claude Code、Hermes Agent、OpenCode、Zed、Roo Code 与 Cline 指向同一份 GitHub checkout。使用 `--check` 只检查漂移；使用 `--update --apply` 先从 GitHub 快进更新，再修复本机发现路径。
+
+其他支持 Agent Skills 的工具只需登记一次全局 Skill 根目录：
+
+```bash
+python3 skills/eric-catalog/scripts/register_tool_surface.py \
+  --name my-agent --mode links --skills-root ~/.my-agent/skills
+python3 scripts/sync_user_install.py --apply
+```
+
+工具需要自己的目录时使用 `links`；工具已经原生读取 `~/.agents/skills`、只需清理高优先级副本时使用 `shadows`。机器路径仅保存在 `~/.config/eric-agent-skills/tool-surfaces.json`，不会进入公开 GitHub。
 
 目录中的版本号代表“通过隐私、许可、可移植性和测试门禁的最新有效版本”。文件修改时间更晚但含本机路径、私有夹具、未授权素材或功能倒退的副本，不会覆盖权威版本。
 
@@ -64,5 +74,7 @@ python3 scripts/sync_user_install.py --apply
 第三方与字体许可见 [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)，维护与发布流程见 [`docs/maintenance.md`](docs/maintenance.md)。
 
 本次跨工具“最新有效版本”取舍记录见 [`docs/release/v1.2.0-version-audit.md`](docs/release/v1.2.0-version-audit.md)。
+
+可扩展工具入口架构见 [`docs/release/v1.3.0-tool-authority.md`](docs/release/v1.3.0-tool-authority.md)。
 
 首版候选的验收矩阵与尚未解除的发布门禁见 [`docs/release/hub-v1.0.0-acceptance.md`](docs/release/hub-v1.0.0-acceptance.md)。
