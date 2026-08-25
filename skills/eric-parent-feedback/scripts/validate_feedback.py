@@ -93,9 +93,9 @@ CLASS_COURSE_MARKERS = re.compile(
 
 EXTRA_SECTION_RE = re.compile(
     r"^(?:"
-    r"④\s*[^。\n]*|"
-    r"四[、.．)）:：]\s*[^。\n]*|"
-    r"4[、)）:：]\s*(?:家长|补充|老师|温馨|后续|下节课|下一步)[^。\n]*|"
+    r"(?:④|四|4)\s*[、.．)）:：]?\s*"
+    r"(?:家长配合|家长建议|家长提醒|补充说明|补充建议|老师建议|老师提醒|"
+    r"温馨提示|后续安排|下节课安排|下节课计划|下一步安排)[：:]?|"
     r"(?:家长配合|家长建议|家长提醒|补充说明|补充建议|老师建议|老师提醒|"
     r"温馨提示|后续安排|下节课安排|下节课计划|下一步安排)[：:]?"
     r")\s*$",
@@ -144,14 +144,16 @@ def validate(text: str) -> list[str]:
                 f"Forbidden parent-facing content matched /{pattern}/: {match.group(0)} ({message})"
             )
 
-    if not re.search(r"^学生[：:]", text, flags=re.MULTILINE):
-        errors.append("Missing metadata field: 学生：")
-    if not re.search(r"^日期[：:]", text, flags=re.MULTILINE):
-        errors.append("Missing metadata field: 日期：")
-    if not re.search(r"^(?:课次 / 主题|主题)[：:]", text, flags=re.MULTILINE):
-        errors.append("Missing metadata field: 课次 / 主题： or 主题：")
-
     metadata = text.split("①课上内容", maxsplit=1)[0]
+    if not re.search(r"^学生[：:]", metadata, flags=re.MULTILINE):
+        errors.append("Missing or misplaced metadata before section ①: 学生：")
+    if not re.search(r"^日期[：:]", metadata, flags=re.MULTILINE):
+        errors.append("Missing or misplaced metadata before section ①: 日期：")
+    if not re.search(r"^(?:课次 / 主题|主题)[：:]", metadata, flags=re.MULTILINE):
+        errors.append(
+            "Missing or misplaced metadata before section ①: 课次 / 主题： or 主题："
+        )
+
     if CLASS_COURSE_MARKERS.search(metadata) and not re.search(
         r"^班级[：:]", metadata, flags=re.MULTILINE
     ):

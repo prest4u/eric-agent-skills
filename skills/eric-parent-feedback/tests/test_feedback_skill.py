@@ -88,10 +88,32 @@ class FeedbackValidatorTests(unittest.TestCase):
                 self.assertTrue(any("Markdown" in error for error in validate(text)))
 
     def test_common_fourth_section_variants_are_hard_errors(self) -> None:
-        for heading in ("四）家长配合", "家长配合：", "补充说明："):
+        for heading in (
+            "④ 家长配合",
+            "四）家长配合",
+            "4. 家长配合",
+            "4．家长配合",
+            "家长配合：",
+            "补充说明：",
+        ):
             with self.subTest(heading=heading):
                 text = CLEAN_FEEDBACK + "\n" + heading + "\n请配合复习。\n"
                 self.assertTrue(any("fourth" in error for error in validate(text)))
+
+    def test_fourth_numbered_homework_task_is_allowed(self) -> None:
+        text = CLEAN_FEEDBACK.replace(
+            "1. 回看今天完成的短段并订正标记处。",
+            "① 回看今天完成的短段。\n② 订正标记处。\n③ 朗读订正后的短段。\n④ 完成练习册第4页。",
+        )
+        self.assertEqual([], validate(text))
+
+    def test_metadata_must_precede_first_section(self) -> None:
+        text = CLEAN_FEEDBACK.replace("学生：学生A\n", "").replace(
+            "1. 回看今天完成的短段并订正标记处。",
+            "1. 回看今天完成的短段并订正标记处。\n学生：学生A",
+        )
+        errors = "\n".join(validate(text))
+        self.assertIn("misplaced metadata", errors)
 
     def test_legitimate_industrial_production_content_is_allowed(self) -> None:
         text = CLEAN_FEEDBACK.replace("短段写作", "工业生产词汇")
