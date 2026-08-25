@@ -1,13 +1,22 @@
 ---
 name: eric-parent-feedback
-description: '【家长反馈】Use when writing, revising, auditing, or saving Eric''s parent-facing post-class feedback for one-to-one or class/group courses as copy-ready TXT. Trigger for 课后反馈, 家长反馈, 学生反馈, 班课反馈, 一对一反馈, 试听课反馈, 课后总结发家长, 去 AI 味反馈, and converting lesson notes into a polished Chinese parent message. Determine the format from the course type, never the number attending: a class course with only one student still uses class metadata and structure. Must enforce exactly three visible plain-text sections: ①课上内容, ②课上反馈, ③课后作业, with no Markdown headings, no fourth section, no next-lesson preview, and no internal teaching labels.'
+description: "【家长反馈】Write, revise, audit, or save Eric's evidence-calibrated parent-facing post-class feedback for one-to-one, class/group, and trial lessons as copy-ready Chinese TXT. Trigger for 课后反馈, 家长反馈, 学生反馈, 班课反馈, 一对一反馈, 试听课反馈, 课后总结发家长, 去 AI 味反馈, and lesson notes converted into a parent message. Course type—not attendance count—decides the format. Enforce exactly three visible sections: ①课上内容, ②课上反馈, ③课后作业."
 ---
 
 # Eric Parent Feedback
 
-Write parent-facing post-class feedback that is concrete, calm, credible, and ready to paste into a parent group.
+Produce a calm, credible message that lets a parent quickly understand:
 
-This skill is not a general article polish skill. It protects Eric's feedback contract:
+1. what happened in class;
+2. what the student can do now;
+3. the one main difficulty, if one genuinely appeared, and how serious it is;
+4. what to do after class.
+
+Prioritize accurate judgment first, relationship warmth second, and visible teacher professionalism third. Show professionalism through calibrated decisions, not long knowledge lists or multiple diagnoses.
+
+## Output Contract
+
+The visible final must be plain TXT with exactly these sections:
 
 ```text
 ①课上内容
@@ -15,34 +24,41 @@ This skill is not a general article polish skill. It protects Eric's feedback co
 ③课后作业
 ```
 
-No Markdown headings. No fourth section. No next-lesson direction or preview. No internal teaching labels.
+No Markdown headings. No fourth section. No next-lesson preview. No internal teaching labels.
 
-## First Move
+Course type decides the format; headcount never does:
 
-Classify the course before drafting. The governing rule is:
+- one-to-one course → individual format;
+- class/group course → class format, even when one student enrolled or attended;
+- trial lesson → individual metadata with trial-specific diagnostic weighting.
 
-> Course type decides the format; attendance count does not. A one-to-one course uses the individual format. A class/group course uses the class format even when only one student is enrolled or present that day.
+Treat labels such as `班课`, `暑假班`, `寒假班`, `春季班`, `秋季班`, `预科班`, `小班`, and `集体课` as strong class-format signals.
 
-Use explicit course labels such as `班课`, `暑假班`, `寒假班`, `春季班`, `秋季班`, `预科班`, `小班`, or `集体课` as strong class-format signals. Do not reinterpret a named class as one-to-one merely because only one student is listed.
+## Required Judgment Pass
 
-Then classify the task:
+Before drafting or revising, read [references/editorial-judgment.md](references/editorial-judgment.md). Silently build its private decision card:
 
-| Task | Action |
-|---|---|
-| One-to-one course feedback | Use `学生：` metadata and write that student's lesson content, performance, and homework |
-| Class/group course feedback | Use `班级：` plus `学生：` metadata; write shared course content, then give each student's情况说明 inside `②课上反馈`. Keep this format even when there is only one student. |
-| Raw lesson notes -> feedback | Build a clean parent-facing draft |
-| Existing feedback -> 去 AI 味 | Preserve facts and structure; remove template tone |
-| Feedback audit | Check structure, forbidden terms, specificity, tone |
-| Save feedback file | Save a copy-ready `.txt` record in the existing student feedback folder |
+- overall mastery;
+- one or two observable classroom results;
+- one primary issue for the feedback unit, only if it genuinely matters;
+- severity;
+- independent performance versus response after a reminder;
+- lower-priority observations;
+- homework status.
 
-If local paths are relevant, inspect the actual lesson notes, worksheets, prior feedback, or student folder before writing. Do not rely on memory alone when files are available.
+Do not print the card or the word “证据” as a framework. It exists only to control emphasis.
 
-## Required Output Shape
+Use today's facts in authority order: Eric's explicit description, actual student work from today, same-lesson observation records, then earlier feedback for verified comparison. A lesson plan establishes what was taught, never what the student mastered.
 
-Default output is plain TXT, not Markdown. First decide whether the course itself is one-to-one or class/group. Never decide from the number of students named in the lesson record.
+If the main mastery level or severity remains unknown after inspecting available files, ask one decisive question, such as:
 
-One-to-one course lesson:
+> 今天这部分是能够独立完成，还是提醒后才能完成？
+
+Do not send a questionnaire. Do not infer mastery from the handout. Do not manufacture a weakness when the lesson went well.
+
+## Visible Shapes
+
+One-to-one:
 
 ```text
 学生：
@@ -51,18 +67,20 @@ One-to-one course lesson:
 
 ①课上内容
 
-[2-4 natural paragraphs or short bullets about what was actually done]
+[2–4 concrete items; stop after the actual content]
 
 ②课上反馈
 
-[specific student performance: strengths, real problems, learning state, what is becoming more stable]
+[overall mastery plus one or two observable classroom results]
+
+[one calibrated primary issue only when one exists]
 
 ③课后作业
 
-[numbered homework tasks, written so parent/student can execute]
+[numbered executable tasks, or a factual no-homework sentence]
 ```
 
-Class/group course lesson, including a class with one student:
+Class/group, including a class with one student:
 
 ```text
 班级：
@@ -72,94 +90,95 @@ Class/group course lesson, including a class with one student:
 
 ①课上内容
 
-[shared class content actually completed]
+[shared content completed]
 
 ②课上反馈
 
-[student A：specific情况说明]
+[shared result once]
 
-[student B：specific情况说明]
+[student A：verified individual difference]
 
-[optional short whole-class note if it adds real information]
+[student B：verified individual difference]
 
 ③课后作业
 
-[numbered homework tasks, written so parent/student can execute]
+[shared numbered tasks and verified make-up work, or a factual no-homework sentence]
 ```
 
-Use this exact visible section structure. Do not output Markdown `##`, `一、课程内容`, `二、学生表现`, `下节课安排`, `内部路由`, `老师观察`, `补充建议`, or any fourth section in the parent-facing final.
+For a trial lesson, use the individual shape. Give the main learning need most of the diagnostic space; keep no more than two secondary observations visibly lighter. Do not use a problem list to simulate expertise.
 
-## Workflow
+## Drafting Rules
 
-1. **Gather facts**
-   - course type: one-to-one or class/group; treat explicit class naming as authoritative
-   - class name when the course is class/group, even if only one student attended
-   - student name / EC id if known
-   - date
-   - class topic
-   - completed content
-   - student performance evidence
-   - homework
-   - source files or raw notes used
+- `①课上内容`: two to four concrete items. Do not add empty summaries such as `这三类题都做了`.
+- `②课上反馈`: let a parent cold-read 会不会、卡在哪里、严不严重、是否能独立完成.
+- One-to-one feedback normally uses two short paragraphs in section ②.
+- Class feedback states shared mastery once, then applies the one-primary-issue budget separately to each named student. Distinct verified difficulties for different students may all appear; never suppress one student to satisfy a message-wide limit. Never repeat generic praise to fill space.
+- Shared homework belongs in section ③. Mention partial or missing work under a student only when verified and in neutral language.
+- `③课后作业`: write numbered executable tasks when work is assigned. If none is assigned, write one factual sentence such as `本次课无额外作业。`; never invent review work to fill the section. Do not add encouragement, course planning, or the teacher's next move.
+- Never invent performance, scores, homework, sources, family details, or student details.
 
-2. **Separate visible vs internal**
-   - Visible: what was learned, how the student performed, what to do after class.
-   - Internal only: teacher moves, diagnostic traps, route labels, MBTI, "挖坑", production notes, future lesson strategy.
+## Tone Pass
 
-3. **Write with parent-facing specificity**
-   - Name the exact skill or score scene: 完成句子、单项选择、词形变化、阅读证据定位、主谓宾、主系表.
-   - Convert problems into stable learning actions: "还需要继续稳定..." instead of harsh labels.
-   - Tie praise to evidence: "能先判断词性再看上下文" instead of "表现很好".
+Before finalizing, read [references/style-guide.md](references/style-guide.md).
 
-4. **De-AI pass**
-   - Read `references/style-guide.md` for tone and anti-template rules.
-   - Borrow the de-AI stack as roles: `shuorenhua` for scene and protected spans, `deslop-zh` for final subtraction, `remove-ai-flavor/de-AI-writing` for local sentence shells, `qu-ai-wei` for not damaging real teacher voice, and `humanizer-zh` only as broad audit.
-   - Remove empty summary, grand claims, fake warmth, and repeated route markers.
-   - Keep language natural but not chatty; parent feedback should feel professional and human.
+Target register: mostly plain, direct professional Chinese with a smaller amount of restrained written Chinese. It should sound more formal than casual conversation and less bureaucratic than a school report.
 
-5. **Validate before final**
-   - If a file exists or is created, run:
+Remove:
+
+- chatty filler, scolding, or face-to-face teacher talk;
+- administrative abstractions and inflated conclusions;
+- repeated `需要 / 仍需 / 还需要` sentence shells;
+- knowledge-point repetition inside section ②;
+- a minor issue promoted above the overall result.
+
+## Validation
+
+When a feedback file exists, run from this Skill directory:
 
 ```bash
-python3 ./scripts/validate_feedback.py path/to/feedback.txt
+python3 scripts/validate_feedback.py path/to/feedback.txt
 ```
 
-   - If only replying in chat, mentally apply the same checks and say if anything is missing.
+The validator reports hard errors separately from style warnings. Revise every warning unless the exact phrase is deliberately justified by the facts and register. Use `--strict-style` when warnings should fail the command:
+
+```bash
+python3 scripts/validate_feedback.py --strict-style path/to/feedback.txt
+```
+
+For chat-only output, apply the same checks mentally.
 
 ## File Handling
 
-When saving a new feedback file, prefer the existing feedback root:
+Inside Eric's teaching workspace, prefer the existing:
 
 ```text
-<project-dir> Course/teaching-workspace/projects/english-courses/feedback
+teaching-workspace/projects/english-courses/feedback/<course-folder>/
 ```
 
-Use the existing student folder when present. File name pattern:
+Use the existing course or student folder when present. Preferred filename:
 
 ```text
-EC-xxx-name-feedback-YYYY-MM-DD-lesson.txt
+EC-xxx-name-feedback-YYYY-MM-DD-topic.txt
 ```
 
-The saved `.txt` is the sending record: Eric should be able to open it, copy all text, and paste directly into the parent group. If the student folder or EC id is unclear, ask only if saving depends on it; otherwise draft in chat as copy-ready TXT.
-
-After saving a copy-ready `.txt`, always paste the full final TXT content back into chat so Eric can copy it directly, unless he explicitly says not to paste it.
+After saving, paste the complete final TXT back into chat unless Eric explicitly asks not to.
 
 ## Hard Gates
 
-Reject or revise before final if any gate fails:
+Revise before final when any gate fails:
 
-- Exactly three visible plain-text sections: `①课上内容`, `②课上反馈`, `③课后作业`.
-- Metadata matches the course type, not headcount: one-to-one feedback uses `学生：`; class/group feedback uses `班级：` and `学生：`, with per-student情况说明 under `②课上反馈`.
-- A named class/group course must never be downgraded to one-to-one format because only one student is enrolled, listed, or present.
-- No Markdown headings such as `##`.
-- No fourth section after homework.
-- No next-lesson preview, route, or "下节课会..." in the parent-facing final.
-- No internal labels: MBTI, Hermes, T1/B01/B02, 后台, 路由, 维修层, validator, teacher moves.
-- No teacher-tactic wording: `挖坑`, `让学生先错`, `教师动作`, `预期回应`, `心法`, `出招`, `拆招`, `定招`.
-- No invented performance, homework, scores, sources, or family/student details.
-- No AI-detection promise.
+- exactly the three required visible plain-text sections;
+- metadata matches course type, not attendance count;
+- no Markdown headings or fourth section;
+- no next-lesson preview or internal route;
+- no MBTI, memory-system, internal production-workflow, validator, or teacher-tactic labels;
+- no invented claims or AI-detection promise;
+- today's mastery is not inferred from content merely taught;
+- one main problem at most per feedback unit, with severity supported by today's facts: one for a one-to-one or trial student; for a class, one shared class issue plus at most one verified issue per named student.
 
-## References
+## Package Maintenance
 
-- `references/style-guide.md`: parent-facing tone, anti-AI wording, common repairs.
-- `scripts/validate_feedback.py`: deterministic structure and forbidden-term validator.
+- [references/editorial-judgment.md](references/editorial-judgment.md): source authority, private decision card, severity ladder, prominence, and mode rules.
+- [references/style-guide.md](references/style-guide.md): register, repair patterns, and final readback.
+- `test-prompts.json`: anonymized behavioral regressions; expected results describe decisions, not fixed wording.
+- `tests/test_feedback_skill.py`: validator and package-contract tests.

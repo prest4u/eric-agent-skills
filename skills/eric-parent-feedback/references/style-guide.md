@@ -1,122 +1,187 @@
 # Parent Feedback Style Guide
 
-Use this file when drafting or de-AI-polishing parent-facing TXT feedback.
+Use this reference for the final tone and naturalness pass.
 
-## Tone
+## Register
 
-Good feedback sounds like a teacher who actually taught the class:
+Target a blend of roughly:
 
-- specific, not decorative
-- calm, not anxious
-- honest, not harsh
-- warm, not intimate
-- professional, not template-like
+- 70% plain, direct professional Chinese;
+- 30% restrained written Chinese.
 
-Default register: concise Chinese, medium density, direct. The final text should look like a message a real teacher can paste into a parent group, not like a Markdown document.
+The message should be more formal than casual teacher talk and less bureaucratic than a school report.
 
-## What Parents Need
+Good feedback is:
 
-Every feedback should answer only three questions:
+- specific, not decorative;
+- calm, not anxious;
+- honest, not harsh;
+- warm, not intimate;
+- professional, not administrative;
+- concise, not skeletal.
 
-1. 今天课上做了什么？
-2. 孩子今天表现出什么稳定点和问题点？
-3. 回去具体做什么？
+Useful written connectors include “目前”, “较为”, “仍需”, “能够”, and “整体”, but only when they carry real information. Do not stack them to manufacture formality.
 
-Anything about future route, internal diagnosis, or teacher strategy belongs outside the parent-facing final.
-
-## Section Guidance
+## What Each Section Sounds Like
 
 ### ①课上内容
 
-Write what actually happened. Good ingredients:
+Name what actually happened:
 
-- module or score scene
-- concrete knowledge points
-- actual practice type
-- correction focus
-- why this task matters for the exam or course stage
+- exact skill or score scene;
+- concrete knowledge point;
+- practice type;
+- correction focus.
 
-Avoid:
+Stop after two to four useful items. Do not copy the lesson plan mechanically or add an empty summary.
 
-- copying the lesson plan mechanically
-- listing too many internal activity names
-- saying "系统化/全面/深度" without concrete content
-- Markdown formatting such as `##`, horizontal rules, tables, or bold markers in the final TXT
+Weak:
+
+> 本节课围绕相关知识进行了系统梳理，为后续学习打下了坚实基础。
+
+Better:
+
+> 1. 短段写作：把几句话连成一段
+> 2. 使用 because / if / when 连接句子
+> 3. 完形填空：先读完整篇，再根据上下文选择
 
 ### ②课上反馈
 
-Write evidence-based performance.
+Lead with the strongest supported conclusion. Then add the classroom result that makes it credible. Mention only one primary problem, and calibrate its severity.
 
-Use:
+Weak:
 
-- "今天比较稳定的是..."
-- "目前还需要继续巩固的是..."
-- "从课堂表现看..."
-- "这说明前面训练已经有了一定积累..."
-- "问题不在于完全不会，而是..."
+> 学生整体表现良好，具有较强的学习能力，但仍有进一步提升空间。
 
-But do not overuse these shells. Rewrite if every paragraph has the same pattern.
+Better:
 
-Avoid:
+> 今天大部分空能够独立判断，句子也能完整写出。第三人称单数偶有漏写，提醒后能够自行定位并改正，整体影响不大。
 
-- "孩子表现非常棒" without evidence
-- "基础很差" as a label
-- vague comfort: "相信一定会越来越好"
-- pressure language: "必须马上补上，否则..."
-- private psychology: "说明孩子内心..."
+Do not repeat the content list from section ①. “上课认真” may describe participation, but it cannot stand in for mastery.
 
 ### ③课后作业
 
-Make homework executable:
+When homework is assigned, use numbered, executable tasks and include the exact file, page, task type, or check point when known. When none is assigned, write one factual sentence such as:
 
-- use numbered tasks
-- include exact topic, page, file, or exercise type when known
-- say what to check: 词性、时态、短语结构、证据定位、错题原因
-- if homework is light, say "重点不是刷量，而是把今天的动作做稳"
+> 本次课无额外作业。
 
-Do not add a next-lesson plan. A homework check instruction is allowed only if it is framed as what the student should review, not what the next lesson will do.
+Never invent a review task merely to fill the section.
 
-## Anti-AI Repairs
+Weak:
 
-Replace template language with observable classroom language:
+> 希望课后认真复习，继续努力。
 
-| AI/template | Better direction |
+Better:
+
+> 1. 订正今天短段中标记的三处句子。
+> 2. 完成讲义第 6—7 页，做完后提交。
+
+Do not add a next-lesson plan.
+
+## Colloquial-to-Professional Repairs
+
+These phrases are not universal bans, but they should trigger a rewrite check.
+
+| Too conversational or confrontational | Preferred direction |
 |---|---|
-| 本节课围绕...展开，进行了系统梳理 | 今天主要复习/训练了... |
-| 学生整体表现良好 | 今天孩子能在...上跟住节奏 |
-| 具有较强的学习能力 | 在...题型里，反应速度比之前更稳 |
-| 需要进一步加强 | 还需要继续稳定... |
-| 为后续学习打下坚实基础 | 这个动作稳定后，后面做...会更顺 |
-| 望继续努力 | 删除，改成具体作业 |
-| 下节课将继续 | 删除，不写下一课预告 |
+| 状态还行 / 挺好 / 挺不错 | 课堂参与较为稳定 / 能够跟上课堂内容 |
+| 作业要抓紧 | 作业需按要求完成并提交 |
+| 不能请假就不做 | 缺交内容仍需补齐 |
+| 小磕碰 | 偶有小失误 / 个别地方还不够稳定 |
+| 下手更顺 | 独立完成时比之前更稳定 |
+| 问题不大 | 整体影响不大 |
+| 这块还得多练 | 这一项仍需继续练习 |
 
-Use the researched de-AI rules as a division of labor:
+Keep neutral accountability:
 
-- `shuorenhua`: protect facts, terms, student evidence, and parent-facing register before rewriting.
-- `deslop-zh`: final subtraction; delete empty summary, false uplift, and decorative transitions.
-- `remove-ai-flavor` / `de-AI-writing`: patch repeated shells like `本节课围绕...展开`, `整体表现良好`, `进一步加强`.
-- `qu-ai-wei`: do not sterilize Eric's real teacher voice; keep a little natural specificity.
-- `humanizer-zh`: broad audit only; do not inject personal anecdotes or dramatic "soul".
+> 昨日作业目前提交了一部分，剩余内容需补齐。
+
+Do not write:
+
+> 昨天只做了一点，不能再拖了。
+
+## Bureaucratic-or-Inflated Repairs
+
+These phrases often sound formal but hide the real judgment:
+
+| Administrative or inflated | Preferred direction |
+|---|---|
+| 课堂投入度良好 | 今天听讲较为认真 / 能够跟上课堂内容 |
+| 任务完成度尚需提升 | 目前还有两项作业未完成 |
+| 仍有提升空间 | name the exact unstable action |
+| 切实下功夫 | name the practice that is actually needed |
+| 各方面才能往上走 | delete or state one supported consequence |
+| 具有较强的学习能力 | name the independent result |
+| 为后续学习打下坚实基础 | delete unless a concrete consequence matters |
+| 本节课围绕……展开 | 今天主要练习了…… |
+| 进行了系统梳理 | list what was reviewed |
+
+Professionalism comes from choosing the right conclusion and weight, not from abstract nouns.
+
+## Repetition Repairs
+
+Avoid chains such as:
+
+> 写作仍需要继续练习。目前还需要把想法写完整，也需要在更多情境中多加练习。
+
+Compress to one decision:
+
+> 短段能够表达主要意思，但独立组织完整句子时还不够稳定。
+
+Use “需要 / 仍需 / 还需要” once when possible. If two sentences make the same judgment, keep the more concrete one.
+
+## Prominence Repairs
+
+Do not let a small issue become the ending's headline.
+
+Weak:
+
+> 时态和语态掌握较稳。从句已有理解。发音需要认真调整，写作也到了必须下功夫的时候，这两方面理顺后才能继续提高。
+
+Better direction:
+
+> 时态、主语和语态判断较稳。从句的基本结构能够理解，但独立运用还不够熟练，这是本次课堂中更需要关注的一项。发音和写作也有可以调整的地方，不过本次课堂中的观察相对有限，不作过重判断。
+
+The better version keeps one main diagnosis and lowers the weight of secondary observations. Do not copy it mechanically.
+
+## Class Feedback Repairs
+
+Write shared learning once. Use individual lines only for verified differences.
+
+Weak:
+
+> 学生A表现不错。学生B表现也不错。学生C状态挺好。学生D今天也很好。
+
+Better direction:
+
+> 今天四位学生均能跟上阅读讲解。
+> 学生A：昨日作业目前提交了一部分，剩余内容需补齐。
+> 学生B：缺交内容需补做并提交。
+> 学生C：缺交内容需补做并提交。
+> 学生D：近期作业均按要求完成。
+
+Do not fabricate individual mastery differences merely to avoid repetition.
 
 ## Forbidden Visible Content
 
-Never include in parent-facing feedback:
+Never include:
 
-- MBTI or personality typing
-- Hermes, memory, internal project names
-- "挖坑", "让学生先错", "教师动作", "预期回应"
-- "心法", "出招", "拆招", "定招"
-- T1/B01/B02 or any backend routing label
-- "后台", "路由", "维修层", "validator", "生产"
-- "下节课计划", "下节课会", "下一步课程安排", "后续路线"
+- MBTI or personality typing;
+- memory systems or internal project names;
+- teacher tactics such as “挖坑”, “让学生先错”, “教师动作”, or “预期回应”;
+- backend, route, production, or validator labels;
+- next-lesson plans or course-sales language;
+- AI-detection claims.
 
-## Quality Readback
+## Final Readback
 
-Before finalizing:
+Before finalizing, check:
 
-1. Can a parent tell what happened today without seeing the lesson plan?
-2. Is every praise connected to classroom evidence?
-3. Is every problem written as an actionable learning task?
-4. Is homework specific enough to execute?
-5. Are there exactly three visible plain-text sections?
-6. Can Eric copy the whole TXT directly into a parent group without deleting Markdown marks?
+1. Can the parent identify what was learned without seeing the lesson plan?
+2. Does the mastery claim have a real classroom basis?
+3. Is one main issue clearly more important than any secondary observation?
+4. Is its severity accurate, including whether a reminder led to self-correction?
+5. Did participation, mastery, and homework remain separate?
+6. Are chatty, scolding, bureaucratic, repeated, or inflated phrases gone?
+7. Are there exactly three visible plain-text sections?
+8. Can Eric paste the whole message without deleting Markdown or internal notes?

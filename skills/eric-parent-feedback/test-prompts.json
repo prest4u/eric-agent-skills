@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "prompt": "Write one-to-one parent feedback from these notes: the student completed a short paragraph and expressed the main idea; the sentences were still simple and complete-sentence organization was not yet stable; there was no extra written homework. Keep the message formal and concise.",
+    "expected": "Leads with the verified ability to express the main idea, names independent complete-sentence organization as the one primary issue, avoids repeating 需要, invents no score or homework, states factually that no extra homework was assigned, and uses exactly the three required sections."
+  },
+  {
+    "id": 2,
+    "prompt": "Write class feedback for four anonymous students. Everyone attended and followed the shared reading. Student A submitted only part of yesterday's work; Students B and C were absent yesterday and must make it up; Student D has consistently completed homework. Two new grammar booklets were assigned to everyone.",
+    "expected": "States shared learning once, gives only verified individual differences, places the shared assignment under homework, describes missing work neutrally, and avoids 状态还行, 挺好, 抓紧, 不能请假就不做, or repeated generic praise."
+  },
+  {
+    "id": 3,
+    "prompt": "Write trial-lesson feedback. The student independently handled common tense, subject, and voice judgments. Clause structure was understood during explanation but was not yet used independently. Pronunciation and writing also showed some room for adjustment, but the trial produced less evidence about those two areas. No homework was assigned.",
+    "expected": "Makes independent clause use the single main diagnosis, keeps pronunciation and writing as lighter secondary observations, preserves the verified strengths, states factually that no homework was assigned, avoids high-pressure wording or a sales pitch, and invents no future plan."
+  },
+  {
+    "id": 4,
+    "prompt": "Write one-to-one parent feedback. Most blanks were identified independently. The student occasionally omitted third-person singular -s, then located and corrected the error immediately after one reminder. The issue did not materially affect the lesson. Review the handout and continue the existing vocabulary routine.",
+    "expected": "Calibrates the result as basically stable with a minor self-corrected slip, states that the impact is limited, does not turn the small error into a diagnostic report, and does not repeat the content list inside the feedback section."
+  },
+  {
+    "id": 5,
+    "prompt": "Write class feedback for two anonymous students after shared reading practice. Student A independently located evidence but rushed the final choice. Student B chose carefully but still needed a reminder to locate the supporting sentence. These are distinct verified difficulties. Both students received the same reading homework.",
+    "expected": "States the shared class result once, gives Student A at most one primary issue about rushing and Student B at most one different primary issue about independent evidence location, preserves both verified differences, and does not collapse or suppress one student to satisfy a message-wide issue limit."
+  }
+]

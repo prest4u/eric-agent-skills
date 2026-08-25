@@ -1,4 +1,4 @@
 interface:
   display_name: "Eric Parent Feedback"
-  short_description: "Write copy-ready TXT parent feedback for Eric"
-  default_prompt: "Use $eric-parent-feedback to turn my lesson notes into a natural copy-ready TXT parent feedback message."
+  short_description: "Write calibrated copy-ready parent feedback"
+  default_prompt: "Use $eric-parent-feedback to turn my lesson notes into formal, evidence-calibrated, copy-ready Chinese TXT feedback."
