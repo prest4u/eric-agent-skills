@@ -119,6 +119,48 @@ class FeedbackValidatorTests(unittest.TestCase):
         text = CLEAN_FEEDBACK.replace("短段写作", "工业生产词汇")
         self.assertEqual([], validate(text))
 
+    def test_legitimate_backend_and_routing_topics_are_allowed(self) -> None:
+        for topic in (
+            "后台开发英语词汇",
+            "物流路由算法阅读",
+            "T1航站楼英语阅读",
+            "B01单元复习",
+            "Hermes希腊神话阅读",
+            "Python validator 函数阅读",
+        ):
+            with self.subTest(topic=topic):
+                text = CLEAN_FEEDBACK.replace("短段写作", topic)
+                self.assertEqual([], validate(text))
+
+    def test_legitimate_technical_topics_are_allowed_in_body(self) -> None:
+        for sentence in (
+            "今天系统学习了Hermes希腊神话。",
+            "学习使用 Python validator 函数。",
+            "分析物流路由算法的英语说明。",
+        ):
+            with self.subTest(sentence=sentence):
+                text = CLEAN_FEEDBACK.replace("1. 完成一段校园活动短写", sentence)
+                self.assertEqual([], validate(text))
+
+    def test_explicit_internal_route_label_is_rejected(self) -> None:
+        text = CLEAN_FEEDBACK.replace("短段写作", "内部路由标签：T1")
+        self.assertTrue(any("Forbidden" in error for error in validate(text)))
+
+    def test_natural_language_internal_leaks_are_rejected(self) -> None:
+        for leaked in (
+            "学生的MBTI类型是INTJ。",
+            "本反馈已通过 validator 检查。",
+            "反馈路由：T1",
+            "反馈 路由：T1",
+            "Hermes系统：已写入记忆。",
+            "Hermes 系统：已写入记忆。",
+        ):
+            with self.subTest(leaked=leaked):
+                text = CLEAN_FEEDBACK.replace(
+                    "今天能够独立写出短段，主要意思表达清楚。", leaked
+                )
+                self.assertTrue(any("Forbidden" in error for error in validate(text)))
+
     def test_internal_production_workflow_label_is_rejected(self) -> None:
         text = CLEAN_FEEDBACK.replace("短段写作", "内部生产备注")
         self.assertTrue(any("Forbidden" in error for error in validate(text)))
@@ -126,6 +168,35 @@ class FeedbackValidatorTests(unittest.TestCase):
     def test_named_class_requires_class_metadata(self) -> None:
         text = CLEAN_FEEDBACK.replace("学生：学生A", "学生：学生A\n课程：暑假班")
         self.assertTrue(any("班级" in error for error in validate(text)))
+
+    def test_metadata_inside_sections_does_not_satisfy_metadata_contract(self) -> None:
+        text = """①课上内容
+学生：学生A
+
+②课上反馈
+日期：2026年8月25日
+
+③课后作业
+课次 / 主题：短段写作
+"""
+        errors = "\n".join(validate(text))
+        for field in ("学生", "日期", "课次 / 主题"):
+            self.assertIn(field, errors)
+
+    def test_all_three_visible_sections_require_nonempty_bodies(self) -> None:
+        text = """学生：学生A
+日期：2026年8月25日
+课次 / 主题：短段写作
+
+①课上内容
+
+②课上反馈
+
+③课后作业
+"""
+        errors = "\n".join(validate(text))
+        for heading in ("①课上内容", "②课上反馈", "③课后作业"):
+            self.assertIn(f"must not be empty: {heading}", errors)
 
 
 class FeedbackSkillContractTests(unittest.TestCase):

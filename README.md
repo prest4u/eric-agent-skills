@@ -74,6 +74,7 @@ Release, upstream, mirror, and private-fixture procedures are documented in [`do
 The v1.0 candidate gate matrix is tracked in [`docs/release/hub-v1.0.0-acceptance.md`](docs/release/hub-v1.0.0-acceptance.md).
 The cross-agent latest-valid-version decisions for this release are recorded in [`docs/release/v1.2.0-version-audit.md`](docs/release/v1.2.0-version-audit.md).
 The extensible tool-surface architecture is recorded in [`docs/release/v1.3.0-tool-authority.md`](docs/release/v1.3.0-tool-authority.md).
+The parent-feedback editorial and validator upgrade is recorded in [`docs/release/v1.3.1-parent-feedback.md`](docs/release/v1.3.1-parent-feedback.md).
 
 ## Privacy and licensing
 

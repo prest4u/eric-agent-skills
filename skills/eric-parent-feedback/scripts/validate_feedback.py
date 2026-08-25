@@ -24,8 +24,19 @@ FORBIDDEN_PATTERNS: list[tuple[str, str]] = [
         "next-lesson or route preview is not allowed",
     ),
     (
-        r"MBTI|Hermes|T1|B01|B02|后台|路由|维修层|validator|"
-        r"(?:内部|后台)生产|生产(?:版本|备注|状态|稿|层)",
+        r"MBTI|内部(?:后台|路由|生产|MBTI|Hermes|validator|T1|B01|B02)|维修层|"
+        r"^(?:后台|路由|生产|MBTI|Hermes|validator|T1|B01|B02)"
+        r"(?:标签|编号|代码|状态|备注|版本|稿|层)?[：:]|"
+        r"(?:反馈|教学|系统|生产|工作流)\s*(?:的\s*)?(?:路由|route)"
+        r"(?:标签|编号|代码|状态|备注|版本|工作流)?[：:]|"
+        r"内部.{0,6}(?:路由|route)|"
+        r"(?:路由|route|后台|生产)(?:标签|编号|代码|状态|备注|版本|稿|层)[：:]?|"
+        r"(?:本反馈|该反馈|反馈文本|本文|输出|结果).{0,8}validator|"
+        r"(?:通过|经由?)\s*validator\s*(?:检查|验证|校验|审查)|"
+        r"validator\s*(?:检查|验证|校验|审查|通过|状态|结果|报告|版本|标签|编号|代码)[：:]?|"
+        r"(?:内部(?:项目|系统|记忆)?|记忆系统|后台项目|生产系统).{0,3}Hermes|"
+        r"(?:系统|项目|记忆系统)\s*[：:]\s*Hermes|"
+        r"Hermes\s*(?:系统|记忆|项目|标签|编号|状态|备注|版本|路由)",
         "internal planning labels are not allowed",
     ),
     (
@@ -161,6 +172,15 @@ def validate(text: str) -> list[str]:
             "Class-course marker found in metadata, but 班级： is missing. "
             "Course type—not student count—determines the format."
         )
+
+    section_pairs = (
+        ("①课上内容", "②课上反馈"),
+        ("②课上反馈", "③课后作业"),
+        ("③课后作业", None),
+    )
+    for heading, next_heading in section_pairs:
+        if heading in headings and not section(text, heading, next_heading):
+            errors.append(f"Visible section must not be empty: {heading}")
 
     return errors
 

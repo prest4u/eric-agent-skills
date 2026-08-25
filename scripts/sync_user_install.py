@@ -92,6 +92,22 @@ def paths_overlap(left: Path, right: Path) -> bool:
         return False
 
 
+def first_symlink_component(path: Path, base: Path) -> Path | None:
+    """Return the first symlink on a lexical path below base, if one exists."""
+    base = base.expanduser().absolute()
+    path = path.expanduser().absolute()
+    try:
+        relative = path.relative_to(base)
+    except ValueError as exc:
+        raise ValueError(f"managed Skill path escapes the user home: {path}") from exc
+    current = base
+    for part in relative.parts:
+        current /= part
+        if current.is_symlink():
+            return current
+    return None
+
+
 def expand_registered_root(raw: str, home: Path) -> Path:
     if raw == "~":
         path = home
@@ -456,6 +472,13 @@ def reconcile_install(repo: Path, home: Path, *, apply: bool, backup_root: Path)
     reconciler = Reconciler(apply=apply, backup_root=backup_root, result=result)
     shared = home / ".agents/skills"
 
+    shared_link = first_symlink_component(shared, home)
+    if shared_link is not None:
+        raise ValueError(
+            "shared Skill root contains a symlink component; manual review required: "
+            f"{shared_link} -> {resolved(shared_link)}"
+        )
+
     # Parse and validate machine-local adapters before any filesystem mutation.
     custom_surfaces = load_custom_tool_surfaces(repo, home, shared)
 
@@ -472,6 +495,19 @@ def reconcile_install(repo: Path, home: Path, *, apply: bool, backup_root: Path)
         ToolSurface("cline", "links", home / ".cline/skills"),
     )
     profiles_root = home / ".hermes/profiles"
+    profiles_link = first_symlink_component(profiles_root, home)
+    if profiles_link is not None:
+        raise ValueError(
+            "Hermes profiles path contains an unverified symlink: "
+            f"{profiles_link} -> {resolved(profiles_link)}"
+        )
+    if profiles_root.is_dir():
+        for profile in profiles_root.iterdir():
+            if profile.is_symlink():
+                raise ValueError(
+                    "Hermes profile directory is a symlink; manual review required: "
+                    f"{profile} -> {resolved(profile)}"
+                )
     profile_surfaces = (
         tuple(
             ToolSurface(
@@ -516,6 +552,12 @@ def reconcile_install(repo: Path, home: Path, *, apply: bool, backup_root: Path)
         ToolSurface("kimi-desktop", "shadows", kimi_desktop_skills),
     )
     for surface in root_surfaces:
+        ancestor_link = first_symlink_component(surface.skills_root.parent, home)
+        if ancestor_link is not None:
+            raise ValueError(
+                "a built-in Skill root has a symlinked ancestor: "
+                f"{ancestor_link} -> {resolved(ancestor_link)}"
+            )
         if not surface.skills_root.is_symlink():
             continue
         target = resolved(surface.skills_root)

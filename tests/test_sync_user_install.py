@@ -343,6 +343,75 @@ class SyncUserInstallTest(unittest.TestCase):
             self.assertTrue(product_root.is_symlink())
             self.assertFalse(backup.exists())
 
+    def test_symlinked_hermes_profile_fails_before_external_mutation(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            home = root / "home"
+            repo = self.make_repo(root)
+            backup = root / "backups"
+            shared = home / ".agents/skills/alpha-skill"
+            shared.mkdir(parents=True)
+            (shared / "SKILL.md").write_text("old-shared", encoding="utf-8")
+            external_skill = root / "external-profile/skills/alpha-skill"
+            external_skill.mkdir(parents=True)
+            manifest = external_skill / "SKILL.md"
+            manifest.write_text(
+                "---\nname: alpha-skill\ndescription: external\n---\n",
+                encoding="utf-8",
+            )
+            profile = home / ".hermes/profiles/reviewer"
+            profile.parent.mkdir(parents=True)
+            profile.symlink_to(external_skill.parents[1], target_is_directory=True)
+
+            with self.assertRaisesRegex(ValueError, "profile directory is a symlink"):
+                SYNC.reconcile_install(repo, home, apply=True, backup_root=backup)
+
+            self.assertEqual(
+                "old-shared", (shared / "SKILL.md").read_text(encoding="utf-8")
+            )
+            self.assertTrue(manifest.is_file())
+            self.assertTrue(profile.is_symlink())
+            self.assertFalse(backup.exists())
+
+    def test_symlinked_shared_root_fails_without_touching_authority(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            home = root / "home"
+            repo = self.make_repo(root)
+            backup = root / "backups"
+            shared = home / ".agents/skills"
+            shared.parent.mkdir(parents=True)
+            shared.symlink_to(repo / "skills", target_is_directory=True)
+
+            with self.assertRaisesRegex(ValueError, "shared Skill root"):
+                SYNC.reconcile_install(repo, home, apply=True, backup_root=backup)
+
+            for name in ("alpha-skill", "beta-skill"):
+                self.assertTrue((repo / "skills" / name / "SKILL.md").is_file())
+            self.assertTrue(shared.is_symlink())
+            self.assertFalse(backup.exists())
+
+    def test_symlinked_agents_ancestor_fails_without_external_mutation(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            home = root / "home"
+            home.mkdir()
+            repo = self.make_repo(root)
+            backup = root / "backups"
+            external_skill = root / "external-agents/skills/alpha-skill"
+            external_skill.mkdir(parents=True)
+            manifest = external_skill / "SKILL.md"
+            manifest.write_text("external", encoding="utf-8")
+            (home / ".agents").symlink_to(
+                root / "external-agents", target_is_directory=True
+            )
+
+            with self.assertRaisesRegex(ValueError, "shared Skill root"):
+                SYNC.reconcile_install(repo, home, apply=True, backup_root=backup)
+
+            self.assertEqual("external", manifest.read_text(encoding="utf-8"))
+            self.assertFalse(backup.exists())
+
     def test_toml_list_replacement_preserves_other_settings(self) -> None:
         original = 'theme = "dark"\nextra_skill_dirs = [ "/old" ]\n[models]\n'
         updated = SYNC.replace_toml_string_list(

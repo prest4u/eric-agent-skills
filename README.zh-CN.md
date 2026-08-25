@@ -77,4 +77,6 @@ python3 scripts/sync_user_install.py --apply
 
 可扩展工具入口架构见 [`docs/release/v1.3.0-tool-authority.md`](docs/release/v1.3.0-tool-authority.md)。
 
+家长反馈的编辑判断与验证器升级见 [`docs/release/v1.3.1-parent-feedback.md`](docs/release/v1.3.1-parent-feedback.md)。
+
 首版候选的验收矩阵与尚未解除的发布门禁见 [`docs/release/hub-v1.0.0-acceptance.md`](docs/release/hub-v1.0.0-acceptance.md)。
