@@ -18,6 +18,32 @@ from pathlib import Path
 
 
 IDENTIFIER_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+LICENSE_FILE_NAMES = {
+    "license",
+    "license.md",
+    "licence",
+    "licence.md",
+    "copying",
+}
+LICENSE_HEADING_RE = re.compile(r"^#{1,3}\s+license\s*$", re.IGNORECASE)
+NEXT_HEADING_RE = re.compile(r"^#{1,3}\s+\S")
+
+
+def license_evidence_bytes(raw: bytes, evidence_path: str) -> bytes:
+    """Hash a LICENSE file whole; for README evidence, pin only the License section."""
+    name = Path(evidence_path).name.lower()
+    if name in LICENSE_FILE_NAMES:
+        return raw
+    text = raw.decode("utf-8", errors="replace")
+    lines = text.splitlines()
+    start = next((index for index, line in enumerate(lines) if LICENSE_HEADING_RE.fullmatch(line)), None)
+    if start is None:
+        return raw
+    end = next(
+        (index for index in range(start + 1, len(lines)) if NEXT_HEADING_RE.match(lines[index])),
+        len(lines),
+    )
+    return ("\n".join(lines[start:end]).strip() + "\n").encode("utf-8")
 
 
 def repository_key(url: str) -> str:
@@ -101,7 +127,7 @@ def verify_license(checkout: Path, entry: dict) -> str | None:
         raise ValueError(f"license evidence escapes checkout: {evidence_path}") from exc
     if not evidence_path.is_file():
         raise ValueError(f"license evidence is missing: {evidence_path}")
-    license_bytes = evidence_path.read_bytes()
+    license_bytes = license_evidence_bytes(evidence_path.read_bytes(), evidence)
     license_text = license_bytes.decode("utf-8", errors="replace")
     if entry["license"].split("-")[0].lower() not in license_text.lower():
         raise ValueError(f"configured license is not present in evidence: {entry['id']}")

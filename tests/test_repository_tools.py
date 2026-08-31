@@ -93,6 +93,56 @@ class UpstreamSafetyTest(unittest.TestCase):
             with self.assertRaises(ValueError):
                 SYNC.verify_license(checkout, entry)
 
+    def test_readme_body_change_does_not_count_as_license_change(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            checkout = Path(temp)
+            (checkout / "README.md").write_text(
+                "# Skills\n\nOld catalog\n\n## License\n\nMIT\n",
+                encoding="utf-8",
+            )
+            entry = {
+                "id": "sample",
+                "license": "MIT",
+                "license_evidence_path": "README.md",
+            }
+            digest = SYNC.verify_license(checkout, entry)
+            (checkout / "README.md").write_text(
+                "# Skills\n\nNew catalog entry\n\n## License\n\nMIT\n",
+                encoding="utf-8",
+            )
+            entry["license_sha256"] = digest
+            self.assertEqual(digest, SYNC.verify_license(checkout, entry))
+
+    def test_readme_license_section_change_is_blocked(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            checkout = Path(temp)
+            (checkout / "README.md").write_text(
+                "# Skills\n\nCatalog\n\n## License\n\nMIT\n",
+                encoding="utf-8",
+            )
+            digest = SYNC.verify_license(
+                checkout,
+                {
+                    "id": "sample",
+                    "license": "MIT",
+                    "license_evidence_path": "README.md",
+                },
+            )
+            (checkout / "README.md").write_text(
+                "# Skills\n\nCatalog\n\n## License\n\nApache-2.0\n",
+                encoding="utf-8",
+            )
+            with self.assertRaises(ValueError):
+                SYNC.verify_license(
+                    checkout,
+                    {
+                        "id": "sample",
+                        "license": "MIT",
+                        "license_evidence_path": "README.md",
+                        "license_sha256": digest,
+                    },
+                )
+
     def _update_fixture(self, root: Path, *, commit: str = "new-commit"):
         repo = root / "repo"
         checkout = root / "checkout"

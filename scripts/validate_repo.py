@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import json
 import re
+import subprocess
 import sys
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -106,6 +107,28 @@ def validate_markdown_links(path: Path, repo: Path) -> list[Issue]:
         if not resolved.exists():
             issues.append(Issue("BROKEN_LINK", str(path.relative_to(repo)), raw_target))
     return issues
+
+
+def git_tracked_relative_paths(repo: Path) -> set[str] | None:
+    if not (repo / ".git").exists():
+        return None
+    try:
+        output = subprocess.check_output(
+            ["git", "-C", str(repo), "ls-files", "-z"],
+            stderr=subprocess.DEVNULL,
+        )
+    except (OSError, subprocess.CalledProcessError):
+        return None
+    return {item.decode() for item in output.split(b"\0") if item}
+
+
+def is_published_bytecode(relative: str, tracked: set[str] | None) -> bool:
+    if tracked is None:
+        return True
+    if relative in tracked:
+        return True
+    prefix = relative.rstrip("/") + "/"
+    return any(item.startswith(prefix) for item in tracked)
 
 
 def snapshot_tree_hash(root: Path) -> str:
@@ -243,6 +266,7 @@ def validate(repo: Path, only_skill: str | None = None) -> list[Issue]:
     issues.extend(validate_upstream_snapshots(repo, upstream_entries, names))
 
     selected = [only_skill] if only_skill else names
+    tracked = git_tracked_relative_paths(repo)
     for name in selected:
         if name not in names:
             issues.append(Issue("UNKNOWN_SKILL", "catalog/skills.yaml", str(name)))
@@ -273,10 +297,10 @@ def validate(repo: Path, only_skill: str | None = None) -> list[Issue]:
                 issues.append(Issue("SYMLINK", relative, "published skills must be copy-safe"))
             if path.is_dir() and path.name == ".git":
                 issues.append(Issue("NESTED_GIT", relative, "nested repository"))
-            if path.is_dir() and path.name == "__pycache__":
+            if path.is_dir() and path.name == "__pycache__" and is_published_bytecode(relative, tracked):
                 issues.append(Issue("PYTHON_BYTECODE", relative, "generated Python cache directory"))
             if path.is_file():
-                if path.suffix.lower() in {".pyc", ".pyo"}:
+                if path.suffix.lower() in {".pyc", ".pyo"} and is_published_bytecode(relative, tracked):
                     issues.append(Issue("PYTHON_BYTECODE", relative, "generated Python bytecode"))
                 if " 2." in path.name:
                     issues.append(Issue("FINDER_DUPLICATE", relative, "duplicate filename"))

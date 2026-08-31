@@ -10,9 +10,13 @@ import sys
 from pathlib import Path
 
 
-def run(command: list[str], cwd: Path) -> int:
+def run(command: list[str], cwd: Path, env: dict[str, str] | None = None) -> int:
+    merged = os.environ.copy()
+    if env:
+        merged.update(env)
+    merged.setdefault("PYTHONDONTWRITEBYTECODE", "1")
     print(f"+ {' '.join(command)}", flush=True)
-    return subprocess.run(command, cwd=cwd, check=False).returncode
+    return subprocess.run(command, cwd=cwd, check=False, env=merged).returncode
 
 
 def main() -> int:

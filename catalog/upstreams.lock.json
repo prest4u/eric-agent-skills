@@ -28,7 +28,7 @@
       "targets": [
         "eric-quality-sites"
       ],
-      "license_sha256": "c0a05286fc2a9d52ec2480bf070867665b9357beef37c9c2812e5b2ece571b6a"
+      "license_sha256": "daf005969aac8cb4283b3777361f0244f4cce898b9a983a60b7f0d9e96f559bf"
     },
     {
       "id": "vercel-react-best-practices",
@@ -42,7 +42,7 @@
       "targets": [
         "eric-frontend-delivery"
       ],
-      "license_sha256": "c0a05286fc2a9d52ec2480bf070867665b9357beef37c9c2812e5b2ece571b6a"
+      "license_sha256": "daf005969aac8cb4283b3777361f0244f4cce898b9a983a60b7f0d9e96f559bf"
     },
     {
       "id": "vercel-composition-patterns",
@@ -56,7 +56,7 @@
       "targets": [
         "eric-frontend-delivery"
       ],
-      "license_sha256": "c0a05286fc2a9d52ec2480bf070867665b9357beef37c9c2812e5b2ece571b6a"
+      "license_sha256": "daf005969aac8cb4283b3777361f0244f4cce898b9a983a60b7f0d9e96f559bf"
     },
     {
       "id": "addy-frontend-ui-engineering",

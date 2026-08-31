@@ -6,7 +6,7 @@ The hub repository is the only editable source. Mirror repositories are generate
 
 `catalog/upstreams.lock.json` records source paths, exact commits, tree hashes, license evidence hashes, sync mode, and target skills. Machine-managed snapshots live only under `references/upstream/<source>/`; an update never rewrites Eric-owned `SKILL.md` files.
 
-The weekly workflow creates a review-only pull request after repository validation and a pinned SkillSpector scan. It blocks path escapes, symlinks, large files, local snapshot drift, changed license evidence, and high or critical security findings. It never auto-merges.
+The weekly workflow creates a review-only pull request after repository validation and a pinned SkillSpector scan. It blocks path escapes, symlinks, large files, local snapshot drift, changed license evidence, and high or critical security findings. It never auto-merges. When license evidence is a README, only the License section is hashed, so unrelated README edits do not fail the job.
 
 ## Mirror bootstrap and sync
 
