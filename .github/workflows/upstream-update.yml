@@ -29,19 +29,28 @@ jobs:
           cache-dependency-path: requirements-dev.txt
       - run: python -m pip install -r requirements-dev.txt
       - name: Stop when an earlier update PR is awaiting review
+        id: pending
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           count="$(gh pr list --state open --search 'head:automation/upstream-update-' --json number --jq length)"
-          test "$count" = "0"
+          echo "open=${count}" >> "$GITHUB_OUTPUT"
+          if [ "$count" != "0" ]; then
+            echo "An upstream update PR is already open; skipping."
+          fi
       - name: Update locked snapshots
+        if: steps.pending.outputs.open == '0'
         run: |
           cp catalog/upstreams.lock.json "${RUNNER_TEMP}/upstreams.before.json"
           python scripts/sync_upstreams.py update --all
-      - run: python scripts/validate_repo.py
-      - run: python -m unittest discover -s tests -v
-      - run: python scripts/export_mirrors.py --check
+      - if: steps.pending.outputs.open == '0'
+        run: python scripts/validate_repo.py
+      - if: steps.pending.outputs.open == '0'
+        run: python -m unittest discover -s tests -v
+      - if: steps.pending.outputs.open == '0'
+        run: python scripts/export_mirrors.py --check
       - name: Install the locked SkillSpector revision
+        if: steps.pending.outputs.open == '0'
         run: |
           commit="$(python - <<'PY'
           import json
@@ -50,18 +59,22 @@ jobs:
           PY
           )"
           python -m pip install "git+https://github.com/NVIDIA/SkillSpector.git@${commit}"
-      - run: python scripts/run_security_scan.py --output "${RUNNER_TEMP}/security-reports"
+      - if: steps.pending.outputs.open == '0'
+        run: python scripts/run_security_scan.py --output "${RUNNER_TEMP}/security-reports"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: steps.pending.outputs.open == '0'
         with:
           name: upstream-skillspector-reports
           path: ${{ runner.temp }}/security-reports
       - name: Build review report
+        if: steps.pending.outputs.open == '0'
         run: |
           python scripts/render_upstream_report.py \
             --before "${RUNNER_TEMP}/upstreams.before.json" \
             --after catalog/upstreams.lock.json \
             --output "${RUNNER_TEMP}/upstream-update.md"
       - name: Open a review-only PR
+        if: steps.pending.outputs.open == '0'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
