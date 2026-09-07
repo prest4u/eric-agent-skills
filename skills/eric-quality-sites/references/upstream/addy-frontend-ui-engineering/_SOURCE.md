@@ -2,6 +2,6 @@
 
 - Repository: https://github.com/addyosmani/agent-skills.git
 - Source path: `skills/frontend-ui-engineering`
-- Commit: `d2c37ef6225dd8726cdd369a8030307f48592d26`
+- Commit: `48cb1168aeaaa70dfc2bbf709eddfa2a8ed8129a`
 - License: MIT
 - Update policy: replace this directory only through `scripts/sync_upstreams.py`.
