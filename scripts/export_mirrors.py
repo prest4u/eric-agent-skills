@@ -43,13 +43,17 @@ def export_one(repo: Path, record: dict, output: Path) -> None:
         target = output / name
         if not target.exists():
             shutil.copy2(governance / name, target)
-    readme = (
-        f"# {record['name']}\n\n"
-        "This repository is a generated, independently installable mirror.\n\n"
-        "Canonical source: https://github.com/prest4u/eric-agent-skills\n\n"
-        "Do not edit generated skill files here. Submit changes to the canonical repository first.\n"
-    )
-    (output / "README.md").write_text(readme, encoding="utf-8")
+    readme_template = governance / record["name"] / "README.md"
+    if readme_template.is_file():
+        shutil.copy2(readme_template, output / "README.md")
+    else:
+        readme = (
+            f"# {record['name']}\n\n"
+            "This repository is a generated, independently installable mirror.\n\n"
+            "Canonical source: https://github.com/prest4u/eric-agent-skills\n\n"
+            "Do not edit generated skill files here. Submit changes to the canonical repository first.\n"
+        )
+        (output / "README.md").write_text(readme, encoding="utf-8")
     managed = {
         path.relative_to(output).as_posix(): sha256(path)
         for path in sorted(p for p in output.rglob("*") if p.is_file())

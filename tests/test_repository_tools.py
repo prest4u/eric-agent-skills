@@ -290,6 +290,17 @@ class SecurityGateTest(unittest.TestCase):
 
 
 class MirrorExportTest(unittest.TestCase):
+    def test_video_mirrors_keep_their_install_guides(self) -> None:
+        records = {item["name"]: item for item in MIRRORS.mirror_records(REPO)}
+        with tempfile.TemporaryDirectory() as temp:
+            for name in ("video-production-stack", "video-qa"):
+                output = Path(temp) / name
+                MIRRORS.export_one(REPO, records[name], output)
+                original = (REPO / "mirror-support" / name / "README.md").read_bytes()
+                manifest = json.loads((output / ".mirror-manifest.json").read_text(encoding="utf-8"))
+                self.assertEqual(original, (output / "README.md").read_bytes())
+                self.assertEqual(hashlib.sha256(original).hexdigest(), manifest["managed_files"]["README.md"])
+
     def test_video_mirror_preserves_repository_governance(self) -> None:
         record = next(
             item for item in MIRRORS.mirror_records(REPO)
