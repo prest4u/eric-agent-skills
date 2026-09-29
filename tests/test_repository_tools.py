@@ -290,6 +290,32 @@ class SecurityGateTest(unittest.TestCase):
 
 
 class MirrorExportTest(unittest.TestCase):
+    def test_video_mirror_preserves_repository_governance(self) -> None:
+        record = next(
+            item for item in MIRRORS.mirror_records(REPO)
+            if item["name"] == "video-production-stack"
+        )
+        with tempfile.TemporaryDirectory() as temp:
+            output = Path(temp) / "mirror"
+            MIRRORS.export_one(REPO, record, output)
+            manifest = json.loads((output / ".mirror-manifest.json").read_text(encoding="utf-8"))
+            for name in (".gitignore", "CONTRIBUTING.md", "SECURITY.md"):
+                self.assertEqual((REPO / "mirror-support" / name).read_bytes(), (output / name).read_bytes())
+                self.assertIn(name, manifest["managed_files"])
+
+    def test_skill_owned_gitignore_takes_precedence(self) -> None:
+        record = next(
+            item for item in MIRRORS.mirror_records(REPO)
+            if item["name"] == "eric-designed-pdf"
+        )
+        with tempfile.TemporaryDirectory() as temp:
+            output = Path(temp) / "mirror"
+            MIRRORS.export_one(REPO, record, output)
+            original = (REPO / "skills" / record["name"] / ".gitignore").read_bytes()
+            manifest = json.loads((output / ".mirror-manifest.json").read_text(encoding="utf-8"))
+            self.assertEqual(original, (output / ".gitignore").read_bytes())
+            self.assertEqual(hashlib.sha256(original).hexdigest(), manifest["managed_files"][".gitignore"])
+
     def test_exports_all_guarded_mirrors(self) -> None:
         records = MIRRORS.mirror_records(REPO)
         self.assertEqual(18, len(records))

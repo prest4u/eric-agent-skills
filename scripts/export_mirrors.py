@@ -38,6 +38,11 @@ def export_one(repo: Path, record: dict, output: Path) -> None:
     root_notices = repo / "THIRD_PARTY_NOTICES.md"
     if not (output / "THIRD_PARTY_NOTICES.md").exists():
         shutil.copy2(root_notices, output / "THIRD_PARTY_NOTICES.md")
+    governance = repo / "mirror-support"
+    for name in (".gitignore", "CONTRIBUTING.md", "SECURITY.md"):
+        target = output / name
+        if not target.exists():
+            shutil.copy2(governance / name, target)
     readme = (
         f"# {record['name']}\n\n"
         "This repository is a generated, independently installable mirror.\n\n"
