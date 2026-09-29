@@ -1,6 +1,6 @@
 interface:
   display_name: "Video Production Stack"
-  short_description: "Move a video one visible stage forward"
-  default_prompt: "Use $video-production-stack to move this video to its next visible artifact and verify that stage."
+  short_description: "Produce the requested video using the needed stages"
+  default_prompt: "Use $video-production-stack to produce the requested video using the needed stages. Follow the requested scope and load only relevant references."
 policy:
   allow_implicit_invocation: false
