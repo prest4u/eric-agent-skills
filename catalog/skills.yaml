@@ -199,14 +199,14 @@ skills:
     tests: ["python3 scripts/run_skill_tests.py --skill elevenlabs-tts"]
   - name: video-production-stack
     category: video
-    version: 1.0.2
+    version: 1.0.3
     visibility: public
     mirror: prest4u/video-production-stack
     upstreams: [remotion-best-practices, remotion-create, remotion-captions, remotion-multimedia]
     tests: ["python3 scripts/run_skill_tests.py --skill video-production-stack"]
   - name: video-qa
     category: video
-    version: 1.0.2
+    version: 1.0.3
     visibility: public
     mirror: prest4u/video-qa
     upstreams: [remotion-render, remotion-best-practices]
