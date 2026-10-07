@@ -289,33 +289,33 @@ fingerprints:
   file: references/upstream/remotion-best-practices/remotion-markup/remotion-maps/techniques/maptiler/assets/MapTilerVectorElement.ts
   reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
     but contains no credential value.
-- hash: sha256:a261502268a47d8c73b5970b872c62ecc029d6927a13f6c8da7d5f8e071b1697
+- hash: sha256:6a3e47684b46f5229a79f351faf2d5b9f079fdf98f50b7f67c572ba1c9159776
   rule_id: PE3
   file: references/upstream/remotion-best-practices/remotion-maps/techniques/mapbox/TECHNIQUE.md
-  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
-    but contains no credential value.
-- hash: sha256:48c0c35ab66feb89532e2be9c66a7e6313b6321efb70f747179efc890f738f96
+  reason: 'Reviewed Remotion upstream 93f43538d2404e03b13c9edb8ba066407648765f: Mapbox
+    examples read REMOTION_MAPBOX_TOKEN from the environment and embed no token value.'
+- hash: sha256:0a3d7bd31149a10c5416fa3a5162f780c7f2dbddbcd2e923461f4e943ec5930a
   rule_id: PE3
   file: references/upstream/remotion-best-practices/remotion-maps/techniques/mapbox/TECHNIQUE.md
-  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
-    but contains no credential value.
-- hash: sha256:79472fcd38e57a653d8787cb81182e402532c84fcebd242fc431dd6630af5044
+  reason: 'Reviewed Remotion upstream 93f43538d2404e03b13c9edb8ba066407648765f: Mapbox
+    examples read REMOTION_MAPBOX_TOKEN from the environment and embed no token value.'
+- hash: sha256:78fb4bfceda4d17bedbbd21fd21c6cb6ae924a02e90c07d8f413dcfc8f2284d9
   rule_id: PE3
   file: references/upstream/remotion-best-practices/remotion-maps/techniques/mapbox/TECHNIQUE.md
-  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
-    but contains no credential value.
-- hash: sha256:e3199aaf3fdf21327c0125e38b01c34b4b92038666dff178dad182d232ab7137
+  reason: 'Reviewed Remotion upstream 93f43538d2404e03b13c9edb8ba066407648765f: Mapbox
+    examples read REMOTION_MAPBOX_TOKEN from the environment and embed no token value.'
+- hash: sha256:e9f00de21c7921646dc2a00dd1c2702f9fb50f97ef56de589fb93aade944bdfe
   rule_id: PE3
   file: references/upstream/remotion-best-practices/remotion-markup/remotion-maps/techniques/mapbox/TECHNIQUE.md
-  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
-    but contains no credential value.
-- hash: sha256:92451ba860021c8d3b656ab7e4bea24353ad2172fa31a9cea5268ea9d3fb79e9
+  reason: 'Reviewed Remotion upstream 93f43538d2404e03b13c9edb8ba066407648765f: Mapbox
+    examples read REMOTION_MAPBOX_TOKEN from the environment and embed no token value.'
+- hash: sha256:40df8bfe5cb93ca3e37a1d5ce6fa08624affb1c28fc6036adb6f697c8bd0d007
   rule_id: PE3
   file: references/upstream/remotion-best-practices/remotion-markup/remotion-maps/techniques/mapbox/TECHNIQUE.md
-  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
-    but contains no credential value.
-- hash: sha256:e8ae0f34b0a3326cd4117bae2cf7729a4bba41ded44ed41b38c00318ca7a4a62
+  reason: 'Reviewed Remotion upstream 93f43538d2404e03b13c9edb8ba066407648765f: Mapbox
+    examples read REMOTION_MAPBOX_TOKEN from the environment and embed no token value.'
+- hash: sha256:7af885814e7389d94001c1ac8e20d052a9808b547f5a98107cdb9f96a26b071d
   rule_id: PE3
   file: references/upstream/remotion-best-practices/remotion-markup/remotion-maps/techniques/mapbox/TECHNIQUE.md
-  reason: Reviewed pinned Remotion Mapbox documentation; it names public token handling
-    but contains no credential value.
+  reason: 'Reviewed Remotion upstream 93f43538d2404e03b13c9edb8ba066407648765f: Mapbox
+    examples read REMOTION_MAPBOX_TOKEN from the environment and embed no token value.'
