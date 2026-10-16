@@ -1,6 +1,6 @@
 # adaptive-quality-loop
 
-> Match implementation rigor to BUILD, PROOF, or RELEASE risk.
+> Choose a focused problem-solving method when explicitly requested.
 
 ## Welcome
 
@@ -9,13 +9,13 @@ needed to inspect, install, adapt, test, and contribute to the Skill without clo
 
 ## What it does
 
-- Keep ordinary work output-first and lightweight
-- Use reversible proofs when one assumption could cause material rework
-- Require frozen identities and independent review for external or high-impact releases
+- Choose a reversible trial for an uncertainty that could cause material rework
+- Diagnose repeated failures using the actual result and a changed hypothesis
+- Select relevant guidance without adding another task workflow
 
-**Use it when:** A durable implementation, multi-file change, formal validation, migration, deployment, or publication needs proportionate quality gates.
+**Use it when:** You explicitly request Adaptive Quality Loop to work through a consequential uncertainty, missing verification, or repeated failure.
 
-**Do not use it when:** You only need advice, explanation, status, or a narrow read-only answer.
+**Do not use it when:** Ordinary implementation, design, review, advice, or status work can proceed under the current task instructions.
 
 ## Install
 
@@ -30,8 +30,8 @@ remain predictable.
 
 ## Example prompts
 
-- `Use $adaptive-quality-loop to implement this change with the smallest sufficient verification.`
-- `Prepare this exact commit for release and keep reviewer sign-off separate from publication.`
+- `Use $adaptive-quality-loop to choose a small trial for this unresolved implementation assumption.`
+- `Use $adaptive-quality-loop to diagnose this repeated failure from the actual logs and output.`
 
 ## Current invocation
 
