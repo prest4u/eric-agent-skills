@@ -15,6 +15,8 @@ from urllib.parse import urljoin, urlparse
 import requests
 from playwright.async_api import Response, async_playwright
 
+from video_intake import final_redaction_gate, redact_sensitive_text
+
 
 PAGE_HOSTS = {"douyin.com", "www.douyin.com", "v.douyin.com", "iesdouyin.com", "www.iesdouyin.com"}
 MEDIA_SUFFIXES = (
@@ -49,6 +51,8 @@ def host_matches(host: str, suffixes: tuple[str, ...]) -> bool:
 
 def validate_page_url(url: str) -> None:
     parsed = urlparse(url)
+    if parsed.username or parsed.password:
+        raise ValueError("URL user information is not accepted")
     if parsed.scheme != "https" or (parsed.hostname or "").lower() not in PAGE_HOSTS:
         raise ValueError("Only public HTTPS Douyin video links are accepted")
 
@@ -56,6 +60,8 @@ def validate_page_url(url: str) -> None:
 def validate_media_url(url: str) -> None:
     parsed = urlparse(url)
     host = (parsed.hostname or "").lower()
+    if parsed.username or parsed.password:
+        raise ValueError("URL user information is not accepted")
     if parsed.scheme != "https" or not host_matches(host, MEDIA_SUFFIXES):
         raise ValueError(f"Unexpected media host: {host or 'missing'}")
 
@@ -311,8 +317,8 @@ def transcribe(video: Path, folder: Path, metadata: dict, model: Path) -> dict:
         )
     (folder / "口播字幕.srt").write_text("\n".join(srt_rows), encoding="utf-8")
     md = (
-        f"# {metadata['title']}｜口播转写\n\n"
-        f"> 来源：{metadata['source_url']}\n"
+        f"# {redact_sensitive_text(metadata['title'])}｜口播转写\n\n"
+        f"> 来源：{redact_sensitive_text(metadata['source_url'])}\n"
         f"> 视频 ID：{metadata['video_id']}\n"
         "> 说明：本稿由本机语音识别生成，专有名词与数字需结合原片复核。\n\n"
         f"{text}\n"
@@ -332,7 +338,7 @@ async def run(args: argparse.Namespace) -> int:
                 print(f"[{index}/{len(args.urls)}] 读取公开页面", flush=True)
                 try:
                     metadata = await capture(browser, url, args.wait_ms)
-                    folder = args.output_dir / f"{index:02d}-{safe_name(metadata['title'])} [{metadata['video_id']}]"
+                    folder = args.output_dir / f"{index:02d}-{safe_name(redact_sensitive_text(metadata['title']))} [{metadata['video_id']}]"
                     folder.mkdir(parents=True, exist_ok=True)
                     video, metadata["downloaded_bytes"] = acquire_media(metadata, folder)
                     transcript_file = folder / "口播原始转写.txt"
@@ -349,17 +355,17 @@ async def run(args: argparse.Namespace) -> int:
                     elif not args.download_only:
                         metadata["transcript"] = transcribe(video, folder, metadata, model)
                     (folder / "来源信息.json").write_text(
-                        json.dumps(metadata, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+                        json.dumps(final_redaction_gate(metadata), ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
                     )
                     statuses.append({"url": url, "status": "ok", "folder": str(folder)})
                     print(f"[{index}/{len(args.urls)}] 完成：{folder.name}", flush=True)
                 except Exception as error:
-                    statuses.append({"url": url, "status": "failed", "error": str(error)[:300]})
-                    print(f"[{index}/{len(args.urls)}] 失败：{error}", file=sys.stderr, flush=True)
+                    statuses.append({"url": url, "status": "failed", "error": redact_sensitive_text(str(error))[:300]})
+                    print(f"[{index}/{len(args.urls)}] 失败：{redact_sensitive_text(str(error))[:300]}", file=sys.stderr, flush=True)
         finally:
             await browser.close()
     (args.output_dir / "处理结果.json").write_text(
-        json.dumps(statuses, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        json.dumps(final_redaction_gate(statuses), ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
     return 0 if all(item["status"] == "ok" for item in statuses) else 2
 

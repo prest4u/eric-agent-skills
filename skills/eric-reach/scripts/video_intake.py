@@ -213,6 +213,7 @@ def sanitize_display_path(path: str, max_segments: int = 128) -> str:
 
 def sanitize_display_url(raw_url: str, depth: int = 0, max_depth: int = 3) -> str:
     parts = urlsplit(raw_url)
+    parts = parts._replace(netloc=parts.netloc.rsplit("@", 1)[-1])
     if depth >= max_depth:
         return urlunsplit((parts.scheme, parts.netloc, sanitize_display_path(parts.path or "/"), "", ""))
     safe_query = []

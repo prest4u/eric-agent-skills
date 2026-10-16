@@ -1,11 +1,15 @@
 # eric-teaching-polish
 
-> Remove AI and backstage workflow language from teaching materials.
+> Revise classroom language and explicitly requested exercises while preserving meaning and answer accuracy.
 
 ## Welcome
 
 `eric-teaching-polish` is a standalone Codex Skill by Eric (`prest4u`). This repository contains everything
 needed to inspect, install, adapt, test, and contribute to the Skill without cloning a larger collection.
+
+## Current scope
+
+Apply local wording corrections to the supplied sentence, activity, page or pack. When the user explicitly requests an exercise-quality rebuild, revise prompts, answers and teacher guidance together while retaining the learning target and suitable difficulty. Read SKILL.md for the current scope and checks.
 
 ## What it does
 
@@ -13,7 +17,7 @@ needed to inspect, install, adapt, test, and contribute to the Skill without clo
 - Keep student, parent, teacher, and public surfaces appropriately separated
 - Validate teaching text for internal labels, production residue, and cross-package leaks
 
-**Use it when:** A lesson, worksheet, handout, slide, PDF, or teaching draft sounds like an AI workflow instead of a real teacher.
+**Use it when:** A supplied teaching text needs clearer classroom language, or you explicitly request an exercise-quality rebuild with matching answers and teacher guidance.
 
 **Do not use it when:** The request is pure parent post-class feedback or requires inventing unsupported teaching facts.
 

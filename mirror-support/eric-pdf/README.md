@@ -46,7 +46,7 @@ where they provide reproducible behavior.
 - `references/` — focused operating guidance loaded only when relevant.
 - `scripts/` — validators, builders, or deterministic helpers when present.
 - `tests/` and `test-prompts.json` — contract and regression coverage when present.
-- `assets/` and `templates/` — reusable source assets when present; generated deliverables are excluded.
+- `assets/` and `templates/` — reusable source assets when present; bundled demo PDFs and rendered previews are included; user-generated deliverables are excluded.
 
 ## Validation
 
@@ -57,7 +57,7 @@ or independent-review evidence when the Skill explicitly requires those gates.
 ## Safety and privacy
 
 Do not commit credentials, account state, private task transcripts, personal records, student/customer data,
-local absolute paths, caches, or generated deliverables. Invocation guides workflow; it does not grant authority
+local absolute paths, caches, or user-generated deliverables. Invocation guides workflow; it does not grant authority
 to publish, deploy, spend money, overwrite files, access accounts, or perform destructive actions.
 
 ## Contributing
