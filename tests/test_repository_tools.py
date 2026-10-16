@@ -532,5 +532,27 @@ class IndependentInstallTest(unittest.TestCase):
                 self.assertIn("无需安装或读取 `$eric-slate-white-pdf`", visual)
 
 
+class StandaloneWorkflowTests(unittest.TestCase):
+    def test_ci_rejects_unlisted_tracked_files(self):
+        workflow = yaml.safe_load((REPO / "skills/eric-handoff/.github/workflows/ci.yml").read_text())
+        run = next(step["run"] for step in workflow["jobs"]["validate"]["steps"] if step.get("name") == "Verify exported package and run bundled tests")
+        code = run[run.index("\n") + 1:run.rfind("\nPYCODE")]
+        with tempfile.TemporaryDirectory() as raw:
+            root = Path(raw)
+            skill = root / "SKILL.md"
+            skill.write_text("---\nname: test-skill\n---\n")
+            manifest = {"skill": "test-skill", "managed_files": {"SKILL.md": hashlib.sha256(skill.read_bytes()).hexdigest()}}
+            (root / ".mirror-manifest.json").write_text(json.dumps(manifest))
+            clean = subprocess.run([sys.executable, "-c", code], cwd=root, capture_output=True, text=True)
+            self.assertEqual(clean.returncode, 0, clean.stderr)
+            subprocess.run(["git", "init", "-q"], cwd=root, check=True)
+            (root / "unexpected.txt").write_text("not in the export")
+            subprocess.run(["git", "add", "--", "unexpected.txt"], cwd=root, check=True)
+            bad = subprocess.run([sys.executable, "-c", code], cwd=root, capture_output=True, text=True)
+            self.assertNotEqual(bad.returncode, 0)
+            self.assertIn("unmanaged/missing files", bad.stderr)
+            self.assertIn("unexpected.txt", bad.stderr)
+
+
 if __name__ == "__main__":
     unittest.main()

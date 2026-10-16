@@ -23,6 +23,16 @@ jobs:
           from pathlib import Path
           root = Path.cwd()
           manifest = json.loads(Path(".mirror-manifest.json").read_text())
+          actual_files = set()
+          for path in root.rglob("*"):
+              relative = path.relative_to(root)
+              if relative.parts[0] == ".git":
+                  continue
+              assert not path.is_symlink(), str(relative)
+              if path.is_file():
+                  actual_files.add(relative.as_posix())
+          expected_files = set(manifest["managed_files"]) | {".mirror-manifest.json"}
+          assert actual_files == expected_files, f"unmanaged/missing files: {sorted(actual_files ^ expected_files)}"
           for name, expected in manifest["managed_files"].items():
               path = root / name
               assert path.resolve().is_relative_to(root), name
