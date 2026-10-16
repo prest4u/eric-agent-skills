@@ -102,6 +102,8 @@ def strict_login_backed_risk_code(exc: BackendFailure) -> str | None:
         return "HTTP_429"
     if exc.status == 412 or re.search(r"\bhttp\s*412\b|\bstatus\s*[:=]?\s*412\b", detail):
         return "HTTP_412"
+    if any(marker in detail for marker in ("sign in to confirm", "not a bot", "不是聊天机器人", "不是机器人", "login_required")):
+        return "LOGIN_CHALLENGE"
     if "captcha" in detail or "验证码" in detail:
         return "CAPTCHA"
     if any(marker in detail for marker in ("access too frequent", "access-too-frequent", "访问频繁", "请求频繁", "too many requests", "rate limit")):
@@ -306,7 +308,11 @@ def public_url_info(url_info: dict[str, str]) -> dict[str, str]:
 
 
 def yt_dlp_argv(*args: str) -> list[str]:
-    return [*YTDLP_NEUTRAL_PREFIX, *args]
+    # Config is deliberately ignored: select an installed runtime explicitly.
+    # Node is opt-in in yt-dlp; Deno remains preferred when present.
+    runtime = next((name for name in ("deno", "node") if shutil.which(name)), None)
+    runtime_args = ["--js-runtimes", runtime] if runtime else []
+    return [*YTDLP_NEUTRAL_PREFIX, *runtime_args, *args]
 
 
 def final_redaction_gate(value: Any, path: tuple[str, ...] = ()) -> Any:
@@ -424,10 +430,12 @@ def safe_output_dir(value: str | None) -> Path:
     return path
 
 
-def backend_plan(url_info: dict[str, str], visual_mode: str) -> list[dict[str, Any]]:
+def backend_plan(url_info: dict[str, str], visual_mode: str, youtube_backend: str = "yt-dlp") -> list[dict[str, Any]]:
     """Return the declared free-only acquisition plan without running a backend."""
     platform = url_info["platform"]
-    if platform == "youtube":
+    if platform == "youtube" and youtube_backend == "opencli":
+        steps = [("metadata_and_playability", "opencli-youtube"), ("subtitle", "opencli-youtube")]
+    elif platform == "youtube":
         steps = [
             ("metadata", "yt-dlp"),
             ("manual_or_auto_subtitle", "yt-dlp"),
@@ -491,6 +499,8 @@ def parse_timecode(value: Any) -> float | None:
     if isinstance(value, (int, float)):
         return float(value)
     text = str(value).strip().replace(",", ".")
+    if re.fullmatch(r"\d+(?:\.\d+)?s", text):
+        return float(text[:-1])
     try:
         return float(text)
     except ValueError:
@@ -617,19 +627,26 @@ def decide_visual(intent: str, mode: str, transcript_status: str, coverage: floa
         return True, "user_forced_visual"
     if mode == "never":
         return False, "user_disabled_visual"
-    haystack = (intent + " " + source_text).lower()
+    requested = intent.lower()
     visual_cues = (
         "画面", "看图", "图表", "屏幕", "操作", "演示", "场景", "剪辑", "镜头", "动作", "表情", "肢体",
         "产品", "穿搭", "字幕烧录", "画面文字", "slide", "chart", "screen", "demo", "scene", "editing",
         "body language", "on-screen", "visual", "show me",
     )
-    transcript_only = ("只要字幕", "只提取字幕", "说了什么", "口播", "transcript only", "subtitles only")
-    if any(cue in haystack for cue in visual_cues):
+    transcript_only = ("只要字幕", "只提取字幕", "只要口播", "transcript only", "subtitles only")
+    # The requested modality outranks metadata hints and missing subtitles.
+    # A transcript-only request may need audio ASR, but not visual preparation.
+    if any(cue in requested for cue in transcript_only):
+        return False, "transcript_only_request"
+    if any(cue in requested for cue in visual_cues):
         return True, "visual_intent_detected"
+    spoken_content = ("说了什么", "口播", "what does this video say", "what was said")
+    if any(cue in requested for cue in spoken_content):
+        return False, "spoken_content_requested"
+    if any(cue in source_text.lower() for cue in visual_cues):
+        return True, "source_suggests_visual_content"
     if transcript_status != "ok" or coverage < 0.5:
         return True, "transcript_missing_or_insufficient"
-    if any(cue in haystack for cue in transcript_only):
-        return False, "reliable_transcript_satisfies_request"
     return False, "reliable_transcript_no_visual_need"
 
 
@@ -707,12 +724,14 @@ def normalize_opencli_metadata(platform: str, payload: Any) -> dict[str, Any]:
         return None
 
     normalized = {
-        "id": first("id", "bvid", "bv号", "笔记id", "note_id"),
+        "id": first("id", "videoid", "bvid", "bv号", "笔记id", "note_id"),
         "title": first("title", "标题", "视频标题", "笔记标题"),
-        "author": first("author", "作者", "up主", "uploader", "昵称", "博主"),
+        "author": first("author", "channel", "作者", "up主", "uploader", "昵称", "博主"),
         "duration": first("duration", "时长", "视频时长"),
-        "published_at": first("published_at", "发布时间", "发布日期", "publish_time", "上传时间"),
+        "published_at": first("published_at", "publishdate", "发布时间", "发布日期", "publish_time", "上传时间"),
     }
+    if platform == "youtube":
+        normalized.update({"playability_status": first("playabilityStatus"), "playability_reason": first("playabilityReason"), "members_only": first("membersOnly")})
     if platform == "bilibili" and normalized["id"] is None:
         normalized["id"] = first("bvid")
     return {key: value for key, value in normalized.items() if value is not None}
@@ -784,7 +803,11 @@ def is_xiaohongshu_login_wall(payload: Any) -> bool:
 
 
 class VideoIntake:
-    def __init__(self, url_info: dict[str, str], intent: str, visual_mode: str, page: int | None, output: Path, runner: Runner | None = None):
+    def __init__(self, url_info: dict[str, str], intent: str, visual_mode: str, page: int | None, output: Path, runner: Runner | None = None, youtube_backend: str = "yt-dlp"):
+        if youtube_backend not in {"yt-dlp", "opencli"}:
+            raise ValueError("unsupported YouTube backend")
+        self.youtube_backend = youtube_backend
+        self.youtube_playability_verified = False
         self.url_info = url_info
         self.intent = intent
         self.visual_mode = visual_mode
@@ -806,8 +829,9 @@ class VideoIntake:
 
     def record_failure(self, exc: BackendFailure) -> None:
         is_login_backed = self.url_info["platform"] in {"bilibili", "xiaohongshu"}
-        strict_risk = strict_login_backed_risk_code(exc) if is_login_backed and exc.backend.startswith("opencli") else None
-        boundary = strict_risk or (access_boundary_code(exc.detail) if exc.backend.startswith("opencli") else None)
+        network_backend = exc.backend.startswith("opencli") or exc.backend == "yt-dlp"
+        strict_risk = strict_login_backed_risk_code(exc) if network_backend else None
+        boundary = strict_risk or (access_boundary_code(exc.detail) if network_backend else None)
         if boundary:
             if strict_risk or exc.stage == "metadata":
                 scope = "platform"
@@ -838,7 +862,15 @@ class VideoIntake:
         if platform == "generic":
             return source_from_metadata(platform, display_url, {})
         try:
-            if platform == "youtube":
+            if platform == "youtube" and self.youtube_backend == "opencli":
+                raw_meta = self.run_json(["opencli", "youtube", "video", fetch_url, "-f", "json"], "metadata", "opencli-youtube")
+                self.meta = normalize_opencli_metadata("youtube", raw_meta)
+                status = self.meta.get("playability_status")
+                if status != "OK":
+                    reason = str(self.meta.get("playability_reason") or status or "missing playability status")
+                    raise BackendFailure("metadata", "opencli-youtube", None, f"YouTube playback unavailable ({status or 'MISSING_STATUS'}): {reason}")
+                self.youtube_playability_verified = True
+            elif platform == "youtube":
                 self.meta = self.run_json(yt_dlp_argv("--dump-single-json", "--no-playlist", fetch_url), "metadata", "yt-dlp")
             elif platform == "bilibili":
                 argv = ["opencli", "bilibili", "video", fetch_url]
@@ -870,7 +902,11 @@ class VideoIntake:
         return source_from_metadata(platform, display_url, self.meta)
 
     def youtube_subtitle(self, allow_opencli: bool = True) -> tuple[str, str | None, list[dict[str, Any]]] | None:
-        choice = choose_subtitle(self.meta if isinstance(self.meta, dict) else {})
+        if self.youtube_backend == "opencli" and not self.youtube_playability_verified:
+            return None
+        if "platform" in self.access_blocks or "subtitle" in self.access_blocks:
+            return None
+        choice = choose_subtitle(self.meta if isinstance(self.meta, dict) else {}) if self.youtube_backend == "yt-dlp" else None
         if choice:
             language, source_type = choice
             stem = self.output / "source"
@@ -968,7 +1004,11 @@ class VideoIntake:
         url = private_fetch_url(self.url_info)
         if platform == "generic":
             return None
-        if platform in {"bilibili", "xiaohongshu"} and ("platform" in self.access_blocks or "media_download" in self.access_blocks):
+        if "platform" in self.access_blocks or "media_download" in self.access_blocks:
+            return None
+        if platform == "youtube" and self.youtube_backend == "opencli":
+            if not any(item.get("stage") == "media_download" for item in self.limitations):
+                self.limitations.append({"stage": "media_download", "backend": "opencli-youtube", "detail": "Browser transcript mode has no reviewed media downloader; no automatic yt-dlp or credential fallback."})
             return None
         attempt = (want_video, height)
         if attempt in self.media_attempts:
@@ -980,10 +1020,13 @@ class VideoIntake:
                     fmt = f"bv*[height<={height}]+ba/b[height<={height}]"
                     argv = yt_dlp_argv("--no-playlist", "--max-filesize", "1G", "-f", fmt, "--merge-output-format", "mp4", "-o", str(self.output / "media.%(ext)s"), url)
                 else:
-                    argv = yt_dlp_argv("--no-playlist", "--max-filesize", "1G", "-x", "--audio-format", "wav", "-o", str(self.output / "media.%(ext)s"), url)
+                    argv = yt_dlp_argv("--no-playlist", "--max-filesize", "1G", "-f", "bestaudio/best", "-x", "--audio-format", "wav", "-o", str(self.output / "media.%(ext)s"), url)
                 backend = "yt-dlp"
             elif platform == "bilibili":
-                argv = ["opencli", "bilibili", "download", url, "--output", str(self.output), "--quality", f"{height}p"]
+                # The installed adapter has no audio-only mode. Use its smallest
+                # supported video size for ASR instead of pretending it omits video.
+                quality = f"{height}p" if want_video else "480p"
+                argv = ["opencli", "bilibili", "download", url, "--output", str(self.output), "--quality", quality]
                 if self.page:
                     argv += ["--page", str(self.page)]
                 argv += ["-f", "json"]
@@ -991,6 +1034,17 @@ class VideoIntake:
             else:
                 argv = ["opencli", "xiaohongshu", "download", url, "--output", str(self.output), "-f", "json"]
                 backend = "opencli-xiaohongshu"
+            if not want_video and platform in {"bilibili", "xiaohongshu"}:
+                detail = (
+                    "The installed adapter has no audio-only download mode; local ASR requires combined video/audio source media. "
+                    "No frame extraction or OCR is requested."
+                )
+                if platform == "xiaohongshu":
+                    detail += " This adapter can also download images from the same note and exposes no media-type filter."
+                self.limitations.append({
+                    "stage": "media_download", "backend": backend,
+                    "code": "AUDIO_ONLY_DOWNLOAD_UNAVAILABLE", "detail": detail,
+                })
             self.runner.run(argv, stage="media_download", backend=backend, timeout=1800)
             self.record_success("media_download", backend)
         except BackendFailure as exc:
@@ -1295,6 +1349,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--intent", default="")
     parser.add_argument("--visual", choices=("auto", "always", "never"), default="auto")
     parser.add_argument("--page", type=int)
+    parser.add_argument("--youtube-backend", choices=("opencli", "yt-dlp"), default="opencli", help="Select the YouTube backend before acquisition; defaults to the authorized Chrome bridge")
     parser.add_argument("--output-dir")
     parser.add_argument("--classify-only", "--dry-run", dest="classify_only", action="store_true", help="validate and print the backend plan without acquisition")
     return parser
@@ -1317,7 +1372,7 @@ def main(argv: list[str] | None = None) -> int:
                         "source": public_url_info(info),
                         "free_only": True,
                         "visual": args.visual,
-                        "planned_steps": backend_plan(info, args.visual),
+                        "planned_steps": backend_plan(info, args.visual, args.youtube_backend),
                         "local_asr_preflight": local_runtime_preflight(),
                     },
                     ensure_ascii=False,
@@ -1326,7 +1381,7 @@ def main(argv: list[str] | None = None) -> int:
             )
             return 0
         output = safe_output_dir(args.output_dir)
-        intake = VideoIntake(info, args.intent, args.visual, args.page, output)
+        intake = VideoIntake(info, args.intent, args.visual, args.page, output, youtube_backend=args.youtube_backend)
         intake.execute()
         print(str(output / PACKET_NAME))
         return 0

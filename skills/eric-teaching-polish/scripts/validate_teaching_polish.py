@@ -9,8 +9,17 @@ import sys
 from pathlib import Path
 
 
+PLAIN_PATTERNS = {
+    "plain_banned_terms": r"边界|证据",
+    "plain_contrast_zh": r"(?:(?:不是|并非)[^。！？\n]{0,160}?(?:而是|而在于|[，,][ \t]*(?:是|在于))|不在于[^。！？\n]{0,160}?而在于)",
+    "plain_contrast_en": r"\bnot\b[^\n.!?]{1,160}?\bbut\b|\b(?:this|it) (?:is not|isn['’]t) about[^\n]{1,160}?\b(?:this|it)(?: is|['’]s) about\b",
+    "plain_escalation": r"不仅[^。！？\n]{0,160}?(?:更是|更要|更在于)",
+    "plain_stock_phrases": r"真正重要的是|值得注意的是|综上所述|归根结底|待核实风险|已证实漏洞|底层逻辑|闭环|赋能|抓手|颗粒度",
+}
+
+
 HARD_PATTERNS = {
-    "hidden_memory_or_project_label": r"\b(MBTI|Hermes|validator|production|agent)\b|记忆系统|跨项目记忆",
+    "hidden_memory_or_project_label": r"\b(MBTI|Hermes|validator)\b|\b(?:production|agent)\s*[:：=]|\b(?:Codex|AI|reviewer|implementation)\s+agent\b|(?m:^[ \t]*(?:#{1,6}[ \t]+)?(?:internal[ -]+)?(?:production|agent)[ -]+(?:(?:review|internal)[ -]+)?(?:notes?|metadata|status|logs?|scaffolding)(?=[ \t]*(?:[:：]|$)))|记忆系统|跨项目记忆",
     "teacher_tactic": r"挖坑|让学生先错|教师动作|预期回应|教学上抓|教学上|教学口径",
     "move_jargon": r"心法|出招|拆招|定招",
     "routing_backend": r"后台|路由|维修层|短程维修|内部记录",
@@ -24,11 +33,11 @@ SOFT_PATTERNS = {
     "student_source_label_leak": r"(?m)source[_\s-]*id|TJGK-PAPER|SIM-\d+|天津高考真题(?:节选|改编)?|原创天津高考仿真|原创仿真|真题改编|真题[/／]改编|真题精拆|真题限时|真题审题|完整仿真篇章|仿真任务|复用材料|回看材料|\b\d{4}\s*·\s*(?:reading_expression|reading|cloze)\b|^\s*(?-i:reading_expression|cloze)\s*$",
     "student_sequence_field_leak": r"source[_\s-]*unit[_\s-]*no|reader[_\s-]*order|build[_\s-]*order|canonical[_\s-]*id|golden\s+sample|thick\s+unit|quality\s+gate",
     "raw_source_question_code": r"TJGK-\d{4}[A-Z]?-[A-Z0-9-]+|(?:CLOZE|READ)-\d{1,2}|L\d{2}-EC0?\d{1,2}|(?<![A-Za-z0-9])(?:B|G)\d{1,2}(?![A-Za-z0-9])",
-    "pipeline_words": r"入口|回收|动作链|得分动作|动作卡|自检卡|得分卡|工具卡|任务卡|私人自检|优先动作卡|班级动作热区|score\s*moves|scorecard|self-check\s*card|得分场景|能力场景|机制",
+    "pipeline_words": r"入口|(?:内容|知识点|题目|教学|课程|课堂|答案|练习)回收|回收(?:动作|环节|机制|任务|卡)|动作链|得分动作|动作卡|自检卡|得分卡|工具卡|任务卡|私人自检|优先动作卡|班级动作热区|score\s*moves|scorecard|self-check\s*card|得分场景|能力场景|机制",
     "student_schedule_leak": r"课堂安排|课堂动作|教师节奏|学生产出|时间安排|课堂中必须保留|不可被课堂核对占用|讲评|本阶段分钟",
     "answer_leak": r"参考答案|答案解析|正确答案|答案\s*[:：]|解析\s*[:：]",
     "internal_taxonomy": r"\bSOLO\b",
-    "production_markers": r"\bprototype\b|\bdrafts?\b|/Users/",
+    "production_markers": r"\bprototype\b|\b(?:production|build|generated)[ -]+drafts?\b|(?m:^\s*(?:#{1,6}\s+)?drafts?(?:\s+(?:v(?:ersion)?\s*)?\d+(?:\.\d+)*)?\s*(?::[^\r\n]*)?$)|/Users/",
     "student_production_frontmatter": r"\bSoft\s+Signal\b|\bpublication\s+edition\b|\blesson\s+pack\b|\bcombined\s+book\b|\bgenerated\s+from\b|A4\s+(?:student\s+|teacher\s+)?total\s+book|stage\s+openers\s+and\s+lesson\s+bodies|\bfront\s+matter\b|\bEnglish-forward\b|\bLearning\s+object\b|\bexam-style\s+reading\b",
     "student_navigation_production_wording": r"内部查找|内部翻找|本讲内部",
     "corporate_ai_words": r"闭环|抓手|沉淀|赋能|拉通|对齐|颗粒度|路径|矩阵",
@@ -71,29 +80,71 @@ def line_for_pos(text: str, pos: int) -> int:
     return text.count("\n", 0, pos) + 1
 
 
-def scan(text: str) -> tuple[list[str], list[str]]:
+AUDIENCES = ("student", "teacher", "internal", "parent", "public")
+STUDENT_ONLY_PATTERNS = {
+    "answer_leak", "visible_version_or_course_label", "course_map_visible",
+    "student_schedule_leak", "internal_taxonomy",
+}
+
+
+def source_line_range(value: str) -> tuple[int, int]:
+    match = re.fullmatch(r"([1-9]\d*):([1-9]\d*)", value)
+    if not match or int(match[1]) > int(match[2]):
+        raise argparse.ArgumentTypeError("source lines must be START:END with 1 <= START <= END")
+    return int(match[1]), int(match[2])
+
+
+def scan(text: str, audience: str = "student",
+         source_lines: tuple[tuple[int, int], ...] = (),
+         language_only: bool = False) -> tuple[list[str], list[str]]:
+    """Check the declared audience; quoted-source exemptions cover language, not answer leaks.
+
+    Source line ranges are supplied by the caller after verifying the exact source.
+    They do not alter the artifact or imply that its factual/source claims are verified.
+    """
+    if audience not in AUDIENCES:
+        raise ValueError("unknown audience: " + audience)
+    lines = text.splitlines(keepends=True)
+    source_indices: set[int] = set()
+    for start, end in source_lines:
+        if start < 1 or end < start or end > len(lines):
+            raise ValueError("source line range is outside the input")
+        source_indices.update(range(start - 1, end))
+    language_text = "".join(
+        re.sub(r"[^\r\n]", " ", line) if i in source_indices else line
+        for i, line in enumerate(lines)
+    )
+
     errors: list[str] = []
     warnings: list[str] = []
 
-    for name, pattern in HARD_PATTERNS.items():
-        for match in re.finditer(pattern, text, flags=re.IGNORECASE):
+    hard_patterns = PLAIN_PATTERNS if language_only else {**PLAIN_PATTERNS, **HARD_PATTERNS}
+    for name, pattern in hard_patterns.items():
+        if audience in {"teacher", "internal"} and name == "teacher_tactic":
+            continue
+        for match in re.finditer(pattern, language_text, flags=re.IGNORECASE):
             line = line_for_pos(text, match.start())
             errors.append(f"{name}: line {line}: {match.group(0)}")
 
+    if language_only:
+        return errors, warnings
+
     for name, pattern in SOFT_PATTERNS.items():
-        for match in re.finditer(pattern, text, flags=re.IGNORECASE):
+        if audience in {"teacher", "internal"} and (name in STUDENT_ONLY_PATTERNS or name.startswith("student_")):
+            continue
+        # An exemption for authentic language must not hide student answer leakage.
+        scanned_text = text if name == "answer_leak" else language_text
+        for match in re.finditer(pattern, scanned_text, flags=re.IGNORECASE):
             line = line_for_pos(text, match.start())
             warnings.append(f"{name}: line {line}: {match.group(0)}")
 
-    has_schedule_context = re.search(
-        SOFT_PATTERNS["student_schedule_leak"], text, flags=re.IGNORECASE
-    )
     minute_range_number = r"(?:0|0?[1-9]|[1-9]\d|1[01]\d|120)"
     for line_no, line in enumerate(text.splitlines(), start=1):
         stripped = line.strip()
         if not re.fullmatch(fr"{minute_range_number}\s*[-–—]\s*{minute_range_number}", stripped):
             continue
-        warnings.append(f"student_schedule_leak: line {line_no}: {stripped}")
+        if audience not in {"teacher", "internal"} and line_no - 1 not in source_indices:
+            warnings.append(f"student_schedule_leak: line {line_no}: {stripped}")
 
     return errors, warnings
 
@@ -108,10 +159,19 @@ def main(argv: list[str]) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("path", help="File to validate, or '-' for stdin")
     parser.add_argument("--strict", action="store_true", help="Treat warnings as failures")
+    parser.add_argument("--audience", choices=AUDIENCES, default="student",
+                        help="Output audience; default student preserves answer-leak checks")
+    parser.add_argument("--source-lines", action="append", type=source_line_range, default=[],
+                        metavar="START:END", help="Exact verified source lines exempt from language cleanup only")
+    parser.add_argument("--language-only", action="store_true",
+                        help="Check authored prose only; excludes teaching-specific checks and does not certify natural style")
     args = parser.parse_args(argv[1:])
 
     text = read_input(args.path)
-    errors, warnings = scan(text)
+    try:
+        errors, warnings = scan(text, args.audience, tuple(args.source_lines), args.language_only)
+    except ValueError as exc:
+        parser.error(str(exc))
 
     if errors:
         print("FAIL")

@@ -1,13 +1,13 @@
 # Evidence Contract
 
-Use one evidence vocabulary across every domain, but scale the record to the decision and risk.
+Use one internal source-assessment vocabulary across every domain, but scale the record to the decision and risk. The labels below support analysis and explicitly requested structured records. Ordinary replies use the visible-writing rules in SKILL.md: explain the actual source, date, result or missing fact in prose, with citations; do not copy internal labels into headings.
 
 ## Evidence Depth
 
 | Depth | Use when | Required record |
 |---|---|---|
-| Quick | One or two low-risk claims; a short factual answer | Claim, conclusion, source link, source rank, evidence status, and material caveat or conflict. |
-| Standard | Several claims, comparison, citation audit, or a recommendation | A compact claim table with the standard fields below. |
+| Quick | One or two low-risk claims; a short factual answer | Conclusion, supporting source link, and any material caveat or conflict; assess source quality without displaying a metadata form. |
+| Standard | Several claims, comparison, citation audit, or a recommendation | Explain material claims with supporting sources and limitations; use a compact comparison table when it aids the decision. |
 | Decision / high-risk | Financial, legal, policy, safety, reputation, current public-figure, or consequential business/education decision | Standard fields plus domain context, exact evidence locator, method/applicability, and explicit unverified alternatives. |
 
 Do not create a giant ledger for a simple question. Do not omit a material caveat merely to keep the answer short.
@@ -32,15 +32,15 @@ An official vendor page is S1 only for what that vendor says about itself, not f
 - `unsupported`: searched or inspected allowed evidence and found no adequate support.
 - `unverifiable`: required evidence is unavailable, inaccessible, private, prohibited, or not published.
 
-Use reader-facing `Not checked` when currentness or another requested check was not performed. Do not turn it into a positive status.
+When currentness or another requested check was not performed, say exactly what was not checked in the reader’s language. Keep `Not checked` only when the user requested that status field. Do not imply that the check passed.
 
 ## Standard Claim Fields
 
-For standard and decision/high-risk work, use:
+For an explicitly requested evidence ledger or a decision/high-risk record that needs structured traceability, the following fields are available. Ordinary standard answers may express the same relevant information in prose; do not force an eleven-column table:
 
 `claim_id | claim | domain | source | source_rank | evidence_status | confidence | published_or_updated | accessed_at | conflict_or_caveat | action`
 
-Add an exact evidence locator and the relevant domain context for decision/high-risk work. Reduce the number of claims before dropping fields. Dates use the user's timezone when material; record `not found` rather than inventing a publication date.
+Keep exact evidence locators and relevant domain context for consequential claims. Preserve an explicitly requested schema; otherwise include only fields that help assess the decision. Do not invent numerical confidence or hide material claims to fit a record. Dates use the user's timezone when material; record `not found` rather than inventing a publication date.
 
 ## Verification Rules
 

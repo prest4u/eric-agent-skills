@@ -1,27 +1,9 @@
-# Specialist handoffs
+# Bounded specialist handoff
 
-Pass explicit unknowns; never invent missing fields.
+Use a specialist only for an independently useful question or required independent review. Supply the outcome, affected artifact, relevant requirements, known evidence, permitted actions, and return format. Exclude unrelated history and private content.
 
-## data-analytics:validate-data
+For an independent reviewer, identify the stable candidate, acceptance criteria, current checks, and any concrete unresolved findings. Request evidence-backed defects and coverage limits. An implementer does not self-sign an independent verdict; a review does not authorize external actions.
 
-Validation question; audience/decision; exact artifacts/version; sources/as-of; population/grain/filters/exclusions; formulas/denominators/units/timezone; windows/baseline; claims/recommendations; SQL/notebook/sheet/dashboard evidence; recomputed values/traced records; rendered evidence; caveats/unavailable checks; requested share verdict.
+The specialist may use available native tools. A named Skill is optional and must not become a mandatory cross-Skill dependency. Do not install or copy another Skill just to satisfy a route.
 
-Use for analysis, metric, chart, recommendation, or decision-claim review—not merely because a CSV exists.
-
-## building-validators
-
-Project root and existing validator inventory; finding IDs to make durable; artifact/release contract; captured bad behavior; one good and bad fixture per gate family; project-native language/test/CI; strict severities/release boundary; machine fields/human next action; no-write/path safety; acceptance commands.
-
-Use only when the check must be repeatable, executable, and reusable. Prefer native frameworks; use the Python scaffold only when none is usable.
-
-## eric-review
-
-Mode/question; allowlist/exclusions/identities; authoritative requirements; audience/channel/stage/deadline; evidence matrix; finding IDs/fix claims; separate permissions; privacy/redaction; reviewer provenance; required decision/sign-off.
-
-An implementer returns `PENDING INDEPENDENT REVIEW` when other gates pass but the changed artifact lacks independent or Eric approval.
-
-## Missing specialist
-
-Resolve availability from the current runtime inventory, not filesystem cache presence. Record the requested Skill and availability result.
-
-For Q0/Q1, use the strongest native evidence and state the missing route. For Q2/Q3, return `INSUFFICIENT EVIDENCE` or the stronger blocker—never silently claim equivalence. Never copy a plugin Skill into a local fallback.
+If a specialist is unavailable, complete the work that existing tools can support and name the remaining evidence gap. Keep required release or high-impact actions blocked. Do not manufacture equivalence or repeatedly dispatch the same stalled question.

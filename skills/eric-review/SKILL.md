@@ -5,14 +5,14 @@ description: 【独立评审】Use only when Eric explicitly asks to review, cri
 
 # Eric Review
 
-Inspect the actual artifact and answer the decision Eric asked for. Review should shorten the path to a usable result.
+Inspect the actual artifact and answer the decision Eric asked for. Review should shorten the path to a usable result. Host and task policy governs authorization, independence, and completion; choosing this Skill does not add a second workflow or require a persistent review packet.
 
 ## Choose one mode
 
 | Mode | Use | Mutation |
 | --- | --- | --- |
 | `QUICK_REVIEW` | Default for check, critique, or review | Read-only unless Eric also asks for fixes. |
-| `REVIEW_AND_FIX` | Eric asks to review and deliver/fix | The same agent may inspect, edit the named surface, and run one recheck. |
+| `REVIEW_AND_FIX` | Eric asks to review and deliver/fix | The same agent may inspect, edit the named surface, and collect sufficient targeted recheck evidence. |
 | `FORMAL_SIGNOFF` | Eric explicitly asks for approval, release readiness, or the action is high-impact | Read-only review of a frozen identity by an independent reviewer. |
 
 If no inspectable artifact exists, stop the review and build or request the missing artifact. Do not review a plan as a substitute for the requested product.
@@ -30,7 +30,7 @@ Use exact file and line locators when available. Do not require a preflight form
 
 1. Inspect the named artifact and identify the smallest set of blocking or high-value changes.
 2. Apply only the edits Eric authorized; preserve unrelated work.
-3. Run one targeted recheck against the changed surface and adjacent boundary.
+3. Collect the smallest sufficient recheck set for the changed surface and adjacent boundary; reuse current trustworthy evidence.
 4. Deliver the repaired artifact with the check evidence and remaining non-blocking issues.
 
 Do not pause between audit and repair unless the fix expands scope, changes product intent, creates material cost, or requires external authority.
@@ -43,7 +43,7 @@ Do not pause between audit and repair unless the fix expands scope, changes prod
 4. Block on open P0/P1 issues or missing mandatory evidence.
 5. Report verdict and sign-off separately. Sign-off never authorizes publish, deploy, send, upload, migration, or destructive action.
 
-The producer cannot grant formal READY to its own artifact. Use one independent reviewer or return `PENDING INDEPENDENT REVIEW`; never create a review-of-review chain. Load a matching file from `references/` only when a formal domain lens is genuinely required.
+The producer cannot grant formal READY to its own artifact. Use one independent reviewer. After a stalled or inconclusive result, allow one recovery or fresh replacement; if it still cannot conclude, return the local candidate and `PENDING INDEPENDENT REVIEW`, keeping dependent high-impact actions blocked. Resume only for new evidence, a material candidate change, or restored review capability; never create a review-of-review chain. Load a matching file from `references/` only when a formal domain lens is genuinely required.
 
 ## Verdicts
 
