@@ -25,6 +25,24 @@ sys.modules[LOCAL_SPEC.name] = local_transcribe
 LOCAL_SPEC.loader.exec_module(local_transcribe)
 
 
+class JavaScriptRuntimeTests(unittest.TestCase):
+    def test_node_is_enabled_when_configuration_is_ignored(self):
+        with mock.patch.object(video_intake.shutil, "which", side_effect=lambda name: "/bin/node" if name == "node" else None):
+            argv = video_intake.yt_dlp_argv("--skip-download", "https://youtu.be/example")
+        self.assertIn("--ignore-config", argv)
+        self.assertEqual(argv[argv.index("--js-runtimes") + 1], "node")
+        self.assertNotIn("--remote-components", argv)
+
+    def test_prefers_installed_deno(self):
+        with mock.patch.object(video_intake.shutil, "which", return_value="/bin/runtime"):
+            argv = video_intake.yt_dlp_argv("--version")
+        self.assertEqual(argv[argv.index("--js-runtimes") + 1], "deno")
+
+    def test_does_not_invent_missing_runtime(self):
+        with mock.patch.object(video_intake.shutil, "which", return_value=None):
+            self.assertNotIn("--js-runtimes", video_intake.yt_dlp_argv("--version"))
+
+
 class UrlTests(unittest.TestCase):
     def test_sensitive_key_classifier_handles_camel_pascal_digits_and_separators(self):
         sensitive = (
@@ -189,6 +207,52 @@ class UrlTests(unittest.TestCase):
 
 
 class PolicyTests(unittest.TestCase):
+    def test_transcript_only_ignores_visual_metadata_even_without_subtitles(self):
+        for intent in ("只要字幕", "只提取字幕，不要分析画面", "transcript only", "subtitles only"):
+            for status, coverage in (("ok", 1.0), ("unavailable", 0.0)):
+                with self.subTest(intent=intent, status=status):
+                    self.assertFalse(video_intake.decide_visual(
+                        intent, "auto", status, coverage, "图表产品演示 screen demo"
+                    )[0])
+
+    def test_spoken_question_ignores_title_but_explicit_visual_question_is_kept(self):
+        self.assertFalse(video_intake.decide_visual(
+            "这个视频说了什么", "auto", "ok", 1.0, "产品演示"
+        )[0])
+        self.assertTrue(video_intake.decide_visual(
+            "说明说了什么，并分析画面中的图表", "auto", "ok", 1.0, "产品演示"
+        )[0])
+
+    def test_transcript_only_intake_requests_audio_without_visual_preparation(self):
+        for has_subtitles in (True, False):
+            with self.subTest(has_subtitles=has_subtitles), tempfile.TemporaryDirectory() as raw:
+                source = {"url": "https://www.youtube.com/watch?v=demo", "platform": "youtube",
+                          "id": "demo", "title": "图表与 screen demo", "author": None,
+                          "duration": 30.0, "published_at": None}
+                transcript = {"status": "ok", "source_type": "manual_subtitle", "language": "zh",
+                              "segments": [{"start": 0.0, "end": 30.0, "text": "课程内容"}],
+                              "coverage": 1.0, "file": None, "text_file": None}
+                unavailable = {**transcript, "status": "unavailable", "source_type": None,
+                               "segments": [], "coverage": 0.0}
+                intake = video_intake.VideoIntake(
+                    {"platform": "youtube", "url": source["url"], "host": "www.youtube.com"},
+                    "只要字幕", "auto", None, Path(raw))
+                with mock.patch.object(intake, "acquire_metadata", return_value=source), \
+                     mock.patch.object(intake, "acquire_transcript", return_value=transcript if has_subtitles else unavailable), \
+                     mock.patch.object(intake, "download_media", return_value=Path(raw) / "audio.wav") as download, \
+                     mock.patch.object(intake, "local_asr", return_value={**transcript, "source_type": "local_asr"}) as asr, \
+                     mock.patch.object(intake, "prepare_visual") as visual:
+                    packet = intake.execute()
+                self.assertEqual(packet["transcript"]["status"], "ok")
+                self.assertFalse(packet["visual"]["performed"])
+                visual.assert_not_called()
+                if has_subtitles:
+                    download.assert_not_called()
+                    asr.assert_not_called()
+                else:
+                    download.assert_called_once_with(want_video=False, height=720)
+                    asr.assert_called_once()
+
     def test_visual_auto_policy(self):
         self.assertEqual(video_intake.decide_visual("只要字幕", "auto", "ok", 0.9)[0], False)
         self.assertEqual(video_intake.decide_visual("分析图表", "auto", "ok", 0.9)[0], True)
@@ -541,6 +605,39 @@ class BackendBehaviorTests(unittest.TestCase):
             if self.callback:
                 return self.callback(argv, kwargs)
             return self.responses.pop(0) if self.responses else "[]"
+
+    def test_asr_download_uses_real_adapter_limits_and_discloses_combined_media(self):
+        for platform in ("youtube", "bilibili", "xiaohongshu"):
+            with self.subTest(platform=platform), tempfile.TemporaryDirectory() as raw:
+                output = Path(raw)
+                urls = {"youtube": "https://www.youtube.com/watch?v=demo",
+                        "bilibili": "https://www.bilibili.com/video/BV1demo",
+                        "xiaohongshu": "https://www.xiaohongshu.com/explore/demo"}
+                def save_media(argv, kwargs):
+                    (output / ("media.wav" if platform == "youtube" else "media.mp4")).write_bytes(b"media")
+                    return "[]"
+                runner = self.RecordingRunner(callback=save_media)
+                intake = video_intake.VideoIntake(
+                    video_intake.classify_url(urls[platform]), "只要字幕", "auto",
+                    None, output, runner=runner)
+                self.assertIsNotNone(intake.download_media(want_video=False, height=720))
+                self.assertEqual(len(runner.calls), 1)
+                argv = runner.calls[0]
+                if platform == "youtube":
+                    self.assertEqual(argv[argv.index("-f") + 1], "bestaudio/best")
+                    self.assertIn("-x", argv)
+                    self.assertEqual(intake.limitations, [])
+                else:
+                    self.assertEqual(argv[:3], ["opencli", platform, "download"])
+                    self.assertNotIn("--audio-only", argv)
+                    limitation = next(item for item in intake.limitations
+                                      if item.get("code") == "AUDIO_ONLY_DOWNLOAD_UNAVAILABLE")
+                    self.assertIn("combined video/audio", limitation["detail"])
+                    if platform == "bilibili":
+                        self.assertEqual(argv[argv.index("--quality") + 1], "480p")
+                    else:
+                        self.assertIn("images from the same note", limitation["detail"])
+                        self.assertNotIn("--type", argv)
 
     def test_generic_redirect_or_rebinding_target_never_reaches_backend(self):
         class ForbiddenRunner:
@@ -1031,6 +1128,79 @@ class BackendBehaviorTests(unittest.TestCase):
         formats = [call[call.index("-f") + 1] for call in runner.calls]
         self.assertEqual(formats, ["bv*[height<=720]+ba/b[height<=720]", "bv*[height<=480]+ba/b[height<=480]"])
         self.assertEqual(intake.media_attempts, {(True, 720), (True, 480)})
+
+
+class YouTubeBrowserTests(unittest.TestCase):
+    def make_intake(self, root, status="OK"):
+        metadata = json.dumps([{"field": k, "value": v} for k, v in {
+            "videoId": "test-video", "title": "A public lesson", "channel": "Test channel",
+            "duration": "19s", "publishDate": "2026-09-06", "playabilityStatus": status,
+            "playabilityReason": "Sign in to confirm you are not a bot" if status != "OK" else "",
+        }.items()])
+        subtitle = json.dumps([{"from": "0.00s", "to": "19.00s", "content": "A complete test transcript."}])
+        runner = BackendBehaviorTests.RecordingRunner([metadata, subtitle])
+        intake = video_intake.VideoIntake({"platform": "youtube", "url": "https://youtu.be/test-video", "host": "youtu.be"},
+            "只要字幕", "never", None, root, runner=runner, youtube_backend="opencli")
+        return intake, runner
+
+    def test_browser_metadata_and_transcript_are_used_without_ytdlp(self):
+        with tempfile.TemporaryDirectory() as raw:
+            intake, runner = self.make_intake(Path(raw))
+            packet = intake.execute()
+            self.assertEqual(packet["transcript"]["status"], "ok")
+            self.assertEqual(packet["source"]["id"], "test-video")
+            self.assertEqual(packet["source"]["author"], "Test channel")
+            self.assertEqual(packet["source"]["duration"], 19.0)
+            self.assertEqual(packet["transcript"]["segments"][0]["end"], 19.0)
+            self.assertEqual(packet["transcript"]["coverage"], 1.0)
+            self.assertEqual([call[0:3] for call in runner.calls], [["opencli", "youtube", "video"], ["opencli", "youtube", "transcript"]])
+
+    def test_login_challenge_stops_before_subtitle_or_download(self):
+        with tempfile.TemporaryDirectory() as raw:
+            intake, runner = self.make_intake(Path(raw), "LOGIN_REQUIRED")
+            packet = intake.execute()
+            self.assertEqual(len(runner.calls), 1)
+            self.assertEqual(packet["transcript"]["status"], "unavailable")
+            self.assertEqual(intake.access_blocks["platform"], "LOGIN_CHALLENGE")
+
+    def test_metadata_timeout_never_attempts_transcript(self):
+        class TimeoutRunner:
+            def __init__(self): self.calls = []
+            def run(self, argv, **kwargs):
+                self.calls.append(argv)
+                raise video_intake.BackendFailure("metadata", "opencli-youtube", 75, "TIMEOUT")
+        with tempfile.TemporaryDirectory() as raw:
+            intake, _ = self.make_intake(Path(raw))
+            runner = TimeoutRunner()
+            intake.runner = runner
+            packet = intake.execute()
+            self.assertEqual(len(runner.calls), 1)
+            self.assertEqual(packet["transcript"]["status"], "unavailable")
+            self.assertNotIn("AUTH_REQUIRED", str(packet["limitations"]))
+
+    def test_missing_or_unplayable_status_is_not_mislabeled_login(self):
+        for status in (None, "UNPLAYABLE"):
+            with self.subTest(status=status), tempfile.TemporaryDirectory() as raw:
+                intake, runner = self.make_intake(Path(raw))
+                runner.responses[0] = json.dumps([{"field": "playabilityStatus", "value": status}, {"field": "playabilityReason", "value": "Video unavailable"}])
+                packet = intake.execute()
+                self.assertEqual(len(runner.calls), 1)
+                self.assertEqual(packet["transcript"]["status"], "unavailable")
+                self.assertNotIn("AUTH_REQUIRED", str(packet["limitations"]))
+                self.assertNotIn("LOGIN_CHALLENGE", str(packet["limitations"]))
+
+    def test_ytdlp_bot_error_stops_all_followups(self):
+        with tempfile.TemporaryDirectory() as raw:
+            intake = video_intake.VideoIntake({"platform": "youtube", "url": "https://youtu.be/test-video", "host": "youtu.be"}, "只要字幕", "never", None, Path(raw))
+            intake.record_failure(video_intake.BackendFailure("metadata", "yt-dlp", 1, "Sign in to confirm you're not a bot"))
+            self.assertIsNone(intake.youtube_subtitle())
+            self.assertIsNone(intake.download_media(False, 480))
+            self.assertEqual(intake.access_blocks["platform"], "LOGIN_CHALLENGE")
+
+    def test_cli_defaults_to_browser_and_retains_explicit_ytdlp(self):
+        parser = video_intake.build_parser()
+        self.assertEqual(parser.parse_args(["https://youtu.be/x"]).youtube_backend, "opencli")
+        self.assertEqual(parser.parse_args(["https://youtu.be/x", "--youtube-backend", "yt-dlp"]).youtube_backend, "yt-dlp")
 
 
 class ParsingTests(unittest.TestCase):

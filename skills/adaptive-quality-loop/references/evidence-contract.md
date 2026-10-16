@@ -1,34 +1,35 @@
-# Quality packet contract
+# Optional RELEASE record
 
-Q2/Q3 work requires a JSON quality packet; Q0 must not create one and Q1 uses one only when project convention requires it.
+Use this record only when an explicit formal delivery contract requires a machine-readable release record. BUILD and PROOF do not create one. It documents release evidence; it is not another approval workflow.
 
-Required top-level fields: `schema_version: 1`, `task_id`, `phase`, `artifact`, `risk`, `acceptance`, `gates`, `failures`, `review`, `permissions`, and `next_action`.
+The current `scripts/validate_quality_packet.py` accepts this shape:
 
-Valid phases are `preflight`, `build`, `verify`, `review`, and `recheck`. Machine findings use `P0`, `P1`, `P2`, or `P3`; P0/P1 are contract blockers.
+- `schema_version`: integer `1`.
+- `mode`: exactly `RELEASE`.
+- `artifact`: non-empty string `target` and non-empty string `identity`.
+- `authority`: `status` granted/approved/authorized, non-empty `by`, and non-empty `scope` for the intended action.
+- `recovery`: `available: true`, non-empty `method`, and non-empty `evidence`.
+- `checks`: a non-empty list of objects with non-empty `name`, passing `status`, and non-empty `evidence`. Include the checks required for this release.
+- `review`: non-empty distinct `producer` and `reviewer`, `independent: true`, and `verdict` READY or READY WITH MINOR FOLLOW-UPS.
+- `findings`: optional list with `severity` P0/P1/P2/P3 and `status` open/closed. Open P0/P1 findings prevent a ready record.
 
-- `artifact`: type, exact targets, identity/hash/version, delivery channel.
-- `risk`: Q0-Q3 tier, observed signals, rationale.
-- `acceptance`: non-empty stable IDs, non-empty observable criteria, and a Boolean required flag.
-- `gates`: non-empty stable ID and kind, valid status, Boolean required flag, and a meaningful current evidence locator (a non-empty locator string, or a locator-keyed mapping/list).
-- `failures`: complete, semantically populated failure fingerprints from `failure-loop.md`; partial, empty-valued, out-of-order, or counter-reset fingerprints are invalid.
-- `review`: required flag, provenance (`same_agent`, `independent_agent`, or `eric`), verdict.
-- `permissions`: separate inspect, edit, external mutation, and publish/send authority.
-- Q3 additionally requires structured `approval_evidence` with status; Q3 readiness accepts only a positive structured status (`granted`, `approved`, or `authorized`) whose approver is Eric. External/destructive work also records recovery evidence.
+Example of the field structure (illustrative locators must be replaced with actual evidence):
 
-Gate statuses are `not_run`, `pass`, `fail`, `blocked`, or `not_applicable` with rationale. A pass/fail requires a non-empty current evidence locator. A required gate must pass before READY. Every permission subfield is explicit; missing permission data never implies authority.
-
-Both `READY` and `READY WITH MINOR FOLLOW-UPS` are formal readiness verdicts: Q2/Q3 cannot use same-agent provenance. Q3 readiness requires positively granted approval; merely recording `not_granted` is not approval. Migration, destructive, deploy, publish, upload, and external-mutation readiness also requires recovery evidence.
-
-The repair budget is enforced across normalized fingerprints, not finding IDs. Attempts after one require a stable criterion and complete, contiguous preceding records for that normalized group; omitted history or counter jumps are invalid. Repeating the same failure requires strictly increasing timezone-aware timestamps and counters, plus diagnosis unless the root-cause evidence adds a locator not already recorded for the group. A third implementation attempt requires both that new evidence and structured positive Eric authorization such as `{"status":"granted","by":"Eric"}`; free-form approval text is invalid.
-
-Validate deterministically:
-
-```bash
-python3 -B scripts/validate_quality_packet.py PACKET --json
+```json
+{
+  "schema_version": 1,
+  "mode": "RELEASE",
+  "artifact": {"target": "release/package", "identity": "candidate-version"},
+  "authority": {"status": "granted", "by": "Eric", "scope": "specified delivery action"},
+  "recovery": {"available": true, "method": "restore previous version", "evidence": "recovery-evidence"},
+  "checks": [{"name": "required acceptance", "status": "PASS", "evidence": "current-evidence"}],
+  "review": {"producer": "implementer", "reviewer": "independent-reviewer", "independent": true, "verdict": "READY"},
+  "findings": []
+}
 ```
 
-Exit 0 means contract-valid, 1 means contract findings, 2 means unreadable/invalid JSON. The validator checks packet consistency only; it cannot judge semantic, visual, source, or business quality.
+Earlier documentation used a different field structure with the same schema number. Existing consumers must use the executable contract above; do not infer compatibility from the number alone. Historical records remain historical evidence and must not be relabeled as current release approval.
 
-Store persistent Q2/Q3 packets under the project's existing QA directory or `qa/quality/`. Never create QA files for Q0. Treat installed plugin caches as read-only. If a packet would expose private content, store minimal locators/hashes and redact evidence.
+When a record is explicitly required, run `python3 scripts/validate_quality_packet.py RECORD --json` from this Skill directory. Exit 0 means structurally valid, 1 means findings, and 2 means unreadable/invalid JSON. Structural validity cannot prove the evidence is true, the product is correct, or the reviewer was actually independent.
 
-Verdicts: `READY`, `READY WITH MINOR FOLLOW-UPS`, `PENDING INDEPENDENT REVIEW`, `INSUFFICIENT EVIDENCE`, `BLOCKED_REPAIR_BUDGET`, `NOT READY`. Same-agent Q2/Q3 work cannot claim independent sign-off.
+Missing authority, recovery, passing checks, or independent review must remain visible as a pending or blocked release. Never invent them to make the validator pass. Ordinary local delivery is not dependent on this record.

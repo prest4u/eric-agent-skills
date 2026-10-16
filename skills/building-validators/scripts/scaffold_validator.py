@@ -10,6 +10,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import tempfile
 import stat
 import sys
 from pathlib import Path
@@ -104,6 +106,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import sys
 import tempfile
@@ -535,8 +538,21 @@ def render_markdown(payload: dict[str, Any]) -> str:
 
 def write_reports(report_dir: Path, payload: dict[str, Any]) -> None:
     report_dir.mkdir(parents=True, exist_ok=True)
-    (report_dir / "validator_report.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    (report_dir / "validator_report.md").write_text(render_markdown(payload), encoding="utf-8")
+    outputs = {
+        report_dir / "validator_report.json": json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        report_dir / "validator_report.md": render_markdown(payload),
+    }
+    for path in outputs:
+        if path.is_symlink():
+            raise ValueError(f"report output cannot be a symlink: {path.name}")
+    for path, text in outputs.items():
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=report_dir, delete=False) as handle:
+            temporary = Path(handle.name)
+            handle.write(text)
+        try:
+            os.replace(temporary, path)
+        finally:
+            temporary.unlink(missing_ok=True)
 
 
 def safe_report_dir(root: Path, report_dir: Path) -> Path:
@@ -624,7 +640,11 @@ def main() -> int:
         return 1
     if not args.no_write:
         assert report_dir is not None
-        write_reports(report_dir, payload)
+        try:
+            write_reports(report_dir, payload)
+        except (ValueError, OSError) as exc:
+            print(f"ERROR: {exc}", file=sys.stderr)
+            return 1
     if args.json:
         print(json.dumps(payload, ensure_ascii=False, indent=2))
     else:
@@ -769,10 +789,19 @@ def build_rules(domain: str) -> dict[str, Any]:
 
 
 def write_file(path: Path, text: str, force: bool) -> None:
+    if path.is_symlink():
+        raise ValueError(f"output cannot be a symlink: {path}")
     if path.exists() and not force:
         raise FileExistsError(f"{path} exists; pass --force to overwrite")
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(text, encoding="utf-8")
+    with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=path.parent, delete=False) as handle:
+        temporary = Path(handle.name)
+        handle.write(text)
+    try:
+        temporary.chmod(0o644)
+        os.replace(temporary, path)
+    finally:
+        temporary.unlink(missing_ok=True)
 
 
 def make_executable(path: Path) -> None:
@@ -800,6 +829,16 @@ def scaffold(project_root: Path, out_dir: Path, domain: str, force: bool) -> lis
         target / "tests" / "test_validate_project.py": GENERATED_TEST_TEMPLATE,
         target / "README.md": README_TEMPLATE,
     }
+    for path in files:
+        try:
+            path.resolve().relative_to(project_root.resolve())
+        except ValueError as exc:
+            raise ValueError(f"output escapes project_root: {path}") from exc
+        for part in (path, *path.parents):
+            if part == project_root:
+                break
+            if part.is_symlink():
+                raise ValueError(f"output cannot use a symlink: {part}")
     written: list[Path] = []
     for path, text in files.items():
         write_file(path, text, force)

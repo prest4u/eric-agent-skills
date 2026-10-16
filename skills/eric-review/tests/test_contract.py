@@ -41,7 +41,9 @@ class EricReviewContractTests(unittest.TestCase):
     def test_review_and_fix_allows_same_agent(self):
         repair = SKILL.split("## REVIEW_AND_FIX", 1)[1].split("## FORMAL_SIGNOFF", 1)[0]
         self.assertIn("same agent", SKILL)
-        self.assertIn("one targeted recheck", repair)
+        self.assertIn("smallest sufficient recheck set", repair)
+        self.assertIn("changed surface and adjacent boundary", repair)
+        self.assertIn("reuse current trustworthy evidence", repair)
 
     def test_review_and_fix_does_not_pause_normally(self):
         repair = SKILL.split("## REVIEW_AND_FIX", 1)[1].split("## FORMAL_SIGNOFF", 1)[0]

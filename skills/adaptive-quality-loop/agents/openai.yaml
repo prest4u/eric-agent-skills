@@ -1,6 +1,6 @@
 interface:
   display_name: "Adaptive Quality Loop"
-  short_description: "Build first, then run the smallest useful quality check"
-  default_prompt: "Use $adaptive-quality-loop in BUILD mode to produce the visible artifact first and run one targeted acceptance check."
+  short_description: "Opt-in methods for uncertainty and failed checks"
+  default_prompt: "Use $adaptive-quality-loop to examine this specific uncertainty or failure and choose the smallest useful next step under the task and host policy."
 policy:
-  allow_implicit_invocation: true
+  allow_implicit_invocation: false

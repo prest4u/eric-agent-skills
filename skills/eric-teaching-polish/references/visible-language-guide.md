@@ -1,6 +1,6 @@
 # Visible Language Guide
 
-Use this when polishing teaching materials for students, parents, or public-facing use.
+Use this when polishing teaching materials for students, teachers, parents, or public-facing use. Apply the visible-writing rules in SKILL.md before the examples below; internal teaching terms are not automatically suitable for the final prose.
 
 ## Goal
 
@@ -12,6 +12,10 @@ Make the text sound like a real teacher giving useful material:
 - not over-explained
 - not full of production/workflow labels
 
+## Lesson Titles
+
+Give a single lesson a short title naming its main grammar topic or skill area. Chinese examples: “时间状语从句”, “定语从句”, “写作”, and “时态与语态综合练习”. Put the learner performance target, reading room or other setting, worksheet type, and teaching sequence in the objective or activity descriptions. Check the cover, running head, teacher copy, notes, homework, and current course index for the same title. Keep old titles inside historical archives.
+
 ## Internal-To-Visible Replacements
 
 | Avoid in visible text | Better visible wording |
@@ -19,7 +23,7 @@ Make the text sound like a real teacher giving useful material:
 | 入口 | 从这里开始 / 第一步 / 先看这个例句 / 先做这组题 |
 | 回收 | 复习 / 回看 / 重新巩固 / 再练一遍 |
 | 卡片 | 练习页 / 小题 / 例句 / 知识点整理 / 任务单 |
-| 动作卡 / 自检卡 / 得分动作 | 练习页 / 证据记录 / 下一步练习点 / 先看证据再作答 |
+| 动作卡 / 自检卡 / 得分动作 | 练习页 / 写出原文对应句 / 下一题练习 / 找到对应句后作答 |
 | 私人自检 / 优先动作卡 / 班级动作热区 | 个人回看 / 下一步练习点 / 班级易错点 |
 | score moves / scorecard / self-check card | evidence check / practice note / next practice point / before-you-leave review |
 | 路由 | 后续安排 / 这次先做... / 本节课先处理... |
@@ -36,7 +40,7 @@ Make the text sound like a real teacher giving useful material:
 | 对齐 / 拉通 | 统一 / 串起来 / 放在一起看 |
 | 课堂安排 / 课堂动作 / 教师节奏 / 学生产出 | 删除教师执行视角；学生版改为练习环节 / 我会完成 |
 | 0-10 / 10-27 等教师课堂分钟段 | 学生版删除；教师版可保留。学生自己的限时练习计划可以保留 |
-| 学生版 / 教师版 / 教师用 / 22讲 / 第N讲 | 学生版删除身份标签；标题直接写学习对象，如“动词形式判断” |
+| 学生版 / 教师版 / 教师用 / 22讲 / 第N讲 | 学生版删除身份标签；标题写具体教学主题，如“时态与语态综合练习” |
 | 第07-08讲 / 第10-13讲 / 02-06 / 07-09 / 前四讲 / 本阶段分钟 | 前面几次训练 / 前一阶段 / 阶段名 / 本次限时练习 |
 | reading/cloze 表格里的裸行号范围 `1-2` / `3-4` / `5-6` | `Line 1, Line 2` / `Lines 1 and 2` / `line group: start/support/result` |
 | 课程地图 / 22讲路线 / Course Map | 学生单课包默认不放；把使用说明放第一课，把阶段回顾放单元结尾 |
@@ -71,7 +75,7 @@ Remove or rewrite:
 - "这为后续学习打下坚实基础"
 - "从知识输入到能力输出形成闭环"
 - "真正重要的是..."
-- "不是...而是..." when it is only a lecture shell
+- "不是...而是..." and equivalent contrast shells in all newly authored explanations; preserve exact quotations or grammar forms the user explicitly asks to teach
 - "先...再...最后..." when it describes the teacher's workflow rather than a student's task
 - "我们可以看到 / 接下来我们 / 下面来看" in student-facing worksheets
 - "一套完整的学习路径 / 能力矩阵 / 训练框架" unless it is a parent-facing course overview and written naturally
@@ -104,9 +108,9 @@ Remove or rewrite:
 - bare hyphen line ranges such as "1-2 / 3-4 / 5-6" in reading or cloze line-band tables; use "Line 1, Line 2" or "Lines 1 and 2" so the text does not look like timing, lesson-range, or route residue
 - main-idea/structure lesson residue such as "Line-Band Rescue", "line band + one evidence word", or "主旨题找证据即可"; use paragraph job, title scope, ending result, wrong-title rejection, and safer-title repair
 - reading-set/timed-combination lesson residue such as "Line-Band Rescue", "line band + one evidence word", or "组合限时阅读找证据即可"; use easy first, skip-return, proof count, return point, and hard-first repair
-- integrated objective-reading lesson residue such as "Objective Reading: Line-Band Rescue", "客观题综合找证据即可", or "顺利学生做；若证据不稳，退回 line band"; use question type, evidence, boundary, review/next action, and one concrete repair
+- integrated objective-reading lesson residue such as "Objective Reading: Line-Band Rescue", "客观题综合找证据即可", or "顺利学生做；若证据不稳，退回 line band"; identify the question type, point to the relevant sentence, explain what it supports, and give a specific correction
 - reading-response locate/rewrite lesson residue such as "Line-Band Rescue", "Line Bank only", or "阅读表达找证据即可"; use question form, needed words, answer starter, cut words, subject match, and tense check
-- open reading-response lesson residue such as "Open Response: Line Bank only", "开放回答题找证据即可", "retell the whole story", or "personal opinion first"; use answer position, text fact, because link, boundary, retelling cut, slogan-only rejection, and safe personal link
+- open reading-response lesson residue such as "Open Response: Line Bank only", "开放回答题找证据即可", "retell the whole story", or "personal opinion first"; answer the question, cite the relevant detail, explain the reason and remove unsupported additions or mere retelling
 - sentence-upgrade writing lesson residue such as "Sentence Upgrade: reader/purpose only", "Prompt card + rescue + repeat", or "顺利学生做；若句子不稳，退回简单句"; use safe base, connector meaning, one upgrade, added-verb check, and stop/return-to-base
 - timed-writing lesson residue such as "Timed Writing: reader/purpose only", "Prompt card + rescue + repeat", or "顺利学生做；若句子不稳，退回简单句"; use reader/purpose, topic-time-place-reason outline, opening/small text, missing-point check, and plan-write-check
 - final-review lesson residue such as "Final Review: Plan Before Writing", "Tiny Prompt Repeat", "Low-Risk Writing Extension", "reader/purpose/required points only", "全卷讲评", or "be careful" as the only review action; use one repeated error, proof place, next first step, transfer check, and vague-review repair
@@ -137,7 +141,7 @@ Prefer:
 - "做完后回看错题，标出自己是卡在词义、词性还是时态。"
 - "这个知识点不用背复杂定义，先能在句子里认出来。"
 - "今天先把基础句型写准，再进入更复杂的从句。"
-- Early reading scaffold: "Detail Questions: Evidence First (细节证据)"
+- Early reading scaffold: "Detail Questions: Find the Matching Sentence（找出对应句）"
 - Later reading practice: "Locate the sentence that answers the question."
 - Later reading response: "Rewrite the answer in your own words."
 
@@ -236,6 +240,9 @@ For K12 English reading handouts, match the visible language to the stage of tra
 
 ## Final Readback
 
+First remove the banned authored words and contrast shells from SKILL.md. Read whole paragraphs for rhetorical parallelism, repetitive openings and forced conclusions. Keep useful steps and exact quotations; never mechanically substitute words in an exam source.
+
+
 Before finalizing visible text:
 
 1. Could a student or parent understand it without knowing Eric's internal system?
@@ -262,7 +269,7 @@ Before finalizing visible text:
 21. For paragraph-expansion writing lessons, does the page make students practise point, support detail, because/link, low-error sentence check, and vague-word repair instead of only reader/purpose analysis?
 22. For sentence-upgrade writing lessons, does the page make students practise safe base, connector meaning, one upgrade, added-verb check, and stop/return-to-base instead of only reader/purpose or generic prompt analysis?
 23. For timed-writing lessons, does the page make students practise reader/purpose, topic-time-place-reason outline, opening/small text, missing-point check, and plan-write-check instead of only reader/purpose or generic prompt analysis?
-24. For integrated objective-reading lessons, does the page make students practise question type, evidence, boundary, and review/next action instead of only line locating or a generic evidence table?
+24. For integrated objective-reading lessons, does the page make students identify the question type, locate the relevant sentence, decide what it supports, and correct the answer instead of only line locating or a generic evidence table?
 25. For final-review lessons, does the page make students practise one repeated error, proof place, next first step, transfer check, and vague-review repair instead of only generic writing prompt analysis?
 26. For teacher guides, did any one-sentence `Review cue` or `Teaching cue` become a standalone page? Merge it into the answer/evidence/control layer or rewrite it as a real classroom decision table.
 27. For teacher guides, did any wording explain the layout repair itself, such as `breaks the answer-key rhythm` or `page rhythm`? Replace it with a teacher decision or classroom action.

@@ -30,34 +30,30 @@ REQUIRED_FILES = [
     "assets/eric-pdf-math-demo.typ",
     "assets/eric-pdf-math-demo-student.pdf",
     "assets/eric-pdf-math-demo-teacher.pdf",
+    "assets/eric-a4-starter.typ",
+    "scripts/init_a4.py",
+    "scripts/qa_typst_a4.py",
     "scripts/build_eric_pdf.py",
     "scripts/qa_eric_pdf.py",
     "scripts/test_qa_eric_pdf.py",
     "scripts/validate_skill_gates.py",
     "test-prompts.json",
-    "results.tsv",
 ]
 
 REQUIRED_TOKENS = [
-    "## Hard Completion Gates",
-    "GATE 0: Scope lock",
-    "GATE 1: Fresh compile",
-    "GATE 2: Automated QA",
-    "GATE 3: Rendered-page review",
-    "GATE 4: Leak and version safety",
-    "GATE 5: Evidence report",
-    "Gate Evidence Ledger",
-    "Do not end",
-    "scripts/qa_eric_pdf.py",
-    "typst compile",
-    "rendered pages",
-    "student/teacher",
-    "--profile",
+    "## Workflow",
+    "## Completion conditions",
+    "## Stop conditions",
+    "scripts/init_a4.py",
+    "scripts/qa_typst_a4.py",
+    "--profile student",
     "--require-visual-checks",
-    "manual_visual_review",
-    "profile_scan",
-    "do not omit `--source`",
+    "cover,first-body,dense,final",
+    "freshly compiled",
+    "A human has inspected the rendered pages",
+    "overwrite authority is explicit",
 ]
+
 
 DEMO_QA_TARGETS = [
     (
@@ -120,7 +116,7 @@ def validate(skill_dir: Path, run_demo_qa: bool = True) -> dict[str, Any]:
     description = frontmatter.get("description", "")
     checks["frontmatter"] = check(
         frontmatter.get("name") == "eric-pdf"
-        and description.startswith("Create, polish, compile, or QA")
+        and "Explicit-only Typst A4 classroom adapter" in description
         and len(description) <= 1024,
         name=frontmatter.get("name"),
         description_length=len(description),

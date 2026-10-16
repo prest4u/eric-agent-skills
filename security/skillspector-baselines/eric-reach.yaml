@@ -1,61 +1,41 @@
-# SkillSpector baseline — findings listed here are suppressed on future scans.
-# Edit 'reason' fields and add glob 'rules' as needed. See docs/SUPPRESSION.md.
+# Exact fingerprints reviewed for inert security-test fixtures only. No glob rules.
 version: 2
 scanner_version: 2.9.4
 rules: []
 fingerprints:
-- hash: sha256:84928cfec427b42a368d0a45d4ad08319bfc0f0b323473b7576f6694cf978bc1
-  rule_id: AST4
-  file: scripts/video_intake.py
-  reason: Reviewed synthetic secret-redaction and SSRF rejection tests; flagged values
-    are inert fixtures and blocked addresses.
-- hash: sha256:f0ea5ade57d678d7d7a84faed364bfc430edbde65e92c438bbf56d4d0b7dc262
-  rule_id: AST3
-  file: tests/test_video_intake.py
-  reason: Reviewed synthetic secret-redaction and SSRF rejection tests; flagged values
-    are inert fixtures and blocked addresses.
-- hash: sha256:89bef9b3c5a97f9b86a16fc0aef03139b5e534046e7fe0da25e942af7998735c
-  rule_id: AST3
-  file: tests/test_video_intake.py
-  reason: Reviewed synthetic secret-redaction and SSRF rejection tests; flagged values
-    are inert fixtures and blocked addresses.
-- hash: sha256:650dbb5ae8570d1d1feabea629dd25f8c2770d31142a9fe4c9e73adf6abc5b14
-  rule_id: TT2
-  file: scripts/video_intake.py
-  reason: Reviewed synthetic secret-redaction and SSRF rejection tests; flagged values
-    are inert fixtures and blocked addresses.
-- hash: sha256:c93284ee2b84fddb6a4a8babdfe93d83226fe746ca088f14b71d6639db68a476
-  rule_id: LP3
-  file: SKILL.md
-  reason: Reviewed synthetic secret-redaction and SSRF rejection tests; flagged values
-    are inert fixtures and blocked addresses.
-- hash: sha256:f464e587a612a54c965d623a34f25a8f87db2b88b5acda31d71a31dc1d75f57b
+- hash: sha256:ed5a9fe8843bedd5372e65f9d98785e4051010472f3fa69fe2fee02dc92a9320
   rule_id: PE3
   file: tests/test_video_intake.py
-  reason: Reviewed synthetic secret-redaction and SSRF rejection tests; flagged values
-    are inert fixtures and blocked addresses.
-- hash: sha256:c7bc82ea3206b1ecf151464498e28cc081c18758f49f260a840debe90de43fd0
+  reason: 'Reviewed inert negative-test fixtures: a rejected file-scheme URL or synthetic
+    redaction markers. Tests assert rejection or marker removal; RecordingRunner performs
+    no subprocess or network I/O.'
+- hash: sha256:17abd6f4f7fd957ab216654f3f56be6ce60d5ab3efae5e40c416c57faecdcabf
   rule_id: PE3
   file: tests/test_video_intake.py
-  reason: Reviewed synthetic secret-redaction and SSRF rejection tests; flagged values
-    are inert fixtures and blocked addresses.
-- hash: sha256:17d5b4fb8dfcc18b323fe4e057c4cdf4d41a3fda66a5b73fdd715c6e2d922261
+  reason: 'Reviewed inert negative-test fixtures: a rejected file-scheme URL or synthetic
+    redaction markers. Tests assert rejection or marker removal; RecordingRunner performs
+    no subprocess or network I/O.'
+- hash: sha256:eaa6912abb42b52c317b3ab6278c2d7c3e848229c743bc2ff7230e8403388776
   rule_id: PE3
   file: tests/test_video_intake.py
-  reason: Reviewed synthetic secret-redaction and SSRF rejection tests; flagged values
-    are inert fixtures and blocked addresses.
-- hash: sha256:b6fd76233293ba066be6ab74c696840dd09939d4e97237ce39126dd61191dc2e
+  reason: 'Reviewed inert negative-test fixtures: a rejected file-scheme URL or synthetic
+    redaction markers. Tests assert rejection or marker removal; RecordingRunner performs
+    no subprocess or network I/O.'
+- hash: sha256:8520be8c4858d1f200b0e2fcd5aac95eca9bed60058a043a2769546652a2d2cb
   rule_id: PE3
   file: tests/test_video_intake.py
-  reason: Reviewed synthetic secret-redaction and SSRF rejection tests; flagged values
-    are inert fixtures and blocked addresses.
-- hash: sha256:0f4d0a1852d35c4f6014f3da4bae463f2b77113a50bcbf219cc6f670c3e4d661
+  reason: 'Reviewed inert negative-test fixtures: a rejected file-scheme URL or synthetic
+    redaction markers. Tests assert rejection or marker removal; RecordingRunner performs
+    no subprocess or network I/O.'
+- hash: sha256:6e440e2e2b2a55c6b64c0cd9ef2da56298fc2632d40790246f1c1c11422ea4ec
   rule_id: SSRF1
   file: tests/test_video_intake.py
-  reason: Reviewed synthetic secret-redaction and SSRF rejection tests; flagged values
-    are inert fixtures and blocked addresses.
-- hash: sha256:614c6e390f06081c0dd792583e63bf2c7ab9f350a3d29e91d0a774f02e8ab4ac
+  reason: Reviewed inert cloud-metadata rejection fixtures. classify_url rejects the
+    literal URL; assert_public_resolution uses an injected resolver stub and must
+    raise. No metadata request occurs.
+- hash: sha256:31e0c51c4e9eb1df6dbc7b3b9cc8690a53eedd2c0a84950480847a1812da87d7
   rule_id: SSRF1
   file: tests/test_video_intake.py
-  reason: Reviewed synthetic secret-redaction and SSRF rejection tests; flagged values
-    are inert fixtures and blocked addresses.
+  reason: Reviewed inert cloud-metadata rejection fixtures. classify_url rejects the
+    literal URL; assert_public_resolution uses an injected resolver stub and must
+    raise. No metadata request occurs.

@@ -8,5 +8,30 @@
     "id": "teacher_master_not_answer_appendix",
     "prompt": "Use eric-teaching-polish to revise a teacher guide that only lists answers and says teachers should look at the workbook for the full questions.",
     "expected": "Flags the teacher guide as not class-ready and rewrites the expectation toward a self-contained teaching master with full task surface, answers, evidence, common errors, and repair notes in lesson order."
+  },
+  {
+    "id": "same_fact_four_times",
+    "prompt": "Polish a Stage 6 draft that teaches 'Wages are higher than costs', then asks learners to fill higher in the same sentence, mark the same sentence correct, and choose higher in a four-option item. The teacher notes say all four are useful practice. Revise the exercise quality without changing the comparison target.",
+    "expected": "Keeps at most one direct model of that fact, changes later items to new comparable sources and different learner decisions, updates every key and teacher explanation, and does not count a word swap as a new decision."
+  },
+  {
+    "id": "temporal_data_not_cause",
+    "prompt": "Polish a Task 1 model using only this source: recovery was 12% before a coil was fitted and 27% afterwards. The draft says, 'Installing the coil raised the recovery rate from 12% to 27%.' No causal claim appears in the source.",
+    "expected": "Rewrites the model as a before-and-after observation, preserves 12% and 27%, and removes any teacher note that treats causation as established."
+  },
+  {
+    "id": "valid_variant_vs_task_target",
+    "prompt": "Review a teacher key that rejects 'than Ines' because it omits 'did', rejects 'will meet' as ungrammatical for an arranged meeting, and rejects 'the news' because news is uncountable. The matching prompts require a clear comparison, emphasize an arrangement, and identify one known news item.",
+    "expected": "Accepts the grammatical ellipsis and definite article; explains that will meet can be grammatical while an arranged-time form better serves that prompt; distinguishes English correctness from meeting the requested meaning."
+  },
+  {
+    "id": "acceptable_answer_must_keep_conditions",
+    "prompt": "Check a teacher edition where the task says 'If staff leave before Friday, Piotr will shift the survey to next week', but an acceptable answer drops 'to next week'. Another task requires leaving before noon, but its accepted answer says only 'leave early'.",
+    "expected": "Removes or repairs both shortened accepted answers because they omit required time information, then reads each answer back against the full student prompt."
+  },
+  {
+    "id": "adjacent_stage_cosmetic_swap",
+    "prompt": "Polish Stage 5 and Stage 6 together. Stage 5 repeats 'water is being filtered this evening' as model, blank, error repair, and choice. Stage 6 repeats a campus shop being busiest as an example, correction, and final independent item. Preserve each stage target while fixing the repetition.",
+    "expected": "Checks repetitions within and across the two booklets, keeps useful instruction once, and changes later source facts, contexts, and decision types so answers cannot be copied from an earlier item."
   }
 ]

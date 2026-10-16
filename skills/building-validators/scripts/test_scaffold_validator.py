@@ -41,6 +41,44 @@ class ScaffoldValidatorTests(unittest.TestCase):
             "--json",
         )
 
+    def test_force_scaffold_does_not_follow_output_symlinks(self):
+        for relative in ("validate_project.py", "tests"):
+            with self.subTest(relative=relative), tempfile.TemporaryDirectory() as raw:
+                root = Path(raw) / "project"
+                root.mkdir()
+                validator = self.scaffold_bundle(root)
+                outside = Path(raw) / "outside"
+                target = validator / relative
+                if target.is_dir():
+                    (target / "test_validate_project.py").unlink()
+                    target.rmdir()
+                    outside.mkdir()
+                    sentinel = outside / "test_validate_project.py"
+                else:
+                    target.unlink()
+                    sentinel = outside
+                sentinel.write_text("preserve")
+                target.symlink_to(outside, target_is_directory=relative == "tests")
+                result = self.run_py(str(SCAFFOLD), str(root), "--force")
+                self.assertNotEqual(result.returncode, 0)
+                self.assertEqual(sentinel.read_text(), "preserve")
+
+    def test_generated_reports_reject_output_file_symlinks(self):
+        for filename in ("validator_report.json", "validator_report.md"):
+            with self.subTest(filename=filename), tempfile.TemporaryDirectory() as raw:
+                root = Path(raw) / "project"
+                root.mkdir()
+                validator = self.scaffold_bundle(root)
+                reports = root / "reports"
+                reports.mkdir()
+                outside = Path(raw) / "outside"
+                outside.write_text("preserve")
+                (reports / filename).symlink_to(outside)
+                result = self.run_py(str(validator / "validate_project.py"), "--root", str(root), "--rules", str(validator / "validator_rules.json"), "--report-dir", str(reports))
+                self.assertNotEqual(result.returncode, 0)
+                self.assertEqual(outside.read_text(), "preserve")
+                self.assertFalse((reports / ("validator_report.md" if filename.endswith("json") else "validator_report.json")).exists())
+
     def test_skill_description_contains_chinese_trigger_words(self) -> None:
         skill_text = (SKILL_DIR / "SKILL.md").read_text(encoding="utf-8")
         description_line = next(line for line in skill_text.splitlines() if line.startswith("description:"))
@@ -57,6 +95,8 @@ class ScaffoldValidatorTests(unittest.TestCase):
             generated_test = validator_dir / "tests" / "test_validate_project.py"
 
             self.assertTrue(validate_script.exists())
+            self.assertEqual(validate_script.stat().st_mode & 0o777, 0o755)
+            self.assertEqual((validator_dir / "README.md").stat().st_mode & 0o777, 0o644)
             self.assertTrue(rules.exists())
             self.assertTrue(generated_test.exists())
 

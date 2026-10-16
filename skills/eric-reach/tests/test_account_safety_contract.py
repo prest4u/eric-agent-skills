@@ -57,23 +57,43 @@ class AccountSafetyContractTests(unittest.TestCase):
             "anti-detection",
             "fingerprint spoofing",
             "random \"humanized\"",
-            "switch backend, account, IP address, proxy",
+            "Do not rotate accounts, IP addresses, proxies or fingerprints",
         ):
             with self.subTest(required=required):
                 self.assertIn(required, compact)
 
-    def test_policy_risk_signals_are_non_retryable_with_one_local_exception(self):
+    def test_policy_classifies_fallback_without_weakening_explicit_restrictions(self):
         policy = read("references/account-safety.md")
         for signal in (
             "CAPTCHA", "429", "412", "access too frequent", "SECURITY_BLOCK",
             "account anomaly", "login challenge", "verification challenge",
         ):
             with self.subTest(signal=signal):
-                self.assertIn(signal, policy)
-        self.assertIn("Stop immediately and do not retry", policy)
+                self.assertIn(signal.lower(), policy.lower())
+        self.assertIn("Stop the failing automated route first", policy)
+        for clause in (
+            "One normal-page inspection",
+            "Use another existing authorized session",
+            "at most two justified alternate",
+            "Do not rotate accounts, IP addresses, proxies or fingerprints",
+            "Host validation, private-network/SSRF prevention",
+            "never weaken the adapter",
+            "prohibit an\nautomatic in-script retry",
+        ):
+            with self.subTest(clause=clause):
+                self.assertIn(clause, policy)
         self.assertIn("confirmed local daemon failure", policy)
         self.assertIn("request was never sent", policy)
         self.assertIn("exactly one retry", policy)
+
+    def test_entry_points_do_not_reintroduce_blanket_account_stop(self):
+        skill = read("SKILL.md")
+        social = read("references/social.md")
+        self.assertNotIn("or change accounts", skill)
+        self.assertNotIn("backend cannot read, stop and request separate", social)
+        self.assertNotIn("is blocked by login state, stop", social)
+        self.assertNotIn("uploading, account changes", social)
+        self.assertIn("Selecting an existing authorized session", social)
 
     def test_policy_preserves_evidence_links_and_non_safe_threshold_limit(self):
         policy = read("references/account-safety.md")
@@ -97,7 +117,7 @@ class AccountSafetyContractTests(unittest.TestCase):
             "one metadata/note read",
             "one subtitle read",
             "one media download only",
-            "Do not retry any of those stages",
+            "Do not automatically retry any of those stages",
         ):
             with self.subTest(clause=clause):
                 self.assertIn(clause, policy)
@@ -136,7 +156,7 @@ class AccountSafetyContractTests(unittest.TestCase):
         self.assertIn("single exact video link, do not search first", video)
         self.assertIn("Reliable subtitles that satisfy the", video)
         self.assertIn("do not download the picture track", video)
-        self.assertIn("strict circuit breaker overrides", video)
+        self.assertIn("This classification overrides", video)
         self.assertIn("playlist or batch request is refused", video)
         self.assertIn("one exact video at a time", video)
 

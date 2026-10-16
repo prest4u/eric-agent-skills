@@ -5,6 +5,16 @@ description: 【研究路由】Use only when Eric explicitly invokes $eric-resea
 
 # Eric Research
 
+## Visible writing
+
+Apply this to newly authored reader-facing text and the task reply, including titles, notes and exported text. Do not use “边界” or “证据” in Chinese prose; describe the specific rule, source, observed result or limitation. Preserve citations and exact quoted source text, official names, code/schema fields and explicitly requested grammar examples. Quotation marks alone do not exempt newly generated prose.
+
+Ban “不是……而是……”, “并非……而是……”, “不在于……而在于……”, “不是 X，是 Y” and stock English equivalents. Remove rhetorical parallelism, repeated sentence openings, slogan triplets, artificial crescendos and empty concluding uplift. Keep real task steps and useful comparisons. Write the point directly, with concrete facts and natural sentences; do not replace one abstract label with another or invent details to sound human.
+
+Read the changed visible text once before delivery or rendering. Fix the offending sentences while preserving the requested format and facts. Internal method labels and reference examples do not override this rule. This check adds no extra artifact, Skill dependency, reviewer or approval step.
+
+Keep source evaluation and factual qualifications. Express them with the actual source, date, finding or missing fact; internal research statuses are not mandatory reader-facing headings.
+
 Turn a research question into a source-backed answer whose certainty matches the evidence. Keep one workflow across domains and load only the relevant domain reference.
 
 ## Set The Scope
@@ -18,6 +28,10 @@ Turn a research question into a source-backed answer whose certainty matches the
    - Marketing: [references/marketing.md](references/marketing.md)
    - News, social, or entertainment: [references/news-social-entertainment.md](references/news-social-entertainment.md)
 5. For mixed-domain work, split claims by domain, apply each delta, then synthesize once under the common evidence contract. Do not let evidence from one domain certify a claim in another.
+
+## Spend effort on the unresolved claim
+
+Use retrieval for missing facts, calculations for numerical claims, and deeper reasoning for competing explanations or tradeoffs. A short high-consequence claim still needs strong evidence; a long extraction task need not become open-ended research. Stop when the material question is answered at the required evidence standard and consequential gaps are explicit. Do not pad the source count, search adjacent topics, or create a formal record for an ordinary answer.
 
 ## Acquire Or Inspect
 
@@ -36,11 +50,6 @@ Turn a research question into a source-backed answer whose certainty matches the
 
 ## Return
 
-Adapt the length to the task while keeping these reader-facing parts:
-
-1. Bottom line.
-2. Evidence for each material claim at the selected depth.
-3. Conflicts, caveats, and what was not checked.
-4. Next verification action only when a material gap remains.
+Answer the question directly. Put source links beside the claims they support. When a missing date, untested assumption or disagreement changes the conclusion, state that specific fact in ordinary language. Add a next action only when it helps resolve the user's question. Do not force four named sections or expose internal status codes; preserve a user-requested report schema.
 
 Do not restore or invoke archived research specialist Skills. Do not provide personalized financial, medical, legal, or educational advice beyond the evidence.

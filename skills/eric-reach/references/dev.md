@@ -1,7 +1,9 @@
 # GitHub read-only acquisition
 
-Use GitHub CLI only to search or read public repositories, code, Issues, pull
-requests, checks, Actions, releases, commits, and API resources.
+Use a suitable existing GitHub read connector or the CLI examples below for
+public repositories, code, Issues, pull requests, checks, Actions, releases,
+commits, and API resources. Read an exact supplied object directly; do not
+search or check the entire toolchain first.
 
 ```bash
 gh search repos "query" --sort stars --limit 10
@@ -33,4 +35,5 @@ setup or write-command fallback from this Skill.
 
 For repository documentation, prefer direct public files or `gh repo view`.
 Use Context7 only for supported library documentation. Return retrieved URLs
-and fields; leave source ranking and synthesis to Eric Research.
+and fields. Explain the retrieved material directly; use a separate research
+Skill only when explicitly selected or project-bound, and reuse this evidence.
