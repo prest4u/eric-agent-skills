@@ -1,5 +1,5 @@
 beautifulsoup4==4.14.3
-Markdown==3.10.2
+Markdown==3.10.3
 numpy==2.5.2
 Pillow==12.3.0
 PyMuPDF==1.27.2.2
